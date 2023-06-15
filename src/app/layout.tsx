@@ -1,8 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-    title: 'E-commerce',
-    description: 'E-commerce Gamer',
+    title: 'Power Tech',
+    description: 'E-commerce Power tech',
 }
 
 export default function RootLayout({
