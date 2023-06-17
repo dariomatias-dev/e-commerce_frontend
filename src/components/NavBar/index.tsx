@@ -1,5 +1,6 @@
-import resetFormatting from "@/utils/resetFormatting";
 import Link from "next/link";
+
+import resetFormatting from "@/utils/resetFormatting";
 
 const itemsNavBar = [
     "Departamentos",
@@ -20,9 +21,12 @@ const NavBar = () => {
                         const formattedItem = resetFormatting(item);
 
                         return (
-                            <Link href={`/${formattedItem}`}>
-                                {item}
-                            </Link>
+                            <li className="flex flex-col items-center group">
+                                <Link href={`/${formattedItem}`}>
+                                    {item}
+                                </Link>
+                                <span className="inline-block w-0 group-hover:w-full h-[1.8px] bg-gray-600 -mt-1 transition-all duration-300" />
+                            </li>
                         )
                     })
                 }

@@ -30,20 +30,22 @@ const Header = () => {
                 </Link>
 
                 <ul className="flex gap-5 text-gray-600 text-xs mb-[3px]">
-                    <li className="hover:underline">
+                    <li className="flex flex-col items-center group">
                         <Link href="/">
                             Sobre nós
                         </Link>
+                        <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
                     </li>
-                    <li className="hover:underline">
+                    <li className="flex flex-col items-center group">
                         <Link href="/">
                             Contato
                         </Link>
+                        <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
                     </li>
                 </ul>
             </div>
 
-            <div className="flex w-[450px] h-10 border-[0.8px] border-black rounded-md overflow-hidden">
+            <div className="flex w-[450px] h-10 border-[0.8px] hover:border-px border-gray-500 hover:border-black rounded-md overflow-hidden transition-all duration-300">
                 <input
                     type="text"
                     minLength={4}
@@ -66,7 +68,7 @@ const Header = () => {
                     <a
                         className="flex justify-center items-center"
                     >
-                        <BsCart3 className="w-5 h-5 text-gray-400" />
+                        <BsCart3 className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                     </a>
                 </Link>
 
@@ -77,7 +79,7 @@ const Header = () => {
                     <a
                         className="flex justify-center items-center"
                     >
-                        <MdFavoriteBorder className="w-5 h-5 text-gray-400" />
+                        <MdFavoriteBorder className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                     </a>
                 </Link>
 
@@ -86,9 +88,9 @@ const Header = () => {
                     legacyBehavior
                 >
                     <a
-                        className="flex justify-center items-center p-2 border border-gray-500 rounded-full"
+                        className="flex justify-center items-center p-2 border border-gray-500 hover:text-gray-600 rounded-full transition-all duration-300 group"
                     >
-                        <IoPersonAddOutline className="w-5 h-5 text-gray-400" />
+                        <IoPersonAddOutline className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-all duration-300" />
                     </a>
                 </Link>
             </div>
