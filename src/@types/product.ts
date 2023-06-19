@@ -1,6 +1,6 @@
-import ProductCardDataProps from './productCardData';
+import ProductCardProps from './productCard';
 
-interface ProductProps extends Omit<ProductCardDataProps, "imageUrlId"> {
+interface ProductProps extends Omit<ProductCardProps, "imageUrlId"> {
     description: string;
     imageUrlIds: Array<string>;
     categoryIds: Array<string>;
