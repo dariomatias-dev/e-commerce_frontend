@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,7 +52,7 @@ const Header = () => {
                     type="text"
                     minLength={4}
                     maxLength={40}
-                    placeholder="Digite algo..."
+                    placeholder="Pesquise aqui..."
                     onChange={e => setQuery(e.target.value)}
                     className="w-full pl-2 outline-none"
                 />

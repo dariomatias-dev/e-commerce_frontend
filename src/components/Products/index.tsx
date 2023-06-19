@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -5,6 +7,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 
 import ProductCardProps from "@/@types/productCard";
+
+import resetFormatting from "@/utils/resetFormatting";
 
 type ProductsDataProps = {
     products: ProductCardProps[],
@@ -31,34 +35,48 @@ const Products = () => {
         <div className="flex flex-wrap justify-center gap-x-28 gap-y-10 bg-gray-100 px-10 py-8">
             {
                 productsData.products.map(productData => {
+                    const formattedProductName= resetFormatting(productData.name);
+
                     return (
                         <div
                             key={productData.id}
                             className="w-[230px] flex flex-col gap-6 p-2 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300"
                         >
                             <div className="h-10 flex hover:justify-end items-center group">
-                                <div className="group-hover:hidden flex gap-2">
-                                    <div>
-                                        <div className="w-10 h-10 flex flex-col justify-center items-center bg-gray-400 text-xs rounded-md">
-                                            <span className="text-white font-bold">15%</span>
+                                <Link
+                                    href={""}
+                                    legacyBehavior
+                                >
+                                    <a className="group-hover:hidden flex gap-2">
+                                        <div>
+                                            <div className="w-10 h-10 flex flex-col justify-center items-center bg-gray-400 text-xs rounded-md">
+                                                <span className="text-white font-bold">15%</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div className="w-10 h-10 flex flex-col justify-center items-center text-[8px] border-2 border-gray-200 rounded-md">
-                                            <span>RESTAM</span>
-                                            <span className="font-bold">500</span>
-                                            <span>UNID.</span>
+
+                                        <div>
+                                            <div className="w-10 h-10 flex flex-col justify-center items-center text-[8px] border-2 border-gray-200 rounded-md">
+                                                <span>RESTAM</span>
+                                                <span className="font-bold">500</span>
+                                                <span>UNID.</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="hidden group-hover:flex gap-4 mr-1">
-                                    <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                                    <FaShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                                </div>
+                                    </a>
+                                </Link>
+
+                                <Link
+                                    href={""}
+                                    legacyBehavior
+                                >
+                                    <a className="hidden group-hover:flex gap-4 mr-1">
+                                        <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                                        <FaShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                                    </a>
+                                </Link>
                             </div>
 
                             <Link
-                                href={``}
+                                href={`/produto/${formattedProductName}/?id=${productData.id}`}
                                 legacyBehavior
                             >
                                 <a className="flex flex-col">
