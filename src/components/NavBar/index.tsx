@@ -21,11 +21,14 @@ const NavBar = () => {
                         const formattedItem = resetFormatting(item);
 
                         return (
-                            <li className="flex flex-col items-center group">
+                            <li
+                                key={formattedItem}
+                                className="flex flex-col items-center group"
+                            >
                                 <Link href={`/${formattedItem}`}>
                                     {item}
                                 </Link>
-                                <span className="inline-block w-0 group-hover:w-full h-[1.8px] bg-gray-600 -mt-1 transition-all duration-300" />
+                                <span className="inline-block w-0 group-hover:w-full h-[1.8px] bg-gray-500 -mt-1 transition-all duration-300" />
                             </li>
                         )
                     })
