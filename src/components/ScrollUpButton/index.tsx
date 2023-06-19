@@ -30,7 +30,7 @@ const ScrollUpButton = () => {
     return (
         <button
             onClick={scrollToTop}
-            className={`${buttonVisible ? "fixed" : "hidden"} right-6 bottom-6 bg-black hover:bg-zinc-900 border border-gray-600 rounded-full p-4 transition-all duration-300`}
+            className={`${buttonVisible ? "fixed" : "hidden"} right-6 bottom-6 bg-black hover:bg-zinc-950 border border-gray-600 rounded-full p-4 transition-all duration-300`}
         >
             <IoIosArrowUp className="w-6 h-6 text-white" />
         </button>

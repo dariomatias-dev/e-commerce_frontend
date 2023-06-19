@@ -20,9 +20,13 @@ const Products = () => {
     const [productsData, setProductsData] = useState({} as ProductsDataProps);
 
     const fetchData = async (skip: number) => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?skip=${skip}`);
-        const data = await response.json();
-        setProductsData(data);
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?skip=${skip}`);
+            const data = await response.json();
+            setProductsData(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
@@ -32,15 +36,15 @@ const Products = () => {
     if (JSON.stringify(productsData) === "{}") return <></>;
 
     return (
-        <div className="flex flex-wrap justify-center gap-x-28 gap-y-10 bg-gray-100 px-10 py-8">
+        <div className="flex flex-wrap justify-center gap-x-20 gap-y-10 bg-gray-100 px-10 py-8">
             {
                 productsData.products.map(productData => {
-                    const formattedProductName= resetFormatting(productData.name);
+                    const formattedProductName = resetFormatting(productData.name);
 
                     return (
                         <div
                             key={productData.id}
-                            className="w-[230px] flex flex-col gap-6 p-2 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300"
+                            className="w-[230px] flex flex-col justify-between gap-4 p-2 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300"
                         >
                             <div className="h-10 flex hover:justify-end items-center group">
                                 <Link
@@ -79,17 +83,17 @@ const Products = () => {
                                 href={`/produto/${formattedProductName}/?id=${productData.id}`}
                                 legacyBehavior
                             >
-                                <a className="flex flex-col">
+                                <a className="flex flex-col justify-between gap-3">
                                     <Image
                                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${productData.imageUrlId}.jpg`}
                                         width={500}
                                         height={500}
                                         priority={true}
-                                        alt={`Imagem da categoria ${productData.name}.`}
-                                        className="w-full max-w-[10rem] h-auto object-contain mx-auto mb-4"
+                                        alt={`Imagem do produto: ${productData.name}.`}
+                                        className="w-full max-w-[10rem] max-h-[10rem] h-auto object-contain mx-auto"
                                     />
 
-                                    <h3 className="text-gray-700 font-bold uppercase ml-2 mb-3">
+                                    <h3 className="text-gray-700 font-bold uppercase ml-2">
                                         {productData.name}
                                     </h3>
 

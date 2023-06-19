@@ -9,9 +9,13 @@ const Categories = () => {
     const [categoriesData, setCategoriesData] = useState<CategoryProps[]>([]);
 
     const fetchData = async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
-        const data = await response.json();
-        setCategoriesData(data);
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
+            const data = await response.json();
+            setCategoriesData(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
@@ -31,8 +35,8 @@ const Categories = () => {
                                 width={500}
                                 height={500}
                                 priority={true}
-                                style={{ width: '100%', maxWidth: "10rem", height: 'auto', objectFit: "contain" }}
                                 alt={`Imagem da categoria ${categoryData.name}.`}
+                                className="w-full max-w-[14rem] h-auto object-contain mx-auto mb-4"
                             />
 
                             <h3 className="text-gray-700 text-center font-bold uppercase">
