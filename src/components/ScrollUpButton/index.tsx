@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 
 const ScrollUpButton = () => {
@@ -23,7 +23,7 @@ const ScrollUpButton = () => {
         window.addEventListener("scroll", checkScroll);
 
         return () => {
-            window.removeEventListener('scroll', checkScroll);
+            window.removeEventListener("scroll", checkScroll);
         };
     }, []);
 

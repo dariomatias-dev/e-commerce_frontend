@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 
@@ -36,7 +36,7 @@ const Products = () => {
     if (JSON.stringify(productsData) === "{}") return <></>;
 
     return (
-        <div className="flex flex-wrap justify-center gap-x-20 gap-y-10 bg-gray-100 px-10 py-8">
+        <section className="flex flex-wrap justify-center gap-x-20 gap-y-10 bg-gray-100 px-10 py-8">
             {
                 productsData.products.map(productData => {
                     const formattedProductName = resetFormatting(productData.name);
@@ -117,7 +117,7 @@ const Products = () => {
                     )
                 })
             }
-        </div>
+        </section>
     );
 };
 

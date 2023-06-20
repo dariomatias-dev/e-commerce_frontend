@@ -25,7 +25,7 @@ const Categories = () => {
     if (!categoriesData) return <></>;
 
     return (
-        <div className="flex flex-wrap justify-center gap-x-28 gap-y-10 mx-10 my-8">
+        <section className="flex flex-wrap justify-center gap-x-28 gap-y-10 mx-10 my-8">
             {
                 categoriesData.map(categoryData => {
                     return (
@@ -46,7 +46,7 @@ const Categories = () => {
                     )
                 })
             }
-        </div>
+        </section>
     );
 };
 

@@ -20,21 +20,33 @@ const contacts = [
 ];
 
 const Contacts = () => {
-    const [showMessage, setShowMessage] = useState(false);
+    const [message, setMessage] = useState({
+        showMessage: false,
+        contactName: "",
+    });
 
     const copyToClipboard = (text: string) => {
         const twoPointsLocation = text.indexOf(":");
         navigator.clipboard.writeText(text.slice(twoPointsLocation + 2));
 
-        setShowMessage(true);
+        setMessage({
+            showMessage: true,
+            contactName: text.slice(0, twoPointsLocation),
+        });
         hideMessage();
     };
 
     const hideMessage = () => {
         let timer: ReturnType<typeof setTimeout>;
+        const time = 2500;
         timer = setTimeout(() => {
-            setShowMessage(false);
-        }, 5000);
+            setMessage(prevState => {
+                return {
+                    ...prevState,
+                    showMessage: false,
+                };
+            });
+        }, time);
 
         return () => {
             clearInterval(timer);
@@ -63,9 +75,9 @@ const Contacts = () => {
                 }
             </ul>
 
-            <div className={`${showMessage ? "opacity-100" : "opacity-0"} fixed bottom-5 mx-auto bg-[#101010] px-4 py-1 rounded-full transition duration-1000`}>
+            <div className={`${message.showMessage ? "opacity-100" : "opacity-0"} fixed bottom-5 left-2/4 -translate-x-2/4 bg-[#101010] px-4 py-1 rounded-full transition duration-1000`}>
                 <p>
-                    Texto copiado para a área de transferência
+                    {message.contactName} copiado para a área de transferência
                 </p>
             </div>
         </div>

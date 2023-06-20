@@ -6,8 +6,8 @@ import Contacts from "../Contacts";
 
 const Footer = () => {
     return (
-        <footer>
-            <div className="bg-black text-white px-24 pb-8">
+        <footer className="select-none">
+            <section className="bg-black text-white px-20 pb-8">
                 <div className="flex justify-end pt-12 mb-8">
                     <ul className="flex gap-8">
                         <li className="hover:bg-zinc-800/50 p-2 rounded-md transition duration-300">
@@ -71,7 +71,7 @@ const Footer = () => {
 
                     <div>
                         <h2 className="text-xl font-bold">
-                            Informação
+                            Informações
                         </h2>
                         <ul className="inline-flex flex-col gap-3 mt-3 text-gray-200">
                             <li>
@@ -109,7 +109,7 @@ const Footer = () => {
                         <input
                             type="email"
                             placeholder="Insirá seu email aqui"
-                            className="w-full bg-zinc-50/10 px-1 py-1 border border-zinc-400 hover:border-zinc-300 focus:border-zinc-300 rounded-sm outline-none transition duration-500"
+                            className="w-full bg-zinc-500/10 px-1 py-1 border border-zinc-400 hover:border-zinc-300 focus:border-zinc-300 rounded-sm outline-none transition duration-500"
                         />
 
                         <button
@@ -120,13 +120,13 @@ const Footer = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div className="flex justify-center px-24 py-2 bg-[#101010] text-zinc-500">
+            <section className="flex justify-center px-20 py-2 bg-[#101010] text-zinc-500">
                 <p>
                     Criado por <span className="text-zinc-400 font-semibold">Dário</span> | &copy; 2023 Todos os direitos reservados
                 </p>
-            </div>
+            </section>
         </footer>
     );
 };
