@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import { MdKeyboardArrowDown } from "react-icons/md";
 
 import ProductCardProps from "@/@types/productCard";
 import ProductCard from "@/components/ProductCard";
+import FilterButton from "./FilterButton";
 
 type Props = {
     params: {
@@ -59,31 +59,15 @@ const Search = ({ params }: Props) => {
                             Filtrar:
                         </h2>
 
-                        <div className="flex flex-col gap-1">
-                            <h3 className="text-gray-200 text-end text-xs text-gray">
-                                Marcas
-                            </h3>
-                            <button
-                                type="button"
-                                className="flex justify-center items-center gap-2 bg-black hover:bg-white text-gray-100 hover:text-black text-[13px] font-bold uppercase px-6 py-1 border border-zinc-200 hover:border-zinc-100 rounded-md transition duration-300"
-                            >
-                                Todas
-                                <MdKeyboardArrowDown className="-mx-1 w-6 h-6" />
-                            </button>
-                        </div>
+                        <FilterButton
+                            title="Marcas"
+                            content="Todas"
+                        />
 
-                        <div className="flex flex-col gap-1">
-                            <h3 className="text-gray-200 text-end text-xs text-gray">
-                                Ordenar por
-                            </h3>
-                            <button
-                                type="button"
-                                className="flex justify-center items-center gap-2 bg-black hover:bg-white text-gray-100 hover:text-black text-[13px] font-bold uppercase px-6 py-1 border border-zinc-200 hover:border-zinc-100 rounded-md transition duration-300"
-                            >
-                                Menor preço
-                                <MdKeyboardArrowDown className="-mx-1 w-6 h-6" />
-                            </button>
-                        </div>
+                        <FilterButton
+                            title="Ordenar por"
+                            content="Ordenar por"
+                        />
                     </div>
                 </div>
             </div>
