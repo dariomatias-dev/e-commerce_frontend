@@ -3,12 +3,31 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BsCart3 } from "react-icons/bs";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { MdFavoriteBorder, MdOutlineSearch } from "react-icons/md";
 
 const Header = () => {
     const [query, setQuery] = useState("");
+
+    const { push } = useRouter();
+
+    const validateQueryValue = () => {
+        const value = query.trim();
+        const valueExists = value.length;
+        const minimumSize = value.length >= 3;
+        const maximumSize = value.length <= 20;
+
+        return valueExists && minimumSize && maximumSize;
+    };
+
+    const search = () => {
+        const validValue = validateQueryValue();
+
+        if (validValue)
+            push(`/busca/${query}`);
+    };
 
     return (
         <header className="py-3 flex justify-between items-center px-20">
@@ -54,10 +73,17 @@ const Header = () => {
                     maxLength={40}
                     placeholder="Pesquise aqui..."
                     onChange={e => setQuery(e.target.value)}
+                    onKeyUp={e => {
+                        if (e.key === "Enter") search();
+                    }}
                     className="w-full pl-2 outline-none"
                 />
 
-                <button className="h-full bg-black px-2">
+                <button
+                    type="button"
+                    onClick={search}
+                    className="h-full bg-black px-2"
+                >
                     <MdOutlineSearch className="w-6 h-6 text-white select-none" />
                 </button>
             </div>
