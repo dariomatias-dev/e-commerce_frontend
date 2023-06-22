@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { BsShare } from "react-icons/bs";
+import { FaPlus } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 
 import ProductProps from "@/@types/product";
@@ -31,8 +32,8 @@ const Product = ({ searchParams }: Props) => {
     if (JSON.stringify(productData) === "{}") return <></>;
 
     return (
-        <div>
-            <div className="flex justify-between bg-zinc-100 text-white m-10 p-10 rounded-md">
+        <div className="flex flex-col gap-8 m-10">
+            <div className="flex justify-between bg-zinc-100 text-white p-10 rounded-md">
                 <div>
                     <div className="flex justify-end gap-4 mb-6">
                         <BsShare className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
@@ -76,6 +77,15 @@ const Product = ({ searchParams }: Props) => {
                         COMPRAR
                     </button>
                 </div>
+            </div>
+            <div className="flex flex-col justify-between gap-4 bg-zinc-100 p-10 rounded-md">
+                <h2 className="flex items-center gap-3 text-gray-700 hover:text-gray-900 text-3xl font-bold uppercase cursor-pointer transition duration-300">
+                    <FaPlus className="w-7 h-7" />
+                    Descrição do produto
+                </h2>
+                <p className="text-black text-justify">
+                    {productData.description}
+                </p>
             </div>
         </div>
     );
