@@ -1,6 +1,12 @@
+'use client'
+
+import { useState } from "react";
+import FormLegalPerson from "./FormLegalPerson";
 import FormPhysicalPerson from "./FormPhysicalPerson";
 
 const Cadastro = () => {
+    const [form, setForm] = useState("physicalPerson");
+
     return (
         <div className="w-full max-w-[40rem] mx-auto mt-16 mb-20">
             <div className="flex flex-col gap-3">
@@ -24,7 +30,8 @@ const Cadastro = () => {
                             type="radio"
                             name="accountType"
                             value="physicalPerson"
-                            checked
+                            checked={form === "physicalPerson"}
+                            onChange={e => setForm(e.target.value)}
                         />
                         <span>Pessoa Física</span>
                     </label>
@@ -34,13 +41,20 @@ const Cadastro = () => {
                             type="radio"
                             name="accountType"
                             value="legalPerson"
+                            checked={form === "legalPerson"}
+                            onChange={e => setForm(e.target.value)}
                         />
                         <span>Pessoa Jurídica</span>
                     </label>
                 </form>
             </div>
 
-            <FormPhysicalPerson />
+            {
+                form === "physicalPerson" ?
+                    <FormPhysicalPerson />
+                    :
+                    <FormLegalPerson />
+            }
         </div>
     );
 };

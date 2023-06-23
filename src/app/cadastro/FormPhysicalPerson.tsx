@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 import styles from "./styles";
+import ShowPasswordButton from "./ShowPasswordButton";
 
 const FormPhysicalPerson = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -111,12 +111,12 @@ const FormPhysicalPerson = () => {
             <div className="relative w-full">
                 <input
                     type="email"
-                    id="rg"
+                    id="email"
                     placeholder=" "
                     className={styles.input}
                 />
                 <label
-                    htmlFor="rg"
+                    htmlFor="email"
                     className={styles.label}
                 >
                     E-mail
@@ -137,18 +137,10 @@ const FormPhysicalPerson = () => {
                     >
                         Senha
                     </label>
-                    <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute top-1/4 right-2 mt-[2px]"
-                    >
-                        {
-                            showPassword ?
-                                <BsEyeFill className="w-5 h-5" />
-                                :
-                                <BsEyeSlashFill className="w-5 h-5" />
-                        }
-                    </button>
+                    <ShowPasswordButton
+                        showPassword={showPassword}
+                        setShowPassword={setShowPassword}
+                    />
                 </div>
 
                 <div className="relative w-full">
@@ -164,18 +156,10 @@ const FormPhysicalPerson = () => {
                     >
                         Confirmar senha
                     </label>
-                    <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute top-1/4 right-2 mt-[2px]"
-                    >
-                        {
-                            showConfirmPassword ?
-                                <BsEyeFill className="w-5 h-5" />
-                                :
-                                <BsEyeSlashFill className="w-5 h-5" />
-                        }
-                    </button>
+                    <ShowPasswordButton
+                        showPassword={showConfirmPassword}
+                        setShowPassword={setShowConfirmPassword}
+                    />
                 </div>
             </div>
 
