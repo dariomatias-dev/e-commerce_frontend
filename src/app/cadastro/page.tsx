@@ -1,8 +1,11 @@
 'use client'
 
 import { useState } from "react";
+
 import FormLegalPerson from "./FormLegalPerson";
 import FormPhysicalPerson from "./FormPhysicalPerson";
+
+import RedirectionLoginRegistration from "@/components/RedirectionLoginRegistration";
 
 const Cadastro = () => {
     const [form, setForm] = useState("physicalPerson");
@@ -55,6 +58,12 @@ const Cadastro = () => {
                     :
                     <FormLegalPerson />
             }
+
+            <RedirectionLoginRegistration
+                message="Já possui um cadastro?"
+                pathName="/login"
+                linkName="Faça login"
+            />
         </div>
     );
 };

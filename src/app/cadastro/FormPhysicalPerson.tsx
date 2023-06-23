@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from "react";
-import Link from "next/link";
 
-import styles from "./styles";
-import ShowPasswordButton from "./ShowPasswordButton";
+import ShowPasswordButton from "@/components/ShowPasswordButton";
+
+import styles from "@/utils/styles";
 
 const FormPhysicalPerson = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -181,24 +181,6 @@ const FormPhysicalPerson = () => {
             >
                 Criar conta
             </button>
-
-            <div className="flex gap-1 mx-auto">
-                <span className="text-gray-700">
-                    Já possui um cadastro?
-                </span>
-
-                <Link
-                    href={""}
-                    legacyBehavior
-                >
-                    <div className="flex flex-col group">
-                        <a className="font-semibold">
-                            Faça login
-                        </a>
-                        <span className="inline-block w-0 group-hover:w-full h-[1.8px] bg-gray-500 -mt-1 transition-all duration-300" />
-                    </div>
-                </Link>
-            </div>
         </form>
     );
 };
