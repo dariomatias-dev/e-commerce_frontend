@@ -112,7 +112,7 @@ const Header = () => {
                 </Link>
 
                 <Link
-                    href="/"
+                    href="/login"
                     legacyBehavior
                 >
                     <a

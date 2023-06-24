@@ -1,23 +1,76 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import ShowPasswordButton from "@/components/ShowPasswordButton";
 
+import formatCpf from "@/utils/formatCpf";
+import formatPhoneNumber from "@/utils/formatPhoneNumber";
+import formatRg from "@/utils/formatRg";
+import formatDateOfBirth from "@/utils/formattedDateOfBirth";
 import styles from "@/utils/styles";
+
+const schema = yup.object({
+    firstName: yup.string().min(3).max(20),
+    lastName: yup.string().min(3).max(20),
+    dateOfBirth: yup.string().min(10).max(10),
+    phoneNumber: yup.string().min(17).max(17),
+    cpf: yup.string().min(14).max(14),
+    rg: yup.string().min(7).max(7),
+    email: yup.string().email(),
+    password: yup.string().min(6).max(20),
+    confirmPassword: yup.string().oneOf([yup.ref("password")]).min(6).max(20),
+}).required();
+
+type FormProps = yup.InferType<typeof schema>;
 
 const FormPhysicalPerson = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+    const { register, setValue, handleSubmit, watch, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+    });
+
+    const receiveFormData = (data: FormProps) => {
+        console.log(data);
+    };
+
+    useEffect(() => {
+        const formattedDateOfBirth = formatDateOfBirth(watch("dateOfBirth") as string);
+        setValue("dateOfBirth", formattedDateOfBirth);
+    }, [watch("dateOfBirth")]);
+
+    useEffect(() => {
+        const formattedPhoneNumber = formatPhoneNumber(watch("phoneNumber") as string);
+        setValue("phoneNumber", formattedPhoneNumber);
+    }, [watch("phoneNumber")]);
+
+    useEffect(() => {
+        const formattedCpf = formatCpf(watch("cpf") as string);
+        setValue("cpf", formattedCpf);
+    }, [watch("cpf")]);
+
+    useEffect(() => {
+        const formattedRg = formatRg(watch("rg") as string);
+        setValue("rg", formattedRg);
+    }, [watch("rg")]);
+
     return (
-        <form className="flex flex-col gap-6">
+        <form
+            onSubmit={handleSubmit(receiveFormData)}
+            className="flex flex-col gap-6"
+        >
             <div className="flex gap-4">
                 <div className="relative w-full">
                     <input
                         type="text"
                         id="firstName"
                         placeholder=" "
+                        {...register("firstName")}
                         className={styles.input}
                     />
                     <label
@@ -33,6 +86,7 @@ const FormPhysicalPerson = () => {
                         type="text"
                         id="lastName"
                         placeholder=" "
+                        {...register("lastName")}
                         className={styles.input}
                     />
                     <label
@@ -50,6 +104,7 @@ const FormPhysicalPerson = () => {
                         type="text"
                         id="dateOfBirth"
                         placeholder=" "
+                        {...register("dateOfBirth")}
                         className={styles.input}
                     />
                     <label
@@ -65,6 +120,7 @@ const FormPhysicalPerson = () => {
                         type="tel"
                         id="phoneNumber"
                         placeholder=" "
+                        {...register("phoneNumber")}
                         className={styles.input}
                     />
                     <label
@@ -82,6 +138,7 @@ const FormPhysicalPerson = () => {
                         type="text"
                         id="cpf"
                         placeholder=" "
+                        {...register("cpf")}
                         className={styles.input}
                     />
                     <label
@@ -97,6 +154,7 @@ const FormPhysicalPerson = () => {
                         type="text"
                         id="rg"
                         placeholder=" "
+                        {...register("rg")}
                         className={styles.input}
                     />
                     <label
@@ -113,6 +171,7 @@ const FormPhysicalPerson = () => {
                     type="email"
                     id="email"
                     placeholder=" "
+                    {...register("email")}
                     className={styles.input}
                 />
                 <label
@@ -129,6 +188,7 @@ const FormPhysicalPerson = () => {
                         type={showPassword ? "text" : "password"}
                         id="password"
                         placeholder=" "
+                        {...register("password")}
                         className={styles.input}
                     />
                     <label
@@ -148,6 +208,7 @@ const FormPhysicalPerson = () => {
                         type={showConfirmPassword ? "text" : "password"}
                         id="confirmPassword"
                         placeholder=" "
+                        {...register("confirmPassword")}
                         className={styles.input}
                     />
                     <label

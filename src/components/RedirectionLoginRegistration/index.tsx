@@ -8,7 +8,7 @@ type Props = {
 
 const RedirectionLoginRegistration = ({ message, pathName, linkName }: Props) => {
     return (
-        <div className="flex gap-1 mt-8">
+        <div className="flex justify-center gap-1 mt-8">
             <span className="text-gray-700">
                 {message}
             </span>
