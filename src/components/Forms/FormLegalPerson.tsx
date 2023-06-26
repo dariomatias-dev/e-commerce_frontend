@@ -1,206 +1,125 @@
-'use client'
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useState } from "react";
+import FormInput from "./Fields/FormInput";
+import { schema, FormLegalPersonProps } from "./Schemas/FormLegalPersonSchema";
 
-import ShowPasswordButton from "@/components/ShowPasswordButton";
-
-import styles from "@/utils/styles";
+import FormInputPassword from "./Fields/FormInputPassword";
+import FormCheckboxes from "./Fields/FormCheckboxes";
+import SubmitFormButton from "./SubmitFormButton";
 
 const FormLegalPerson = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { control, register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            termsOfUse: true,
+        },
+        resolver: yupResolver(schema),
+    });
+
+    const receiveFormData = (data: FormLegalPersonProps) => {
+        console.log(data);
+    };
 
     return (
-        <form className="flex flex-col gap-6">
+        <form
+            onSubmit={handleSubmit(receiveFormData)}
+            className="flex flex-col gap-6"
+        >
             <div className="flex gap-4">
-                <div className="relative w-full">
-                    <input
-                        type="text"
-                        id="fantasyName"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="fantasyName"
-                        className={styles.label}
-                    >
-                        Nome Fantasia
-                    </label>
-                </div>
+                <FormInput
+                    inputName="Nome Fantasia"
+                    id="fantasyName"
+                    placeholder="Power Tech"
+                    control={control}
+                    errors={errors}
+                />
 
-                <div className="relative w-full">
-                    <input
-                        type="text"
-                        id="corporateName"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="corporateName"
-                        className={styles.label}
-                    >
-                        Razão Social
-                    </label>
-                </div>
+                <FormInput
+                    inputName="Razão Social"
+                    id="corporateName"
+                    placeholder="E-commerce"
+                    control={control}
+                    errors={errors}
+                />
             </div>
 
             <div className="flex gap-4">
-                <div className="relative w-full">
-                    <input
-                        type="text"
-                        id="cnpj"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="cnpj"
-                        className={styles.label}
-                    >
-                        CNPJ
-                    </label>
-                </div>
+                <FormInput
+                    inputName="CNPJ"
+                    id="cnpj"
+                    placeholder="12345678/9012-34"
+                    control={control}
+                    errors={errors}
+                />
 
-                <div className="relative w-full">
-                    <input
-                        type="text"
-                        id="stateRegistration"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="stateRegistration"
-                        className={styles.label}
-                    >
-                        Inscrição Estadual
-                    </label>
-                </div>
+                <FormInput
+                    inputName="Inscrição Estadual"
+                    id="stateRegistration"
+                    placeholder=" "
+                    control={control}
+                    errors={errors}
+                />
             </div>
 
             <div className="flex gap-4">
-                <div className="relative w-full">
-                    <input
-                        type="text"
-                        id="cpf"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="cpf"
-                        className={styles.label}
-                    >
-                        CPF
-                    </label>
-                </div>
+                <FormInput
+                    inputName="CPF"
+                    id="cpf"
+                    placeholder=" "
+                    control={control}
+                    errors={errors}
+                />
 
-                <div className="relative w-full">
-                    <input
-                        type="text"
-                        id="rg"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="rg"
-                        className={styles.label}
-                    >
-                        RG
-                    </label>
-                </div>
+                <FormInput
+                    inputName="RG"
+                    id="rg"
+                    placeholder=" "
+                    control={control}
+                    errors={errors}
+                />
             </div>
 
 
             <div className="flex gap-4">
-                <div className="relative w-full">
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="email"
-                        className={styles.label}
-                    >
-                        E-mail
-                    </label>
-                </div>
+                <FormInput
+                    inputName="E-mail"
+                    id="email"
+                    placeholder=" "
+                    control={control}
+                    errors={errors}
+                />
 
-                <div className="relative w-full">
-                    <input
-                        type="tel"
-                        id="phoneNumber"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="phoneNumber"
-                        className={styles.label}
-                    >
-                        Telefone Celular
-                    </label>
-                </div>
+                <FormInput
+                    inputName="Telefone Celular"
+                    id="phoneNumber"
+                    placeholder=" "
+                    control={control}
+                    errors={errors}
+                />
             </div>
 
             <div className="flex gap-4">
-                <div className="relative w-full">
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        id="password"
-                        placeholder=" "
-                        autoComplete="off"
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="password"
-                        className={styles.label}
-                    >
-                        Senha
-                    </label>
-                    <ShowPasswordButton
-                        showPassword={showPassword}
-                        setShowPassword={setShowPassword}
-                    />
-                </div>
+                <FormInputPassword
+                    inputName="Senha"
+                    id="password"
+                    register={register}
+                    errors={errors}
+                />
 
-                <div className="relative w-full">
-                    <input
-                        type={showConfirmPassword ? "text" : "password"}
-                        id="confirmPassword"
-                        placeholder=" "
-                        autoComplete="off"
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="confirmPassword"
-                        className={styles.label}
-                    >
-                        Confirmar senha
-                    </label>
-                    <ShowPasswordButton
-                        showPassword={showConfirmPassword}
-                        setShowPassword={setShowConfirmPassword}
-                    />
-                </div>
+                <FormInputPassword
+                    inputName="Confirmar senha"
+                    id="confirmPassword"
+                    register={register}
+                    errors={errors}
+                />
             </div>
 
-            <div className="text-gray-700">
-                <label className="flex gap-2">
-                    <input type="checkbox" />
-                    Li e concordo com os termos de uso e privacidade da Power Tech
-                </label>
+            <FormCheckboxes
+                register={register}
+                errors={errors}
+            />
 
-                <label className="flex gap-2">
-                    <input type="checkbox" />
-                    Quero receber ofertas e novidades por e-mail e mensagens no App da Power Tech
-                </label>
-            </div>
-
-            <button
-                type="submit"
-                className="w-full hover:bg-black hover:text-white font-semibold uppercase px-4 py-2 border border-black rounded-md transition duration-300"
-            >
-                Criar conta
-            </button>
+            <SubmitFormButton />
         </form>
     );
 };

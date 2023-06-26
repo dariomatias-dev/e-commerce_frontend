@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 
-import { FormProps } from "../Schemas/FormPhysicalPersonSchema";
+import { FormLegalPersonProps } from "../Schemas/FormLegalPersonSchema";
+import { FormPhysicalPersonProps } from "../Schemas/FormPhysicalPersonSchema";
 
+import formatCnpj from "@/utils/formatCnpj";
 import formatCpf from "@/utils/formatCpf";
 import formatPhoneNumber from "@/utils/formatPhoneNumber";
 import formatRg from "@/utils/formatRg";
+import formatStateRegistration from "@/utils/formatStateRegistration";
 import formatDateOfBirth from "@/utils/formattedDateOfBirth";
 import styles from "@/utils/styles";
 
@@ -15,8 +18,8 @@ type Props = {
     id: string;
     placeholder: string
     maxLength?: number;
-    control: Control<FormProps>;
-    errors: FieldErrors<FormProps>;
+    control: Control<FormLegalPersonProps> | Control<FormPhysicalPersonProps>;
+    errors: FieldErrors<FormLegalPersonProps | FormPhysicalPersonProps>;
 };
 
 type OnChangeProps = {
@@ -46,6 +49,10 @@ const FormInput = ({
             newValue = formatCpf(value);
         else if (name === "rg")
             newValue = formatRg(value);
+        else if (name === "cnpj")
+            newValue = formatCnpj(value);
+        else if (name === "stateRegistration")
+            newValue = formatStateRegistration(value);
 
         if (newValue)
             setModifiedValue(newValue);
@@ -55,8 +62,8 @@ const FormInput = ({
         <div className="w-full">
             <div className="relative">
                 <Controller
-                    name={id as keyof FormProps}
-                    control={control}
+                    name={id as keyof FormLegalPersonProps & keyof FormPhysicalPersonProps}
+                    control={control as Control<(FormLegalPersonProps | FormPhysicalPersonProps)>}
                     render={({ field }) => (
                         <input
                             type={inputType}
@@ -84,7 +91,7 @@ const FormInput = ({
             </div>
 
             <p className="text-red-600 text-xs">
-                {errors[id as keyof FormProps]?.message}
+                {errors[id as keyof (FormLegalPersonProps | FormPhysicalPersonProps)]?.message}
             </p>
         </div>
     );

@@ -1,14 +1,11 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 import FormCheckboxes from "./Fields/FormCheckboxes";
 import FormInput from "./Fields/FormInput";
 import FormInputPassword from "./Fields/FormInputPassword";
-import { schema } from "./Schemas/FormPhysicalPersonSchema";
+import { schema, FormPhysicalPersonProps } from "./Schemas/FormPhysicalPersonSchema";
 import SubmitFormButton from "./SubmitFormButton";
-
-type FormProps = yup.InferType<typeof schema>;
 
 const FormPhysicalPerson = () => {
     const { control, register, handleSubmit, formState: { errors } } = useForm({
@@ -18,7 +15,7 @@ const FormPhysicalPerson = () => {
         resolver: yupResolver(schema),
     });
 
-    const receiveFormData = (data: FormProps) => {
+    const receiveFormData = (data: FormPhysicalPersonProps) => {
         console.log(data);
     };
 

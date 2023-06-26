@@ -1,20 +1,22 @@
 import * as yup from "yup";
 
 export const schema = yup.object({
-    firstName: yup
+    fantasyName: yup
         .string()
         .min(3, "O nome precisa ter 3 ou mais caracteres.")
         .required("O nome é obrigatório."),
-    lastName: yup
+    corporateName: yup
         .string()
-        .min(3, "O sobrenome precisa ter 3 ou mais caracteres.")
-        .max(20)
-        .required("O sobrenome é obrigatório."),
-    dateOfBirth: yup
+        .min(3, "O nome precisa ter 3 ou mais caracteres.")
+        .required("O nome é obrigatório."),
+    cnpj: yup
         .string()
-        .min(10, "A data de nascimento é obrigatória.")
-        .max(11)
-        .required("A data de nascimento é obrigatória."),
+        .min(3, "O nome precisa ter 3 ou mais caracteres.")
+        .required("O nome é obrigatório."),
+    stateRegistration: yup
+        .string()
+        .min(3, "O nome precisa ter 3 ou mais caracteres.")
+        .required("O nome é obrigatório."),
     phoneNumber: yup
         .string()
         .min(17, "O número de telefone é obrigatório.")
@@ -54,4 +56,4 @@ export const schema = yup.object({
         .required(),
 }).required();
 
-export type FormPhysicalPersonProps = yup.InferType<typeof schema>;
+export type FormLegalPersonProps = yup.InferType<typeof schema>;
