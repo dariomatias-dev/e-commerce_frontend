@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 
-import { FormProps } from "./FormPhysicalPersonSchema";
+import { FormProps } from "../Schemas/FormPhysicalPersonSchema";
 
 import formatCpf from "@/utils/formatCpf";
 import formatPhoneNumber from "@/utils/formatPhoneNumber";
@@ -19,6 +19,11 @@ type Props = {
     errors: FieldErrors<FormProps>;
 };
 
+type OnChangeProps = {
+    name: string;
+    value: string;
+};
+
 const FormInput = ({
     inputName,
     inputType = "text",
@@ -30,7 +35,7 @@ const FormInput = ({
 }: Props) => {
     const [modifiedValue, setModifiedValue] = useState('');
 
-    const onChange = ({ name, value }: { name: string, value: string }) => {
+    const onChange = ({ name, value }: OnChangeProps) => {
         let newValue = "";
 
         if (name === "dateOfBirth")
@@ -42,7 +47,7 @@ const FormInput = ({
         else if (name === "rg")
             newValue = formatRg(value);
 
-        if (newValue.length)
+        if (newValue)
             setModifiedValue(newValue);
     };
 
@@ -56,12 +61,14 @@ const FormInput = ({
                         <input
                             type={inputType}
                             id={id}
+                            {...field}
                             placeholder={placeholder}
                             maxLength={maxLength}
-                            value={modifiedValue !== "" ? modifiedValue : field.value as string}
-                            onChange={(e) => {
-                                field.onChange(e.target.value);
-                                onChange({ name: field.name, value: e.target.value });
+                            value={modifiedValue ? modifiedValue : field.value as string}
+                            onChange={e => {
+                                const value = e.target.value;
+                                field.onChange(value);
+                                onChange({ name: field.name, value });
                             }}
                             className={styles.input}
                         />

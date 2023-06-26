@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import FormLegalPerson from "./FormLegalPerson";
-import FormPhysicalPerson from "./FormPhysicalPerson";
+import FormLegalPerson from "@/components/Forms/FormLegalPerson";
+import FormPhysicalPerson from "@/components/Forms/FormPhysicalPerson";
 
 import RedirectionLoginRegistration from "@/components/RedirectionLoginRegistration";
 

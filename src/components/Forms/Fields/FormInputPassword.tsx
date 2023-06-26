@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-import { FormProps } from "./FormPhysicalPersonSchema";
+import { FormProps } from "../Schemas/FormPhysicalPersonSchema";
 
 import ShowPasswordButton from "@/components/ShowPasswordButton";
 
@@ -30,7 +30,7 @@ const FormInputPassword = ({
                     id={id}
                     maxLength={20}
                     {...register(id as keyof FormProps)}
-                    placeholder=" "
+                    placeholder="••••••••"
                     className={styles.input}
                 />
 
