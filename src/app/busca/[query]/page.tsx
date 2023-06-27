@@ -18,6 +18,23 @@ type ProductsDataProps = {
     take: number;
 };
 
+const brands = [
+    "Nvidia",
+    "AMD",
+    "Intel",
+    "Asus",
+    "MSI",
+    "Gigabyte",
+];
+
+const orderBy = [
+    "Menor preço",
+    "Maior preço",
+    "Promoções",
+    "Mais procurados",
+    "Mais avaliados",
+];
+
 const Search = ({ params }: Props) => {
     const [productsData, setProductsData] = useState({} as ProductsDataProps);
 
@@ -44,7 +61,7 @@ const Search = ({ params }: Props) => {
                     Busca por: "{params.query}"
                 </h1>
 
-                <div className="flex gap-16">
+                <div className="flex items-center gap-16">
                     <div>
                         <h2 className="text-gray-300 text-end text-xs text-gray">
                             Produtos
@@ -54,19 +71,21 @@ const Search = ({ params }: Props) => {
                         </p>
                     </div>
 
-                    <div className="flex gap-8">
+                    <div className="flex items-center gap-8">
                         <h2 className="text-xl font-semibold">
                             Filtrar:
                         </h2>
 
                         <FilterButton
                             title="Marcas"
-                            content="Todas"
+                            standardFilter="Todas"
+                            filters={brands}
                         />
 
                         <FilterButton
                             title="Ordenar por"
-                            content="Ordenar por"
+                            standardFilter="Escolher"
+                            filters={orderBy}
                         />
                     </div>
                 </div>
