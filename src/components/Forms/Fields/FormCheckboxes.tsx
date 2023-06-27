@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-import { FormProps } from "../Schemas/FormPhysicalPersonSchema";
+import { FormProps } from "../Schemas/PhysicalPersonFormSchema";
 import FormCheckbox from "./FormCheckbox";
 
 export type FormCheckboxesProps = {

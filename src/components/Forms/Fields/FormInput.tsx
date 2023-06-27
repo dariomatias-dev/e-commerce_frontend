@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 
-import { FormLegalPersonProps } from "../Schemas/FormLegalPersonSchema";
-import { FormPhysicalPersonProps } from "../Schemas/FormPhysicalPersonSchema";
+import { LegalPersonFormSchema } from "../Schemas/LegalPersonFormSchema";
+import { PhysicalPersonFormSchema } from "../Schemas/PhysicalPersonFormSchema";
+import { LoginFormProps } from "../Schemas/LoginFormSchema";
 
 import formatCnpj from "@/utils/formatCnpj";
 import formatCpf from "@/utils/formatCpf";
@@ -12,14 +13,16 @@ import formatStateRegistration from "@/utils/formatStateRegistration";
 import formatDateOfBirth from "@/utils/formattedDateOfBirth";
 import styles from "@/utils/styles";
 
+type FormsProps = LegalPersonFormSchema | PhysicalPersonFormSchema | LoginFormProps;
+
 type Props = {
     inputName: string;
     inputType?: string;
     id: string;
     placeholder: string
     maxLength?: number;
-    control: Control<FormLegalPersonProps> | Control<FormPhysicalPersonProps>;
-    errors: FieldErrors<FormLegalPersonProps | FormPhysicalPersonProps>;
+    control: Control<FormsProps>;
+    errors: FieldErrors<FormsProps>;
 };
 
 type OnChangeProps = {
@@ -41,18 +44,26 @@ const FormInput = ({
     const onChange = ({ name, value }: OnChangeProps) => {
         let newValue = "";
 
-        if (name === "dateOfBirth")
-            newValue = formatDateOfBirth(value);
-        else if (name === "phoneNumber")
-            newValue = formatPhoneNumber(value);
-        else if (name === "cpf")
-            newValue = formatCpf(value);
-        else if (name === "rg")
-            newValue = formatRg(value);
-        else if (name === "cnpj")
-            newValue = formatCnpj(value);
-        else if (name === "stateRegistration")
-            newValue = formatStateRegistration(value);
+        switch (name) {
+            case "dateOfBirth":
+                newValue = formatDateOfBirth(value);
+                break;
+            case "phoneNumber":
+                newValue = formatPhoneNumber(value);
+                break;
+            case "cpf":
+                newValue = formatCpf(value);
+                break;
+            case "rg":
+                newValue = formatRg(value);
+                break;
+            case "cnpj":
+                newValue = formatCnpj(value);
+                break;
+            case "stateRegistration":
+                newValue = formatStateRegistration(value);
+                break;
+        }
 
         if (newValue)
             setModifiedValue(newValue);
@@ -62,8 +73,8 @@ const FormInput = ({
         <div className="w-full">
             <div className="relative">
                 <Controller
-                    name={id as keyof FormLegalPersonProps & keyof FormPhysicalPersonProps}
-                    control={control as Control<(FormLegalPersonProps | FormPhysicalPersonProps)>}
+                    name={id as keyof FormsProps}
+                    control={control as Control<FormsProps>}
                     render={({ field }) => (
                         <input
                             type={inputType}
@@ -71,7 +82,11 @@ const FormInput = ({
                             {...field}
                             placeholder={placeholder}
                             maxLength={maxLength}
-                            value={modifiedValue ? modifiedValue : field.value as string}
+                            value={modifiedValue ?
+                                modifiedValue
+                                :
+                                field.value as string
+                            }
                             onChange={e => {
                                 const value = e.target.value;
                                 field.onChange(value);
@@ -91,7 +106,7 @@ const FormInput = ({
             </div>
 
             <p className="text-red-600 text-xs">
-                {errors[id as keyof (FormLegalPersonProps | FormPhysicalPersonProps)]?.message}
+                {errors[id as keyof FormsProps]?.message}
             </p>
         </div>
     );

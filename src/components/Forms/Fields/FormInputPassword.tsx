@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-import { FormProps } from "../Schemas/FormPhysicalPersonSchema";
+import { LegalPersonFormSchema } from "../Schemas/LegalPersonFormSchema";
+import { PhysicalPersonFormSchema } from "../Schemas/PhysicalPersonFormSchema";
+import { LoginFormProps } from "../Schemas/LoginFormSchema";
 
 import ShowPasswordButton from "@/components/ShowPasswordButton";
 
 import styles from "@/utils/styles";
 
+type FormsProps = LegalPersonFormSchema | PhysicalPersonFormSchema | LoginFormProps;
+
 type Props = {
     inputName: string;
     id: string;
-    register: UseFormRegister<FormProps>;
-    errors: FieldErrors<FormProps>;
+    register: UseFormRegister<FormsProps>;
+    errors: FieldErrors<FormsProps>;
 };
 
 const FormInputPassword = ({
@@ -29,7 +33,7 @@ const FormInputPassword = ({
                     type={showPassword ? "text" : "password"}
                     id={id}
                     maxLength={20}
-                    {...register(id as keyof FormProps)}
+                    {...register(id as keyof FormsProps)}
                     placeholder="••••••••"
                     className={styles.input}
                 />
@@ -48,7 +52,7 @@ const FormInputPassword = ({
             </div>
 
             <p className="text-red-600 text-xs">
-                {errors[id as keyof FormProps]?.message}
+                {errors[id as keyof FormsProps]?.message}
             </p>
         </div>
     )

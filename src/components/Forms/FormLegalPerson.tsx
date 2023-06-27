@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import FormInput from "./Fields/FormInput";
-import { schema, FormLegalPersonProps } from "./Schemas/FormLegalPersonSchema";
+import { schema, FormLegalPersonProps } from "./Schemas/LegalPersonFormSchema";
 
 import FormInputPassword from "./Fields/FormInputPassword";
 import FormCheckboxes from "./Fields/FormCheckboxes";
@@ -119,7 +119,7 @@ const FormLegalPerson = () => {
                 errors={errors}
             />
 
-            <SubmitFormButton />
+            <SubmitFormButton text="Criar conta" />
         </form>
     );
 };

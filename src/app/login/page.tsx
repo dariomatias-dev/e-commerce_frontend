@@ -1,14 +1,22 @@
 'use client'
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+import FormInput from "@/components/Forms/Fields/FormInput";
+import FormInputPassword from "@/components/Forms/Fields/FormInputPassword";
+import { schema, LoginFormProps } from "@/components/Forms/Schemas/LoginFormSchema";
+import SubmitFormButton from "@/components/Forms/SubmitFormButton";
 import RedirectionLoginRegistration from "@/components/RedirectionLoginRegistration";
-import ShowPasswordButton from "@/components/ShowPasswordButton";
-
-import styles from "@/utils/styles";
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false);
+    const { control, register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const receiveFormData = (data: LoginFormProps) => {
+        console.log(data);
+    };
 
     return (
         <div className="w-full max-w-[25rem] mx-auto mt-16 mb-20">
@@ -22,47 +30,27 @@ const Login = () => {
                 </p>
             </div>
 
-            <form className="flex flex-col gap-6 my-6">
-                <div className="relative w-full">
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="email"
-                        className={styles.label}
-                    >
-                        Email
-                    </label>
-                </div>
+            <form
+                onSubmit={handleSubmit(receiveFormData)}
+                className="flex flex-col gap-6 my-6"
+            >
+                <FormInput
+                    inputName="E-mail"
+                    inputType="email"
+                    id="email"
+                    placeholder="matiasdario75@gmail.com"
+                    control={control}
+                    errors={errors}
+                />
 
-                <div className="relative w-full">
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        id="password"
-                        placeholder=" "
-                        className={styles.input}
-                    />
-                    <label
-                        htmlFor="password"
-                        className={styles.label}
-                    >
-                        Senha
-                    </label>
-                    <ShowPasswordButton
-                        showPassword={showPassword}
-                        setShowPassword={setShowPassword}
-                    />
-                </div>
+                <FormInputPassword
+                    inputName="Senha"
+                    id="password"
+                    register={register}
+                    errors={errors}
+                />
 
-                <button
-                    type="submit"
-                    className="w-full hover:bg-black hover:text-white font-semibold uppercase px-4 py-2 border border-black rounded-md transition duration-300"
-                >
-                    Fazer login
-                </button>
+                <SubmitFormButton text="Fazer login" />
             </form>
 
             <RedirectionLoginRegistration
