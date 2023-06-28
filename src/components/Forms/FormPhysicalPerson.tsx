@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormCheckboxes from "./Fields/FormCheckboxes";
 import FormInput from "./Fields/FormInput";
 import FormInputPassword from "./Fields/FormInputPassword";
-import { schema, FormPhysicalPersonProps } from "./Schemas/PhysicalPersonFormSchema";
+import { schema, PhysicalPersonFormProps } from "./Schemas/PhysicalPersonFormSchema";
 import SubmitFormButton from "./SubmitFormButton";
 
 const FormPhysicalPerson = () => {
@@ -15,7 +15,7 @@ const FormPhysicalPerson = () => {
         resolver: yupResolver(schema),
     });
 
-    const receiveFormData = (data: FormPhysicalPersonProps) => {
+    const receiveFormData = (data: PhysicalPersonFormProps) => {
         console.log(data);
     };
 
@@ -91,14 +91,14 @@ const FormPhysicalPerson = () => {
                 <FormInputPassword
                     inputName="Senha"
                     id="password"
-                    register={register}
+                    control={control}
                     errors={errors}
                 />
 
                 <FormInputPassword
                     inputName="Confirmar senha"
                     id="confirmPassword"
-                    register={register}
+                    control={control}
                     errors={errors}
                 />
             </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 
-import { LegalPersonFormSchema } from "../Schemas/LegalPersonFormSchema";
-import { PhysicalPersonFormSchema } from "../Schemas/PhysicalPersonFormSchema";
+import { LegalPersonFormProps } from "../Schemas/LegalPersonFormSchema";
+import { PhysicalPersonFormProps } from "../Schemas/PhysicalPersonFormSchema";
 import { LoginFormProps } from "../Schemas/LoginFormSchema";
 
 import formatCnpj from "@/utils/formatCnpj";
@@ -13,7 +13,7 @@ import formatStateRegistration from "@/utils/formatStateRegistration";
 import formatDateOfBirth from "@/utils/formattedDateOfBirth";
 import styles from "@/utils/styles";
 
-type FormsProps = LegalPersonFormSchema | PhysicalPersonFormSchema | LoginFormProps;
+type FormsProps = LegalPersonFormProps | PhysicalPersonFormProps | LoginFormProps;
 
 type Props = {
     inputName: string;
@@ -21,7 +21,7 @@ type Props = {
     id: string;
     placeholder: string
     maxLength?: number;
-    control: Control<FormsProps>;
+    control: Control<LegalPersonFormProps> | Control<PhysicalPersonFormProps> | Control<LoginFormProps>;
     errors: FieldErrors<FormsProps>;
 };
 

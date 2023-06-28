@@ -1,12 +1,15 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-import { FormProps } from "../Schemas/PhysicalPersonFormSchema";
+import { LegalPersonFormSchema } from "../Schemas/LegalPersonFormSchema";
+import { PhysicalPersonFormSchema } from "../Schemas/PhysicalPersonFormSchema";
 
-interface FormCheckboxProps {
+type FormsProps = LegalPersonFormSchema | PhysicalPersonFormSchema;
+
+type FormCheckboxProps = {
     message: string;
     id: string;
-    register: UseFormRegister<FormProps>;
-    errors: FieldErrors<FormProps>;
+    register: UseFormRegister<FormsProps>;
+    errors: FieldErrors<FormsProps>;
 };
 
 const FormCheckbox = ({ message, id, register, errors }: FormCheckboxProps) => {
@@ -15,7 +18,7 @@ const FormCheckbox = ({ message, id, register, errors }: FormCheckboxProps) => {
             <label className="flex gap-2 text-gray-700">
                 <input
                     type="checkbox"
-                    {...register(id as keyof FormProps)}
+                    {...register(id as keyof FormsProps)}
                 />
                 {message}
             </label>

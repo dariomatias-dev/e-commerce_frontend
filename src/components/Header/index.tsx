@@ -57,6 +57,7 @@ const Header = () => {
                         </Link>
                         <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
                     </li>
+
                     <li className="flex flex-col items-center group">
                         <Link href="/">
                             Contato
@@ -90,7 +91,7 @@ const Header = () => {
 
             <div className="flex gap-6">
                 <Link
-                    href="/"
+                    href="/carrinho"
                     legacyBehavior
                 >
                     <a

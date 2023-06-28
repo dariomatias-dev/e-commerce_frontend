@@ -7,7 +7,7 @@ import ProductCard from "../ProductCard";
 import ProductCardProps from "@/@types/productCard";
 
 type ProductsDataProps = {
-    products: ProductCardProps[],
+    products: ProductCardProps[];
     skip: number;
     take: number;
 };
@@ -38,13 +38,9 @@ const ProductsSection = () => {
             </h2>
 
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
-                {
-                    productsData.products.map(productData => {
-                        return (
-                            <ProductCard productData={productData} />
-                        )
-                    })
-                }
+                {productsData.products.map(productData => (
+                    <ProductCard productData={productData} />
+                ))}
             </div>
         </section>
     );

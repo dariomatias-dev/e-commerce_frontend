@@ -1,27 +1,27 @@
 import { useState } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 
-import { LegalPersonFormSchema } from "../Schemas/LegalPersonFormSchema";
-import { PhysicalPersonFormSchema } from "../Schemas/PhysicalPersonFormSchema";
+import { LegalPersonFormProps } from "../Schemas/LegalPersonFormSchema";
+import { PhysicalPersonFormProps } from "../Schemas/PhysicalPersonFormSchema";
 import { LoginFormProps } from "../Schemas/LoginFormSchema";
 
 import ShowPasswordButton from "@/components/ShowPasswordButton";
 
 import styles from "@/utils/styles";
 
-type FormsProps = LegalPersonFormSchema | PhysicalPersonFormSchema | LoginFormProps;
+type FormsProps = LegalPersonFormProps | PhysicalPersonFormProps | LoginFormProps;
 
 type Props = {
     inputName: string;
     id: string;
-    register: UseFormRegister<FormsProps>;
+    control: Control<LegalPersonFormProps> | Control<PhysicalPersonFormProps> | Control<LoginFormProps>;
     errors: FieldErrors<FormsProps>;
 };
 
 const FormInputPassword = ({
     inputName,
     id,
-    register,
+    control,
     errors
 }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -29,13 +29,18 @@ const FormInputPassword = ({
     return (
         <div className="w-full">
             <div className="relative">
-                <input
-                    type={showPassword ? "text" : "password"}
-                    id={id}
-                    maxLength={20}
-                    {...register(id as keyof FormsProps)}
-                    placeholder="••••••••"
-                    className={styles.input}
+                <Controller
+                    name={id as keyof FormsProps}
+                    control={control as Control<FormsProps>}
+                    render={({ field }) => (
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            id={id}
+                            {...field}
+                            placeholder="••••••••"
+                            className={styles.input}
+                        />
+                    )}
                 />
 
                 <label

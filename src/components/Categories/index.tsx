@@ -26,26 +26,22 @@ const Categories = () => {
 
     return (
         <section className="flex flex-wrap justify-center gap-x-28 gap-y-10 mx-10 my-8">
-            {
-                categoriesData.map(categoryData => {
-                    return (
-                        <div className="flex flex-col justify-center items-center gap-3">
-                            <Image
-                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${categoryData.imageUrlId}.jpg`}
-                                width={500}
-                                height={500}
-                                priority={true}
-                                alt={`Imagem da categoria ${categoryData.name}.`}
-                                className="w-full max-w-[14rem] h-auto object-contain mx-auto mb-4"
-                            />
+            {categoriesData.map(categoryData => (
+                <div className="flex flex-col justify-center items-center gap-3">
+                    <Image
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${categoryData.imageUrlId}.jpg`}
+                        width={500}
+                        height={500}
+                        priority={true}
+                        alt={`Imagem da categoria ${categoryData.name}.`}
+                        className="w-full max-w-[14rem] h-auto object-contain mx-auto mb-4"
+                    />
 
-                            <h3 className="text-gray-700 text-center font-bold uppercase">
-                                {categoryData.name}
-                            </h3>
-                        </div>
-                    )
-                })
-            }
+                    <h3 className="text-gray-700 text-center font-bold uppercase">
+                        {categoryData.name}
+                    </h3>
+                </div>
+            ))}
         </section>
     );
 };

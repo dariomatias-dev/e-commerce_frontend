@@ -10,7 +10,7 @@ import SubmitFormButton from "@/components/Forms/SubmitFormButton";
 import RedirectionLoginRegistration from "@/components/RedirectionLoginRegistration";
 
 const Login = () => {
-    const { control, register, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
 
@@ -46,7 +46,7 @@ const Login = () => {
                 <FormInputPassword
                     inputName="Senha"
                     id="password"
-                    register={register}
+                    control={control}
                     errors={errors}
                 />
 

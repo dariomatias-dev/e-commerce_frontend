@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import FormInput from "./Fields/FormInput";
-import { schema, FormLegalPersonProps } from "./Schemas/LegalPersonFormSchema";
+import { schema, LegalPersonFormProps } from "./Schemas/LegalPersonFormSchema";
 
 import FormInputPassword from "./Fields/FormInputPassword";
 import FormCheckboxes from "./Fields/FormCheckboxes";
@@ -16,7 +16,7 @@ const FormLegalPerson = () => {
         resolver: yupResolver(schema),
     });
 
-    const receiveFormData = (data: FormLegalPersonProps) => {
+    const receiveFormData = (data: LegalPersonFormProps) => {
         console.log(data);
     };
 
@@ -102,14 +102,14 @@ const FormLegalPerson = () => {
                 <FormInputPassword
                     inputName="Senha"
                     id="password"
-                    register={register}
+                    control={control}
                     errors={errors}
                 />
 
                 <FormInputPassword
                     inputName="Confirmar senha"
                     id="confirmPassword"
-                    register={register}
+                    control={control}
                     errors={errors}
                 />
             </div>

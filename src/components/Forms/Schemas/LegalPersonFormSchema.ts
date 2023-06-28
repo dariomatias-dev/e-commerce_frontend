@@ -56,4 +56,4 @@ export const schema = yup.object({
         .required(),
 }).required();
 
-export type LegalPersonFormSchema = yup.InferType<typeof schema>;
+export type LegalPersonFormProps = yup.InferType<typeof schema>;
