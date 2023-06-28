@@ -29,8 +29,8 @@ const Footer = () => {
                     </ul>
                 </div>
 
-                <div className="flex gap-6 justify-between">
-                    <div>
+                <div className="flex flex-wrap justify-between gap-10">
+                    <div className="mx-auto">
                         <h2 className="text-xl font-bold">
                             Sobre
                         </h2>
@@ -41,7 +41,7 @@ const Footer = () => {
 
                     <Contacts />
 
-                    <div>
+                    <div className="mx-auto">
                         <h2 className="text-xl font-bold">
                             Informações
                         </h2>
@@ -65,7 +65,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className="w-[300px] flex flex-col gap-3">
+                    <div className="w-full max-w-[300px] flex flex-col gap-3 mx-auto">
                         <h2 className="text-xl font-bold">
                             Inscreva-se
                         </h2>
@@ -86,7 +86,7 @@ const Footer = () => {
                 </div>
             </section>
 
-            <section className="flex justify-center px-20 py-2 bg-[#101010] text-zinc-500">
+            <section className="flex justify-center px-6 sm:px-12 md:px-20 py-2 bg-[#101010] text-zinc-500">
                 <p>
                     Criado por <span className="text-zinc-400 font-semibold">Dário</span> | &copy; 2023 Todos os direitos reservados
                 </p>

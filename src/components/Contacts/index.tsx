@@ -54,7 +54,7 @@ const Contacts = () => {
     };
 
     return (
-        <div>
+        <div className="mx-auto">
             <h2 className="text-xl font-bold">
                 Contato
             </h2>
