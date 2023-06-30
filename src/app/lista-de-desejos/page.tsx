@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import FilterButton from "@/components/FilterButton";
 import Loading from "@/components/Loading";
@@ -8,26 +8,11 @@ import ProductCard from "@/components/ProductCard";
 
 import ProductCardProps from "@/@types/productCard";
 
-type Props = {
-    params: {
-        query: string;
-    };
-};
-
 type ProductsDataProps = {
     products: ProductCardProps[],
     skip: number;
     take: number;
 };
-
-const brands = [
-    "Nvidia",
-    "AMD",
-    "Intel",
-    "Asus",
-    "MSI",
-    "Gigabyte",
-];
 
 const orderBy = [
     "Menor preço",
@@ -37,7 +22,7 @@ const orderBy = [
     "Mais avaliados",
 ];
 
-const Search = ({ params }: Props) => {
+const Wishlist = () => {
     const [productsData, setProductsData] = useState({} as ProductsDataProps);
 
     const fetchData = async (skip: number) => {
@@ -57,10 +42,10 @@ const Search = ({ params }: Props) => {
     if (JSON.stringify(productsData) === "{}") return <Loading />;
 
     return (
-        <section className="flex flex-col gap-10 m-10">
-            <div className="flex justify-between items-center text-white bg-black px-8 py-3 rounded-md">
+        <section className="m-10">
+            <div className="flex justify-between items-center gap-16 text-white bg-black my-10 px-8 py-3 rounded-md">
                 <h1 className="text-gray-100 text-2xl font-semibold">
-                    Busca por: "{params.query}"
+                    Meu carrinho
                 </h1>
 
                 <div className="flex items-center gap-16">
@@ -72,18 +57,10 @@ const Search = ({ params }: Props) => {
                             10000
                         </p>
                     </div>
-
                     <div className="flex items-center gap-8">
                         <h2 className="text-xl font-semibold">
                             Filtrar:
                         </h2>
-
-                        <FilterButton
-                            title="Marcas"
-                            standardFilter="Todas"
-                            filters={brands}
-                        />
-
                         <FilterButton
                             title="Ordenar por"
                             standardFilter="Escolher"
@@ -105,4 +82,4 @@ const Search = ({ params }: Props) => {
     );
 };
 
-export default Search;
+export default Wishlist;

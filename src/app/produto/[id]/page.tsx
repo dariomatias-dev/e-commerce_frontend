@@ -39,6 +39,7 @@ const Product = ({ searchParams }: Props) => {
                         <BsShare className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                         <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                     </div>
+
                     <Image
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${productData.imageUrlIds[0]}.jpg`}
                         width={1000}
@@ -48,6 +49,7 @@ const Product = ({ searchParams }: Props) => {
                         alt={`Produto ${productData.name}`}
                     />
                 </div>
+
                 <div className="w-full max-w-[580px] flex flex-col justify-between gap-4 bg-zinc-800 px-4 py-8 rounded-md">
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
@@ -61,6 +63,7 @@ const Product = ({ searchParams }: Props) => {
                                 Vendido e entregue por: <span className="text-white font-semibold">Power Tech</span>
                             </p>
                         </div>
+
                         <div className="flex flex-col gap-2">
                             <p className="text-green-500 text-2xl font-bold">
                                 {Number(productData.price).toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
@@ -70,6 +73,7 @@ const Product = ({ searchParams }: Props) => {
                             </p>
                         </div>
                     </div>
+
                     <button
                         type="button"
                         className="w-full hover:bg-zinc-100 hover:text-black font-bold uppercase py-1 border border-zinc-200 hover:border-zinc-100 rounded-md transition duration-300"
@@ -78,6 +82,7 @@ const Product = ({ searchParams }: Props) => {
                     </button>
                 </div>
             </div>
+            
             <div className="flex flex-col justify-between gap-4 bg-zinc-100 p-10 rounded-md">
                 <h2 className="flex items-center gap-3 text-gray-700 hover:text-gray-900 text-3xl font-bold uppercase cursor-pointer transition duration-300">
                     <FaPlus className="w-7 h-7" />

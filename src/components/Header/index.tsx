@@ -102,7 +102,7 @@ const Header = () => {
                 </Link>
 
                 <Link
-                    href="/"
+                    href="/lista-de-desejos"
                     legacyBehavior
                 >
                     <a

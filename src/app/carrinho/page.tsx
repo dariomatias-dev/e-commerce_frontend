@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
-import ProductCardProps from "@/@types/productCard";
 import CartProduct from "@/components/CartProduct";
+
+import ProductCardProps from "@/@types/productCard";
 
 type ProductsDataProps = {
     products: ProductCardProps[];
