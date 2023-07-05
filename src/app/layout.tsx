@@ -5,6 +5,8 @@ import NavBar from "@/components/NavBar";
 import ScrollUpButton from "@/components/ScrollUpButton";
 import Footer from "@/components/Footer";
 
+import { FavoriteProvider } from "@/contexts/FavoriteContext";
+
 export const metadata = {
     title: "Power Tech",
     description: "E-commerce Power tech",
@@ -18,11 +20,13 @@ const RootLayout = ({ children }: RootLayoutProps) => {
     return (
         <html lang="pt-br">
             <body>
-                <Header />
-                <NavBar />
-                {children}
-                <ScrollUpButton />
-                <Footer />
+                <FavoriteProvider>
+                    <Header />
+                    <NavBar />
+                    {children}
+                    <ScrollUpButton />
+                    <Footer />
+                </FavoriteProvider>
             </body>
         </html>
     );

@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 import ProductCardProps from "@/@types/productCard";
+
+import { useFavorite } from "@/contexts/FavoriteContext";
 
 import resetFormatting from "@/utils/resetFormatting";
 
@@ -13,6 +15,17 @@ type Props = {
 
 const ProductCard = ({ productData }: Props) => {
     const formattedProductName = resetFormatting(productData.name);
+
+    const { favoriteData, createFavorite, addFavorite } = useFavorite()
+
+    const checkFavorite = (productId: string) => {
+        const userId = "57e99e52-753e-4da7-8a67-a6286edd2ee4";
+
+        if (JSON.stringify(favoriteData) === "{}")
+            createFavorite(userId, productId);
+        else
+            addFavorite(userId, productId);
+    };
 
     return (
         <div
@@ -41,24 +54,23 @@ const ProductCard = ({ productData }: Props) => {
                     </a>
                 </Link>
 
-                <div className="flex  gap-4 mr-1">
-                    <Link
-                        href={""}
-                        legacyBehavior
+                <div className="hidden group-hover:flex gap-4 mr-1">
+                    <button
+                        type="button"
+                        onClick={() => checkFavorite(productData.id)}
                     >
-                        <a className="hidden group-hover:block">
-                            <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                        </a>
-                    </Link>
+                        {favoriteData.productIds?.includes(productData.id) ?
+                            <MdFavorite className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                            :
+                            <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />}
+                    </button>
 
-                    <Link
-                        href={""}
-                        legacyBehavior
+                    <button
+                        type="button"
+                    //onClick={}
                     >
-                        <a className="hidden group-hover:block">
-                            <FaShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                        </a>
-                    </Link>
+                        <FaShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                    </button>
                 </div>
             </div>
 
@@ -80,6 +92,7 @@ const ProductCard = ({ productData }: Props) => {
                         alt={`Imagem do produto: ${productData.name}.`}
                         className="w-full max-w-[10rem] max-h-[10rem] h-auto object-contain mx-auto"
                     />
+
                     <h3 className="text-gray-700 font-bold uppercase ml-2">
                         {productData.name}
                     </h3>

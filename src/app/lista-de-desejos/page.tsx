@@ -8,6 +8,8 @@ import ProductCard from "@/components/ProductCard";
 
 import ProductCardProps from "@/@types/productCard";
 
+import { useFavorite } from "@/contexts/FavoriteContext";
+
 type ProductsDataProps = {
     products: ProductCardProps[],
     skip: number;
@@ -25,9 +27,17 @@ const orderBy = [
 const Wishlist = () => {
     const [productsData, setProductsData] = useState({} as ProductsDataProps);
 
+    const { favoriteData } = useFavorite();
+
     const fetchData = async (skip: number) => {
+        console.log(favoriteData)
+        const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/favorite-products?skip=${skip}`);
+        favoriteData.productIds?.forEach(productId => {
+            url.searchParams.append("productIds", productId);
+        });
+
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?skip=${skip}`);
+            const response = await fetch(url);
             const data = await response.json();
             setProductsData(data);
         } catch (err) {
@@ -36,8 +46,9 @@ const Wishlist = () => {
     };
 
     useEffect(() => {
-        fetchData(0);
-    }, []);
+        if (favoriteData)
+            fetchData(0);
+    }, [favoriteData]);
 
     if (JSON.stringify(productsData) === "{}") return <Loading />;
 
@@ -71,7 +82,7 @@ const Wishlist = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
-                {productsData.products.map(productData => (
+                {productsData.products?.map(productData => (
                     <ProductCard
                         key={productData.id}
                         productData={productData}
