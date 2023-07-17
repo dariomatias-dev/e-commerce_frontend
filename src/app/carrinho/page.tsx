@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
@@ -18,7 +18,9 @@ const Cart = () => {
 
     const fecthData = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?skip=${0}`);
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/products?skip=${0}`
+            );
             const data = await response.json();
             setProductsData(data);
         } catch (err) {
@@ -34,26 +36,30 @@ const Cart = () => {
 
     return (
         <section className="m-10">
-            <h1 className="text-2xl">
-                Meu carrinho
-            </h1>
+            <h1 className="text-2xl">Meu carrinho</h1>
 
             <div className="flex gap-10 mt-10">
                 <div className="w-full flex flex-col gap-4">
                     <table className="divide-y divide-gray-200 border border-t-0 border-gray-200 rounded-md shadow-lg overflow-hidden">
                         <thead className="bg-black text-white text-left text-sm tracking-wider">
-                            {["Produto", "", "Quant.", "Preço", ""].map(fieldName => (
-                                <th
-                                    scope="col"
-                                    className="font-normal p-4"
-                                >
-                                    {fieldName}
-                                </th>
-                            ))}
+                            {["Produto", "", "Quant.", "Preço", ""].map(
+                                (fieldName, index) => (
+                                    <th
+                                        key={index}
+                                        scope="col"
+                                        className="font-normal p-4"
+                                    >
+                                        {fieldName}
+                                    </th>
+                                )
+                            )}
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
                             {productsData.products.map((productData) => (
-                                <CartProduct productData={productData} />
+                                <CartProduct
+                                    key={productData.id}
+                                    productData={productData}
+                                />
                             ))}
                         </tbody>
                     </table>
@@ -76,12 +82,8 @@ const Cart = () => {
 
                         <div className="flex flex-col gap-2 mt-5">
                             <div className="flex justify-between mx-6">
-                                <h3 className="text-gray-600">
-                                    Total
-                                </h3>
-                                <p className="text-lg font-bold">
-                                    R$ 3.635,05
-                                </p>
+                                <h3 className="text-gray-600">Total</h3>
+                                <p className="text-lg font-bold">R$ 3.635,05</p>
                             </div>
 
                             <div className="flex flex-col gap-1 text-center font-medium">
@@ -101,14 +103,15 @@ const Cart = () => {
                             </p>
 
                             <div className="flex flex-col gap-1 text-center text-gray-500 font-medium">
-                                <p className="text-xs">
-                                    sem juros no cartão
-                                </p>
+                                <p className="text-xs">sem juros no cartão</p>
                                 <p className="text-red-600 text-xl font-bold">
                                     R$ 3.635,05
                                 </p>
                                 <p className="text-xs">
-                                    em até 12x de <span className="text-red-500">R$ 302,92</span>
+                                    em até 12x de{" "}
+                                    <span className="text-red-500">
+                                        R$ 302,92
+                                    </span>
                                 </p>
                             </div>
                         </div>
@@ -119,7 +122,6 @@ const Cart = () => {
                         className="w-full flex justify-center items-center gap-4 bg-green-600 hover:bg-green-500 text-white text-lg font-bold uppercase px-6 py-4 rounded-md transition duration-300"
                     >
                         <FaShoppingCart className="w-6 h-6" />
-
                         Fazer pedido
                     </button>
                 </div>

@@ -16,15 +16,14 @@ type Props = {
 const ProductCard = ({ productData }: Props) => {
     const formattedProductName = resetFormatting(productData.name);
 
-    const { favoriteData, createFavorite, addFavorite } = useFavorite()
+    const { favoriteData, createFavorite, addFavorite } = useFavorite();
 
     const checkFavorite = (productId: string) => {
         const userId = "57e99e52-753e-4da7-8a67-a6286edd2ee4";
 
         if (JSON.stringify(favoriteData) === "{}")
             createFavorite(userId, productId);
-        else
-            addFavorite(userId, productId);
+        else addFavorite(userId, productId);
     };
 
     return (
@@ -33,14 +32,13 @@ const ProductCard = ({ productData }: Props) => {
             className="w-[230px] flex flex-col justify-between gap-4 p-2 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300"
         >
             <div className="h-10 flex hover:justify-end items-center group">
-                <Link
-                    href={""}
-                    legacyBehavior
-                >
+                <Link href={""} legacyBehavior>
                     <a className="group-hover:hidden flex gap-2">
                         <div>
                             <div className="w-10 h-10 flex flex-col justify-center items-center bg-gray-400 text-xs rounded-md">
-                                <span className="text-white font-bold">15%</span>
+                                <span className="text-white font-bold">
+                                    15%
+                                </span>
                             </div>
                         </div>
 
@@ -59,15 +57,16 @@ const ProductCard = ({ productData }: Props) => {
                         type="button"
                         onClick={() => checkFavorite(productData.id)}
                     >
-                        {favoriteData.productIds?.includes(productData.id) ?
+                        {favoriteData.productIds?.includes(productData.id) ? (
                             <MdFavorite className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                            :
-                            <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />}
+                        ) : (
+                            <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                        )}
                     </button>
 
                     <button
                         type="button"
-                    //onClick={}
+                        //onClick={}
                     >
                         <FaShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                     </button>
@@ -97,7 +96,10 @@ const ProductCard = ({ productData }: Props) => {
                         {productData.name}
                     </h3>
                     <p className="text-gray-700 text-xl font-bold ml-2">
-                        {Number(productData.price).toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
+                        {Number(productData.price).toLocaleString("pt-br", {
+                            style: "currency",
+                            currency: "BRL",
+                        })}
                     </p>
                 </a>
             </Link>

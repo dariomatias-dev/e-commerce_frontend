@@ -4,7 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { RiSubtractFill } from "react-icons/ri";
 
-import ProductCardProps from '@/@types/productCard';
+import ProductCardProps from "@/@types/productCard";
 
 type Props = {
     productData: ProductCardProps;
@@ -14,8 +14,7 @@ const CartProduct = ({ productData }: Props) => {
     const [amount, setAmount] = useState(1);
 
     const subtract = () => {
-        if (amount !== 0)
-            setAmount(amount + 1);
+        if (amount !== 0) setAmount(amount + 1);
     };
 
     const add = () => {
@@ -35,41 +34,31 @@ const CartProduct = ({ productData }: Props) => {
                 />
             </td>
 
-            <td className="whitespace-nowrap p-4">
-                {productData.name}
-            </td>
+            <td className="whitespace-nowrap p-4">{productData.name}</td>
 
             <td className="p-4">
                 <div className="flex gap-1">
-                    <button
-                        type="button"
-                        onClick={subtract}
-                        className=""
-                    >
+                    <button type="button" onClick={subtract} className="">
                         <RiSubtractFill className="w-6 h-6 text-gray-600 hover:text-gray-500 transition duration-300" />
                     </button>
 
                     {amount}
 
-                    <button
-                        type="button"
-                        onClick={add}
-                        className=""
-                    >
+                    <button type="button" onClick={add} className="">
                         <AiOutlinePlus className="w-6 h-6 text-gray-600 hover:text-gray-500 transition duration-300" />
                     </button>
                 </div>
             </td>
 
             <td className="whitespace-nowrap p-4">
-                {Number(productData.price).toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
+                {Number(productData.price).toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                })}
             </td>
 
             <td className="whitespace-nowrap p-4">
-                <button
-                    type="button"
-                    className=""
-                >
+                <button type="button" className="">
                     <MdDelete className="w-6 h-6 text-gray-600 hover:text-gray-500 transition duration-300" />
                 </button>
             </td>

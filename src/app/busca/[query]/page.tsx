@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 
@@ -15,19 +15,12 @@ type Props = {
 };
 
 type ProductsDataProps = {
-    products: ProductCardProps[],
+    products: ProductCardProps[];
     skip: number;
     take: number;
 };
 
-const brands = [
-    "Nvidia",
-    "AMD",
-    "Intel",
-    "Asus",
-    "MSI",
-    "Gigabyte",
-];
+const brands = ["Nvidia", "AMD", "Intel", "Asus", "MSI", "Gigabyte"];
 
 const orderBy = [
     "Menor preço",
@@ -42,7 +35,9 @@ const Search = ({ params }: Props) => {
 
     const fetchData = async (skip: number) => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?skip=${skip}`);
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/products?skip=${skip}`
+            );
             const data = await response.json();
             setProductsData(data);
         } catch (err) {
@@ -60,7 +55,7 @@ const Search = ({ params }: Props) => {
         <section className="flex flex-col gap-10 m-10">
             <div className="flex justify-between items-center text-white bg-black px-8 py-3 rounded-md">
                 <h1 className="text-gray-100 text-2xl font-semibold">
-                    Busca por: "{params.query}"
+                    Busca por: &quot;{params.query}&quot;
                 </h1>
 
                 <div className="flex items-center gap-16">
@@ -68,15 +63,11 @@ const Search = ({ params }: Props) => {
                         <h2 className="text-gray-300 text-end text-xs text-gray">
                             Produtos
                         </h2>
-                        <p>
-                            10000
-                        </p>
+                        <p>10000</p>
                     </div>
 
                     <div className="flex items-center gap-8">
-                        <h2 className="text-xl font-semibold">
-                            Filtrar:
-                        </h2>
+                        <h2 className="text-xl font-semibold">Filtrar:</h2>
 
                         <FilterButton
                             title="Marcas"
@@ -94,7 +85,7 @@ const Search = ({ params }: Props) => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
-                {productsData.products.map(productData => (
+                {productsData.products.map((productData) => (
                     <ProductCard
                         key={productData.id}
                         productData={productData}

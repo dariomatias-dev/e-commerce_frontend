@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 
@@ -23,9 +23,7 @@ const Cadastro = () => {
             </div>
 
             <div className="flex flex-col my-6">
-                <h2 className="text-gray-500 font-semibold">
-                    Tipo de conta
-                </h2>
+                <h2 className="text-gray-500 font-semibold">Tipo de conta</h2>
 
                 <form className="flex gap-4">
                     <label className="flex gap-2">
@@ -34,7 +32,7 @@ const Cadastro = () => {
                             name="accountType"
                             value="physicalPerson"
                             checked={form === "physicalPerson"}
-                            onChange={e => setForm(e.target.value)}
+                            onChange={(e) => setForm(e.target.value)}
                         />
                         <span>Pessoa Física</span>
                     </label>
@@ -45,19 +43,18 @@ const Cadastro = () => {
                             name="accountType"
                             value="legalPerson"
                             checked={form === "legalPerson"}
-                            onChange={e => setForm(e.target.value)}
+                            onChange={(e) => setForm(e.target.value)}
                         />
                         <span>Pessoa Jurídica</span>
                     </label>
                 </form>
             </div>
 
-            {
-                form === "physicalPerson" ?
-                    <FormPhysicalPerson />
-                    :
-                    <FormLegalPerson />
-            }
+            {form === "physicalPerson" ? (
+                <FormPhysicalPerson />
+            ) : (
+                <FormLegalPerson />
+            )}
 
             <RedirectionLoginRegistration
                 message="Já possui um cadastro?"

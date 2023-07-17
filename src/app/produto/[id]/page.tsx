@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -17,7 +17,9 @@ const Product = ({ searchParams }: Props) => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/${searchParams.id}`);
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/product/${searchParams.id}`
+            );
             const data = await response.json();
             setProductData(data);
         } catch (err) {
@@ -27,6 +29,7 @@ const Product = ({ searchParams }: Props) => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (JSON.stringify(productData) === "{}") return <></>;
@@ -60,13 +63,19 @@ const Product = ({ searchParams }: Props) => {
                                 Código: {productData.id}
                             </p>
                             <p className="text-xs text-gray-300">
-                                Vendido e entregue por: <span className="text-white font-semibold">Power Tech</span>
+                                Vendido e entregue por:{" "}
+                                <span className="text-white font-semibold">
+                                    Power Tech
+                                </span>
                             </p>
                         </div>
 
                         <div className="flex flex-col gap-2">
                             <p className="text-green-500 text-2xl font-bold">
-                                {Number(productData.price).toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
+                                {Number(productData.price).toLocaleString(
+                                    "pt-br",
+                                    { style: "currency", currency: "BRL" }
+                                )}
                             </p>
                             <p className="text-xs">
                                 À vista no PIX ou boleto com 15% de desconto
@@ -82,7 +91,7 @@ const Product = ({ searchParams }: Props) => {
                     </button>
                 </div>
             </div>
-            
+
             <div className="flex flex-col justify-between gap-4 bg-zinc-100 p-10 rounded-md">
                 <h2 className="flex items-center gap-3 text-gray-700 hover:text-gray-900 text-3xl font-bold uppercase cursor-pointer transition duration-300">
                     <FaPlus className="w-7 h-7" />

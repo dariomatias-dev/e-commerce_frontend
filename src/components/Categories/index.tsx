@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -10,7 +10,9 @@ const Categories = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/categories`
+            );
             const data = await response.json();
             setCategoriesData(data);
         } catch (err) {
@@ -26,8 +28,11 @@ const Categories = () => {
 
     return (
         <section className="flex flex-wrap justify-center gap-x-28 gap-y-10 mx-10 my-8">
-            {categoriesData.map(categoryData => (
-                <div className="flex flex-col justify-center items-center gap-3">
+            {categoriesData.map((categoryData) => (
+                <div
+                    key={categoryData.id}
+                    className="flex flex-col justify-center items-center gap-3"
+                >
                     <Image
                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${categoryData.imageUrlId}.jpg`}
                         width={500}

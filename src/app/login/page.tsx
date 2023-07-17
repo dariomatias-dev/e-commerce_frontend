@@ -1,17 +1,24 @@
-'use client'
+"use client";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import FormInput from "@/components/Forms/Fields/FormInput";
 import FormInputPassword from "@/components/Forms/Fields/FormInputPassword";
-import { schema, LoginFormProps } from "@/components/Forms/Schemas/LoginFormSchema";
+import {
+    schema,
+    LoginFormProps,
+} from "@/components/Forms/Schemas/LoginFormSchema";
 import SubmitFormButton from "@/components/Forms/SubmitFormButton";
 import RedirectionLoginRegistration from "@/components/RedirectionLoginRegistration";
 
 const Login = () => {
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
     });
 
     const receiveFormData = (data: LoginFormProps) => {

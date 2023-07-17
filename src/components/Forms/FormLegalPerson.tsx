@@ -9,7 +9,12 @@ import FormCheckboxes from "./Fields/FormCheckboxes";
 import SubmitFormButton from "./SubmitFormButton";
 
 const FormLegalPerson = () => {
-    const { control, register, handleSubmit, formState: { errors } } = useForm({
+    const {
+        control,
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             termsOfUse: true,
         },
@@ -79,7 +84,6 @@ const FormLegalPerson = () => {
                 />
             </div>
 
-
             <div className="flex gap-4">
                 <FormInput
                     inputName="E-mail"
@@ -114,10 +118,7 @@ const FormLegalPerson = () => {
                 />
             </div>
 
-            <FormCheckboxes
-                register={register}
-                errors={errors}
-            />
+            <FormCheckboxes register={register} errors={errors} />
 
             <SubmitFormButton text="Criar conta" />
         </form>

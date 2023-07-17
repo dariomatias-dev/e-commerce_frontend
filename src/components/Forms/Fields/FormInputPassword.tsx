@@ -9,21 +9,22 @@ import ShowPasswordButton from "@/components/ShowPasswordButton";
 
 import styles from "@/utils/styles";
 
-type FormsProps = LegalPersonFormProps | PhysicalPersonFormProps | LoginFormProps;
+type FormsProps =
+    | LegalPersonFormProps
+    | PhysicalPersonFormProps
+    | LoginFormProps;
 
 type Props = {
     inputName: string;
     id: string;
-    control: Control<LegalPersonFormProps> | Control<PhysicalPersonFormProps> | Control<LoginFormProps>;
+    control:
+        | Control<LegalPersonFormProps>
+        | Control<PhysicalPersonFormProps>
+        | Control<LoginFormProps>;
     errors: FieldErrors<FormsProps>;
 };
 
-const FormInputPassword = ({
-    inputName,
-    id,
-    control,
-    errors
-}: Props) => {
+const FormInputPassword = ({ inputName, id, control, errors }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -43,10 +44,7 @@ const FormInputPassword = ({
                     )}
                 />
 
-                <label
-                    htmlFor={id}
-                    className={styles.label}
-                >
+                <label htmlFor={id} className={styles.label}>
                     {inputName}
                 </label>
 
@@ -60,7 +58,7 @@ const FormInputPassword = ({
                 {errors[id as keyof FormsProps]?.message}
             </p>
         </div>
-    )
+    );
 };
 
 export default FormInputPassword;

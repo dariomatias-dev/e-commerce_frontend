@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -25,17 +25,13 @@ const Header = () => {
     const search = () => {
         const validValue = validateQueryValue();
 
-        if (validValue)
-            push(`/busca/${query}`);
+        if (validValue) push(`/busca/${query}`);
     };
 
     return (
         <header className="py-3 flex justify-between items-center px-20">
             <div className="flex items-end gap-7">
-                <Link
-                    href="/"
-                    legacyBehavior
-                >
+                <Link href="/" legacyBehavior>
                     <a className="flex items-center gap-2">
                         <Image
                             src="/logo-2.png"
@@ -52,16 +48,12 @@ const Header = () => {
 
                 <ul className="flex gap-5 text-gray-600 text-xs mb-[3px]">
                     <li className="flex flex-col items-center group">
-                        <Link href="/">
-                            Sobre nós
-                        </Link>
+                        <Link href="/">Sobre nós</Link>
                         <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
                     </li>
 
                     <li className="flex flex-col items-center group">
-                        <Link href="/">
-                            Contato
-                        </Link>
+                        <Link href="/">Contato</Link>
                         <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
                     </li>
                 </ul>
@@ -73,8 +65,8 @@ const Header = () => {
                     minLength={4}
                     maxLength={40}
                     placeholder="Pesquise aqui..."
-                    onChange={e => setQuery(e.target.value)}
-                    onKeyUp={e => {
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyUp={(e) => {
                         if (e.key === "Enter") search();
                     }}
                     className="w-full pl-2 outline-none"
@@ -90,35 +82,20 @@ const Header = () => {
             </div>
 
             <div className="flex gap-6">
-                <Link
-                    href="/carrinho"
-                    legacyBehavior
-                >
-                    <a
-                        className="flex justify-center items-center"
-                    >
+                <Link href="/carrinho" legacyBehavior>
+                    <a className="flex justify-center items-center">
                         <BsCart3 className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                     </a>
                 </Link>
 
-                <Link
-                    href="/lista-de-desejos"
-                    legacyBehavior
-                >
-                    <a
-                        className="flex justify-center items-center"
-                    >
+                <Link href="/lista-de-desejos" legacyBehavior>
+                    <a className="flex justify-center items-center">
                         <MdFavoriteBorder className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                     </a>
                 </Link>
 
-                <Link
-                    href="/login"
-                    legacyBehavior
-                >
-                    <a
-                        className="flex justify-center items-center p-2 border border-gray-500 hover:text-gray-600 rounded-full transition-all duration-300 group"
-                    >
+                <Link href="/login" legacyBehavior>
+                    <a className="flex justify-center items-center p-2 border border-gray-500 hover:text-gray-600 rounded-full transition-all duration-300 group">
                         <IoPersonAddOutline className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-all duration-300" />
                     </a>
                 </Link>

@@ -4,11 +4,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormCheckboxes from "./Fields/FormCheckboxes";
 import FormInput from "./Fields/FormInput";
 import FormInputPassword from "./Fields/FormInputPassword";
-import { schema, PhysicalPersonFormProps } from "./Schemas/PhysicalPersonFormSchema";
+import {
+    schema,
+    PhysicalPersonFormProps,
+} from "./Schemas/PhysicalPersonFormSchema";
 import SubmitFormButton from "./SubmitFormButton";
 
 const FormPhysicalPerson = () => {
-    const { control, register, handleSubmit, formState: { errors } } = useForm({
+    const {
+        control,
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             termsOfUse: true,
         },
@@ -103,10 +111,7 @@ const FormPhysicalPerson = () => {
                 />
             </div>
 
-            <FormCheckboxes
-                register={register}
-                errors={errors}
-            />
+            <FormCheckboxes register={register} errors={errors} />
 
             <SubmitFormButton text="Criar conta" />
         </form>

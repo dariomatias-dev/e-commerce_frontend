@@ -1,11 +1,12 @@
-import { FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import {
+    FaInstagram,
+    FaLinkedinIn,
+    FaTwitter,
+    FaWhatsapp,
+} from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 
-const infos = [
-    "Sobre nós",
-    "Política de Privacidade",
-    "Termos e Condições",
-];
+const infos = ["Sobre nós", "Política de Privacidade", "Termos e Condições"];
 
 const socialMedia = [
     {

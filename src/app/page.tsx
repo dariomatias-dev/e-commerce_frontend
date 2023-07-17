@@ -1,6 +1,6 @@
 import Announcements from "@/components/Announcements";
-import ProductsSection from "@/components/ProductsSection";
 import Categories from "@/components/Categories";
+import ProductsSection from "@/components/ProductsSection";
 
 const Home = () => {
     return (

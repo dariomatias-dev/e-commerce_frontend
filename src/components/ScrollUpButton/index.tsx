@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 import { IoIosArrowUp } from "react-icons/io";
@@ -14,8 +14,7 @@ const ScrollUpButton = () => {
     };
 
     const checkScroll = () => {
-        if (window.scrollY > 300)
-            setButtonVisible(true)
+        if (window.scrollY > 300) setButtonVisible(true);
         else setButtonVisible(false);
     };
 
@@ -30,7 +29,9 @@ const ScrollUpButton = () => {
     return (
         <button
             onClick={scrollToTop}
-            className={`${buttonVisible ? "fixed" : "hidden"} right-6 bottom-6 bg-black hover:bg-zinc-950 border border-gray-600 rounded-full p-3 transition-all duration-300`}
+            className={`${
+                buttonVisible ? "fixed" : "hidden"
+            } right-6 bottom-6 bg-black hover:bg-zinc-950 border border-gray-600 rounded-full p-3 transition-all duration-300`}
         >
             <IoIosArrowUp className="w-6 h-6 text-white" />
         </button>

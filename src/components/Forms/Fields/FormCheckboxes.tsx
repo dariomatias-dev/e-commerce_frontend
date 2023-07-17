@@ -1,10 +1,10 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-import { LegalPersonFormSchema } from "../Schemas/LegalPersonFormSchema";
-import { PhysicalPersonFormSchema } from "../Schemas/PhysicalPersonFormSchema";
+import { LegalPersonFormProps } from "../Schemas/LegalPersonFormSchema";
+import { PhysicalPersonFormProps } from "../Schemas/PhysicalPersonFormSchema";
 import FormCheckbox from "./FormCheckbox";
 
-type FormsProps = LegalPersonFormSchema | PhysicalPersonFormSchema;
+type FormsProps = LegalPersonFormProps | PhysicalPersonFormProps;
 
 export type FormCheckboxesProps = {
     register: UseFormRegister<FormsProps>;

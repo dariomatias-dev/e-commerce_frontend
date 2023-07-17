@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect, useContext, createContext } from "react";
 
@@ -25,10 +25,9 @@ export const FavoriteProvider = ({ children }: FavoriteProviderProps) => {
             productIds: [productId],
         };
 
-
         try {
-            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favorite`, {
-                method: "POST",
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wishlist`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -46,11 +45,10 @@ export const FavoriteProvider = ({ children }: FavoriteProviderProps) => {
 
         let productIds = favoriteData.productIds;
         if (productAdded)
-            productIds = productIds.filter(value => {
+            productIds = productIds.filter((value) => {
                 return value !== productId;
             });
-        else
-            productIds.push(productId);
+        else productIds.push(productId);
 
         const data = {
             userId,
@@ -58,13 +56,16 @@ export const FavoriteProvider = ({ children }: FavoriteProviderProps) => {
         };
 
         try {
-            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favorite/57e99e52-753e-4da7-8a67-a6286edd2ee4`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
+            await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/wishlist/57e99e52-753e-4da7-8a67-a6286edd2ee4`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+            );
 
             setFavoriteData(data);
         } catch (err) {
@@ -74,11 +75,12 @@ export const FavoriteProvider = ({ children }: FavoriteProviderProps) => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favorite/57e99e52-753e-4da7-8a67-a6286edd2ee4`);
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/wishlist/57e99e52-753e-4da7-8a67-a6286edd2ee4`
+            );
             const data = await response.json();
 
-            if (data !== null)
-                setFavoriteData(data);
+            if (data !== null) setFavoriteData(data);
         } catch (err) {
             console.log(err);
         }
@@ -89,11 +91,13 @@ export const FavoriteProvider = ({ children }: FavoriteProviderProps) => {
     }, []);
 
     return (
-        <FavoriteContext.Provider value={{
-            favoriteData,
-            createFavorite,
-            addFavorite,
-        }}>
+        <FavoriteContext.Provider
+            value={{
+                favoriteData,
+                createFavorite,
+                addFavorite,
+            }}
+        >
             {children}
         </FavoriteContext.Provider>
     );

@@ -13,15 +13,21 @@ import formatStateRegistration from "@/utils/formatStateRegistration";
 import formatDateOfBirth from "@/utils/formattedDateOfBirth";
 import styles from "@/utils/styles";
 
-type FormsProps = LegalPersonFormProps | PhysicalPersonFormProps | LoginFormProps;
+type FormsProps =
+    | LegalPersonFormProps
+    | PhysicalPersonFormProps
+    | LoginFormProps;
 
 type Props = {
     inputName: string;
     inputType?: string;
     id: string;
-    placeholder: string
+    placeholder: string;
     maxLength?: number;
-    control: Control<LegalPersonFormProps> | Control<PhysicalPersonFormProps> | Control<LoginFormProps>;
+    control:
+        | Control<LegalPersonFormProps>
+        | Control<PhysicalPersonFormProps>
+        | Control<LoginFormProps>;
     errors: FieldErrors<FormsProps>;
 };
 
@@ -37,9 +43,9 @@ const FormInput = ({
     placeholder,
     maxLength = 20,
     control,
-    errors
+    errors,
 }: Props) => {
-    const [modifiedValue, setModifiedValue] = useState('');
+    const [modifiedValue, setModifiedValue] = useState("");
 
     const onChange = ({ name, value }: OnChangeProps) => {
         let newValue = "";
@@ -65,8 +71,7 @@ const FormInput = ({
                 break;
         }
 
-        if (newValue)
-            setModifiedValue(newValue);
+        if (newValue) setModifiedValue(newValue);
     };
 
     return (
@@ -82,12 +87,12 @@ const FormInput = ({
                             {...field}
                             placeholder={placeholder}
                             maxLength={maxLength}
-                            value={modifiedValue ?
+                            value={
                                 modifiedValue
-                                :
-                                field.value as string
+                                    ? modifiedValue
+                                    : (field.value as string)
                             }
-                            onChange={e => {
+                            onChange={(e) => {
                                 const value = e.target.value;
                                 field.onChange(value);
                                 onChange({ name: field.name, value });
@@ -97,10 +102,7 @@ const FormInput = ({
                     )}
                 />
 
-                <label
-                    htmlFor={id}
-                    className={styles.label}
-                >
+                <label htmlFor={id} className={styles.label}>
                     {inputName}
                 </label>
             </div>
@@ -111,6 +113,5 @@ const FormInput = ({
         </div>
     );
 };
-
 
 export default FormInput;

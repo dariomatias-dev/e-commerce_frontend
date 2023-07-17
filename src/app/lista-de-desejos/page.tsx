@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -11,7 +11,7 @@ import ProductCardProps from "@/@types/productCard";
 import { useFavorite } from "@/contexts/FavoriteContext";
 
 type ProductsDataProps = {
-    products: ProductCardProps[],
+    products: ProductCardProps[];
     skip: number;
     take: number;
 };
@@ -30,9 +30,11 @@ const Wishlist = () => {
     const { favoriteData } = useFavorite();
 
     const fetchData = async (skip: number) => {
-        console.log(favoriteData)
-        const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/favorite-products?skip=${skip}`);
-        favoriteData.productIds?.forEach(productId => {
+        console.log(favoriteData);
+        const url = new URL(
+            `${process.env.NEXT_PUBLIC_API_URL}/favorite-products?skip=${skip}`
+        );
+        favoriteData.productIds?.forEach((productId) => {
             url.searchParams.append("productIds", productId);
         });
 
@@ -46,8 +48,8 @@ const Wishlist = () => {
     };
 
     useEffect(() => {
-        if (favoriteData)
-            fetchData(0);
+        if (favoriteData) fetchData(0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [favoriteData]);
 
     if (JSON.stringify(productsData) === "{}") return <Loading />;
@@ -64,14 +66,11 @@ const Wishlist = () => {
                         <h2 className="text-gray-300 text-end text-xs text-gray">
                             Produtos
                         </h2>
-                        <p>
-                            10000
-                        </p>
+                        <p>10000</p>
                     </div>
+
                     <div className="flex items-center gap-8">
-                        <h2 className="text-xl font-semibold">
-                            Filtrar:
-                        </h2>
+                        <h2 className="text-xl font-semibold">Filtrar:</h2>
                         <FilterButton
                             title="Ordenar por"
                             standardFilter="Escolher"
@@ -82,7 +81,7 @@ const Wishlist = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
-                {productsData.products?.map(productData => (
+                {productsData.products?.map((productData) => (
                     <ProductCard
                         key={productData.id}
                         productData={productData}
