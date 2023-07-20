@@ -9,6 +9,7 @@ import {
     PhysicalPersonFormProps,
 } from "./Schemas/PhysicalPersonFormSchema";
 import SubmitFormButton from "./SubmitFormButton";
+import { METHODS } from "http";
 
 const FormPhysicalPerson = () => {
     const {
@@ -23,8 +24,23 @@ const FormPhysicalPerson = () => {
         resolver: yupResolver(schema),
     });
 
-    const receiveFormData = (data: PhysicalPersonFormProps) => {
-        console.log(data);
+    const receiveFormData = async (formData: PhysicalPersonFormProps) => {
+        const {confirmPassword, ...data} = formData;
+        const [day, month, year] = data.dateOfBirth.split("/");
+        const dateObject = new Date(+year, +month - 1, +day);
+        dateObject.setUTCHours(0, 0, 0, 0);
+        const dateOfBirth = dateObject.toISOString();
+        const body = { ...data, dateOfBirth };
+
+        const token = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+
+        console.log(token);
     };
 
     return (
@@ -61,7 +77,7 @@ const FormPhysicalPerson = () => {
 
                 <FormInput
                     inputName="Telefone Celular"
-                    id="phoneNumber"
+                    id="phone"
                     placeholder="+55 83 98640-4371"
                     control={control}
                     errors={errors}
@@ -94,6 +110,43 @@ const FormPhysicalPerson = () => {
                 control={control}
                 errors={errors}
             />
+
+            <div className="flex gap-4">
+                <FormInput
+                    inputName="Estado"
+                    id="state"
+                    placeholder="Paraíba"
+                    control={control}
+                    errors={errors}
+                />
+
+                <FormInput
+                    inputName="Cidade"
+                    id="city"
+                    placeholder="Areial"
+                    control={control}
+                    errors={errors}
+                />
+            </div>
+
+            <div className="flex gap-4">
+                <FormInput
+                    inputName="Endereço"
+                    id="address"
+                    placeholder="Rua São José, 811, Bairro Centro"
+                    maxLength={40}
+                    control={control}
+                    errors={errors}
+                />
+
+                <FormInput
+                    inputName="CEP"
+                    id="cep"
+                    placeholder="58140-000"
+                    control={control}
+                    errors={errors}
+                />
+            </div>
 
             <div className="flex gap-4">
                 <FormInputPassword

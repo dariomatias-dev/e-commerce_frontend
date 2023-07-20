@@ -5,9 +5,10 @@ import { LegalPersonFormProps } from "../Schemas/LegalPersonFormSchema";
 import { PhysicalPersonFormProps } from "../Schemas/PhysicalPersonFormSchema";
 import { LoginFormProps } from "../Schemas/LoginFormSchema";
 
+import formatCep from "@/utils/formatCep";
 import formatCnpj from "@/utils/formatCnpj";
 import formatCpf from "@/utils/formatCpf";
-import formatPhoneNumber from "@/utils/formatPhoneNumber";
+import formatPhone from "@/utils/formatPhone";
 import formatRg from "@/utils/formatRg";
 import formatStateRegistration from "@/utils/formatStateRegistration";
 import formatDateOfBirth from "@/utils/formattedDateOfBirth";
@@ -54,8 +55,8 @@ const FormInput = ({
             case "dateOfBirth":
                 newValue = formatDateOfBirth(value);
                 break;
-            case "phoneNumber":
-                newValue = formatPhoneNumber(value);
+            case "phone":
+                newValue = formatPhone(value);
                 break;
             case "cpf":
                 newValue = formatCpf(value);
@@ -63,11 +64,17 @@ const FormInput = ({
             case "rg":
                 newValue = formatRg(value);
                 break;
+            case "cep":
+                newValue = formatCep(value);
+                break;
             case "cnpj":
                 newValue = formatCnpj(value);
                 break;
             case "stateRegistration":
                 newValue = formatStateRegistration(value);
+                break;
+            default:
+                newValue = value;
                 break;
         }
 

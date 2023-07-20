@@ -1,4 +1,4 @@
-const formatPhoneNumber = (value: string) => {
+const formatPhone = (value: string) => {
     if (value.length > 17) return value.slice(0, 17);
 
     return value
@@ -8,4 +8,4 @@ const formatPhoneNumber = (value: string) => {
         .replace(/(\d{5})(\d{1,4})$/, "$1-$2");
 };
 
-export default formatPhoneNumber;
+export default formatPhone;

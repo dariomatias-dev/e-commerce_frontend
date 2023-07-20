@@ -16,7 +16,7 @@ export const schema = yup
             .min(10, "A data de nascimento é obrigatória.")
             .max(11)
             .required("A data de nascimento é obrigatória."),
-        phoneNumber: yup
+        phone: yup
             .string()
             .min(17, "O número de telefone é obrigatório.")
             .max(18)
@@ -32,6 +32,23 @@ export const schema = yup
             .max(9)
             .required("O RG é obrigatório."),
         email: yup.string().email().required("O email é obrigatório."),
+        state: yup
+            .string()
+            .min(3, "O estado precisa ter 3 ou mais caracteres.")
+            .required("O estado é obrigatório."),
+        city: yup
+            .string()
+            .min(3, "A cidade precisa ter 3 ou mais caracteres.")
+            .required("A cidade é obrigatório."),
+        address: yup
+            .string()
+            .min(3, "O endereço precisa ter 3 ou mais caracteres.")
+            .required("O endereço é obrigatório."),
+        cep: yup
+            .string()
+            .min(9, "O CEP é obrigatório.")
+            .max(10)
+            .required("O CEP é obrigatório."),
         password: yup
             .string()
             .min(6, "A senha precisa ter 6 ou mais caracteres.")

@@ -89,6 +89,7 @@ const FormLegalPerson = () => {
                     inputName="E-mail"
                     id="email"
                     placeholder=" "
+                    maxLength={30}
                     control={control}
                     errors={errors}
                 />

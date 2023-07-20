@@ -5,9 +5,12 @@ import { PhysicalPersonFormProps } from "../Schemas/PhysicalPersonFormSchema";
 import FormCheckbox from "./FormCheckbox";
 
 type FormsProps = LegalPersonFormProps | PhysicalPersonFormProps;
+type UseFormsRegisterProps = UseFormRegister<FormsProps>;
 
 export type FormCheckboxesProps = {
-    register: UseFormRegister<FormsProps>;
+    register:
+        | UseFormRegister<LegalPersonFormProps>
+        | UseFormRegister<PhysicalPersonFormProps>;
     errors: FieldErrors<FormsProps>;
 };
 
@@ -17,14 +20,14 @@ const FormCheckboxes = ({ register, errors }: FormCheckboxesProps) => {
             <FormCheckbox
                 message="Li e concordo com os termos de uso e privacidade da Power Tech"
                 id="termsOfUse"
-                register={register}
+                register={register as UseFormsRegisterProps}
                 errors={errors}
             />
 
             <FormCheckbox
                 message="Quero receber ofertas e novidades por e-mail e mensagens no App da Power Tech"
                 id="receiveMessages"
-                register={register}
+                register={register as UseFormsRegisterProps}
                 errors={errors}
             />
         </div>
