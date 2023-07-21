@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import FormInput from "./Fields/FormInput";
-import { schema, LegalPersonFormProps } from "./Schemas/LegalPersonFormSchema";
+import { schema } from "./Schemas/LegalPersonFormSchema";
 
 import FormInputPassword from "./Fields/FormInputPassword";
 import FormCheckboxes from "./Fields/FormCheckboxes";
 import SubmitFormButton from "./SubmitFormButton";
+
+import sendRegistrationDataToServer from "@/services/sendRegistrationDataToServer";
 
 const FormLegalPerson = () => {
     const {
@@ -21,13 +23,9 @@ const FormLegalPerson = () => {
         resolver: yupResolver(schema),
     });
 
-    const receiveFormData = (data: LegalPersonFormProps) => {
-        console.log(data);
-    };
-
     return (
         <form
-            onSubmit={handleSubmit(receiveFormData)}
+            onSubmit={handleSubmit(sendRegistrationDataToServer)}
             className="flex flex-col gap-6"
         >
             <div className="flex gap-4">
@@ -60,7 +58,7 @@ const FormLegalPerson = () => {
                 <FormInput
                     inputName="Inscrição Estadual"
                     id="stateRegistration"
-                    placeholder=" "
+                    placeholder="123.456.789.012"
                     control={control}
                     errors={errors}
                 />
@@ -70,7 +68,7 @@ const FormLegalPerson = () => {
                 <FormInput
                     inputName="CPF"
                     id="cpf"
-                    placeholder=" "
+                    placeholder="123.456.789-01"
                     control={control}
                     errors={errors}
                 />
@@ -78,7 +76,7 @@ const FormLegalPerson = () => {
                 <FormInput
                     inputName="RG"
                     id="rg"
-                    placeholder=" "
+                    placeholder="12.345-6"
                     control={control}
                     errors={errors}
                 />
@@ -88,7 +86,7 @@ const FormLegalPerson = () => {
                 <FormInput
                     inputName="E-mail"
                     id="email"
-                    placeholder=" "
+                    placeholder="matiasdario75@gmail.com"
                     maxLength={30}
                     control={control}
                     errors={errors}
@@ -96,8 +94,45 @@ const FormLegalPerson = () => {
 
                 <FormInput
                     inputName="Telefone Celular"
-                    id="phoneNumber"
-                    placeholder=" "
+                    id="phone"
+                    placeholder="+55 83 98640-4371"
+                    control={control}
+                    errors={errors}
+                />
+            </div>
+
+            <div className="flex gap-4">
+                <FormInput
+                    inputName="Estado"
+                    id="state"
+                    placeholder="Paraíba"
+                    control={control}
+                    errors={errors}
+                />
+
+                <FormInput
+                    inputName="Cidade"
+                    id="city"
+                    placeholder="Areial"
+                    control={control}
+                    errors={errors}
+                />
+            </div>
+
+            <div className="flex gap-4">
+                <FormInput
+                    inputName="Endereço"
+                    id="address"
+                    placeholder="Rua São José, 811, Bairro Centro"
+                    maxLength={40}
+                    control={control}
+                    errors={errors}
+                />
+
+                <FormInput
+                    inputName="CEP"
+                    id="cep"
+                    placeholder="58140-000"
                     control={control}
                     errors={errors}
                 />

@@ -9,7 +9,8 @@ import {
     PhysicalPersonFormProps,
 } from "./Schemas/PhysicalPersonFormSchema";
 import SubmitFormButton from "./SubmitFormButton";
-import { METHODS } from "http";
+
+import sendRegistrationDataToServer from "@/services/sendRegistrationDataToServer";
 
 const FormPhysicalPerson = () => {
     const {
@@ -25,22 +26,13 @@ const FormPhysicalPerson = () => {
     });
 
     const receiveFormData = async (formData: PhysicalPersonFormProps) => {
-        const {confirmPassword, ...data} = formData;
-        const [day, month, year] = data.dateOfBirth.split("/");
+        const [day, month, year] = formData.dateOfBirth.split("/");
         const dateObject = new Date(+year, +month - 1, +day);
         dateObject.setUTCHours(0, 0, 0, 0);
         const dateOfBirth = dateObject.toISOString();
-        const body = { ...data, dateOfBirth };
+        const data = { ...formData, dateOfBirth };
 
-        const token = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-        });
-
-        console.log(token);
+        sendRegistrationDataToServer(data);
     };
 
     return (
