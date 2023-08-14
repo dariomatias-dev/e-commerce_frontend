@@ -8,6 +8,7 @@ import ProductCardProps from "@/@types/productCard";
 import { useFavorite } from "@/contexts/FavoriteContext";
 
 import resetFormatting from "@/utils/resetFormatting";
+import { generateImageUrl } from "@/utils/generateImagePath";
 
 type Props = {
     productData: ProductCardProps;
@@ -25,6 +26,8 @@ const ProductCard = ({ productData }: Props) => {
             createFavorite(userId, productId);
         else addFavorite(userId, productId);
     };
+
+    const imageUrl = generateImageUrl(productData.name, "products");
 
     return (
         <div
@@ -84,7 +87,7 @@ const ProductCard = ({ productData }: Props) => {
             >
                 <a className="flex flex-col justify-between gap-3">
                     <Image
-                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${productData.imageUrlId}.jpg`}
+                        src={imageUrl}
                         width={500}
                         height={500}
                         priority={true}

@@ -5,7 +5,7 @@ const Announcements = () => {
         <section>
             <Image
                 src={
-                    "https://live.staticflickr.com/65535/52989343725_5b29729e39_h.jpg"
+                    "https://raw.githubusercontent.com/dariomatias-dev/e-commerce_images/main/announcements/announcement.png"
                 }
                 width={2000}
                 height={2000}

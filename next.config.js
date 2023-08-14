@@ -3,7 +3,7 @@
 const nextConfig = {
     images: {
         domains: [
-            "live.staticflickr.com",
+            "raw.githubusercontent.com"
         ],
     },
 };
