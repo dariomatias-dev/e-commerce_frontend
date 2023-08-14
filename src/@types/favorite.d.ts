@@ -1,5 +1,4 @@
 type FavoriteProps = {
-    userId: string;
     productIds: string[];
 };
 

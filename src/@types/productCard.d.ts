@@ -1,8 +1,7 @@
 interface ProductCardProps {
     id: string;
     name: string;
-    imageUrlId: string;
-    price: string;
+    price: number;
 };
 
 export default ProductCardProps;

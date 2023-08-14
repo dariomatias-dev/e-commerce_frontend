@@ -2,7 +2,7 @@ type OrderItemProps = {
     id: string;
     productId: string;
     quantity: number;
-    unitPrice: string;
+    unitPrice: number;
 };
 
 export default OrderItemProps;
