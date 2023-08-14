@@ -4,20 +4,32 @@ import { useState, useEffect, useContext, createContext } from "react";
 
 import FavoriteProps from "@/@types/favorite";
 
-type FavoriteContexProps = {
+import { httpService } from "@/services/httpService";
+
+type UserPreferencesContexProps = {
+    cartProductIds: string[];
     favoriteData: FavoriteProps;
     createFavorite: (userId: string, productId: string) => void;
     addFavorite: (userId: string, productId: string) => void;
 };
 
-const FavoriteContext = createContext({} as FavoriteContexProps);
+const UserPreferencesContext = createContext({} as UserPreferencesContexProps);
 
-type FavoriteProviderProps = {
+type UserPreferencesProviderProps = {
     children: React.ReactNode;
 };
 
-export const FavoriteProvider = ({ children }: FavoriteProviderProps) => {
+export const UserPreferencesProvider = ({ children }: UserPreferencesProviderProps) => {
     const [favoriteData, setFavoriteData] = useState({} as FavoriteProps);
+    const [cartProductIds, setCartProductIds] = useState<string[]>([]);
+
+    const fetchCart = async () => {
+        const productIds = await httpService(
+            "cart/f8a5ded4-9247-44c2-a794-15aa5ff6fda1"
+        );
+
+        setCartProductIds(productIds);
+    };
 
     const createFavorite = async (userId: string, productId: string) => {
         const data = {
@@ -88,22 +100,24 @@ export const FavoriteProvider = ({ children }: FavoriteProviderProps) => {
 
     useEffect(() => {
         fetchData();
+        fetchCart();
     }, []);
 
     return (
-        <FavoriteContext.Provider
+        <UserPreferencesContext.Provider
             value={{
+                cartProductIds,
                 favoriteData,
                 createFavorite,
                 addFavorite,
             }}
         >
             {children}
-        </FavoriteContext.Provider>
+        </UserPreferencesContext.Provider>
     );
 };
 
-export const useFavorite = () => {
-    const context = useContext(FavoriteContext);
+export const useUserPreferences = () => {
+    const context = useContext(UserPreferencesContext);
     return context;
 };
