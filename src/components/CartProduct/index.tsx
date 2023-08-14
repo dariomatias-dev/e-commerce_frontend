@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { RiSubtractFill } from "react-icons/ri";
 
 import ProductCardProps from "@/@types/productCard";
+import { generateImageUrl } from "@/utils/generateImagePath";
 
 type Props = {
     productData: ProductCardProps;
@@ -13,19 +14,21 @@ type Props = {
 const CartProduct = ({ productData }: Props) => {
     const [amount, setAmount] = useState(1);
 
-    const subtract = () => {
-        if (amount !== 0) setAmount(amount + 1);
+    const add = () => {
+        if (amount < 20) setAmount(amount + 1);
     };
 
-    const add = () => {
-        setAmount(amount + 1);
+    const subtract = () => {
+        if (amount !== 1) setAmount(amount - 1);
     };
+
+    const imageUrl = generateImageUrl(productData.name, "products");
 
     return (
         <tr key={productData.id}>
             <td className="whitespace-nowrap p-4">
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${productData.imageUrlId}.jpg`}
+                    src={imageUrl}
                     width={500}
                     height={500}
                     priority={true}

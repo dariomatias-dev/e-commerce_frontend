@@ -8,6 +8,8 @@ import { MdFavoriteBorder } from "react-icons/md";
 
 import ProductProps from "@/@types/product";
 
+import { generateImageUrl } from "@/utils/generateImagePath";
+
 type Props = {
     searchParams: Record<string, string>;
 };
@@ -34,6 +36,8 @@ const Product = ({ searchParams }: Props) => {
 
     if (JSON.stringify(productData) === "{}") return <></>;
 
+    const imageUrl = generateImageUrl(productData.name, "products");
+
     return (
         <div className="flex flex-col gap-8 m-10">
             <div className="flex justify-between bg-zinc-100 text-white p-10 rounded-md">
@@ -44,7 +48,7 @@ const Product = ({ searchParams }: Props) => {
                     </div>
 
                     <Image
-                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${productData.imageUrlIds[0]}.jpg`}
+                        src={imageUrl}
                         width={1000}
                         height={1000}
                         priority={true}

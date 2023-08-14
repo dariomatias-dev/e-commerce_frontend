@@ -30,7 +30,6 @@ const Wishlist = () => {
     const { favoriteData } = useFavorite();
 
     const fetchData = async (skip: number) => {
-        console.log(favoriteData);
         const url = new URL(
             `${process.env.NEXT_PUBLIC_API_URL}/favorite-products?skip=${skip}`
         );
@@ -48,9 +47,9 @@ const Wishlist = () => {
     };
 
     useEffect(() => {
-        if (favoriteData) fetchData(0);
+        fetchData(0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [favoriteData]);
+    }, []);
 
     if (JSON.stringify(productsData) === "{}") return <Loading />;
 

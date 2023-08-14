@@ -3,36 +3,49 @@
 import { useState, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
-import CartProduct from "@/components/CartProduct";
-
 import ProductCardProps from "@/@types/productCard";
 
-type ProductsDataProps = {
-    products: ProductCardProps[];
-    skip: number;
-    take: number;
-};
+import CartProduct from "@/components/CartProduct";
 
 const Cart = () => {
-    const [productsData, setProductsData] = useState({} as ProductsDataProps);
+    const [products, setProducts] = useState<ProductCardProps[]>([]);
 
     const fecthData = async () => {
+        const productIds = await fecthCart();
+
+        fetchProducts(productIds);
+    };
+
+    const fecthCart = async () => {
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/products?skip=${0}`
+                `${process.env.NEXT_PUBLIC_API_URL}/cart/f8a5ded4-9247-44c2-a794-15aa5ff6fda1`
             );
             const data = await response.json();
-            setProductsData(data);
+
+            return data;
         } catch (err) {
             console.log(err);
         }
     };
 
+    const fetchProducts = async (productIds: string[]) => {
+        const response = await fetch(
+            `${
+                process.env.NEXT_PUBLIC_API_URL
+            }/products-by-ids?productIds=${productIds.join(",")}`
+        );
+        const data = await response.json();
+
+        setProducts(data);
+    };
+
     useEffect(() => {
         fecthData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (JSON.stringify(productsData) === "{}") return <></>;
+    if (!products.length) return <></>;
 
     return (
         <section className="m-10">
@@ -55,7 +68,7 @@ const Cart = () => {
                             )}
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {productsData.products.map((productData) => (
+                            {products.map((productData) => (
                                 <CartProduct
                                     key={productData.id}
                                     productData={productData}
