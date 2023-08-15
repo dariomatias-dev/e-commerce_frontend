@@ -10,20 +10,15 @@ import PricesOptions from "@/components/PricesOptions";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
-type PricesAndQuantitiesProps = {
-    [key: string]: {
-        price: number;
-        quantity: number;
-    };
-};
+interface ProductsProps extends ProductCardProps {
+    quantity: number;
+}
 
 const Cart = () => {
-    const [products, setProducts] = useState<ProductCardProps[]>([]);
-    const [pricesAndQuantities, setPricesAndQuantities] = useState(
-        {} as PricesAndQuantitiesProps
-    );
+    const [products, setProducts] = useState<ProductsProps[]>([]);
 
     const { cartProductIds, updateCartProductIds } = useUserPreferences();
+    let price = 0;
 
     const fetchData = async () => {
         const response = await fetch(
@@ -33,16 +28,22 @@ const Cart = () => {
         );
         const data: ProductCardProps[] = await response.json();
 
-        const initialPricesAndQuantities = {} as PricesAndQuantitiesProps;
-        data.forEach((product) => {
-            initialPricesAndQuantities[product.id] = {
-                price: Number(product.price),
-                quantity: 1,
-            };
+        const updatedProducts = data.map((value) => {
+            return { ...value, quantity: 1 };
         });
-        setPricesAndQuantities(initialPricesAndQuantities);
 
-        setProducts(data);
+        setProducts(updatedProducts);
+    };
+
+    const updateProduct = (productId: string, quantity: number) => {
+        setProducts((prevState) => {
+            return prevState.map((product) => {
+                if (product.id === productId) {
+                    return { ...product, quantity };
+                }
+                return product;
+            });
+        });
     };
 
     const removeProduct = (productId: string) => {
@@ -58,16 +59,10 @@ const Cart = () => {
         setProducts([]);
     };
 
-    const chancePricesAndQuantities = (productId: string, quantity: number) => {
-        setPricesAndQuantities((prevState) => {
-            return {
-                ...prevState,
-                [productId]: {
-                    ...prevState[productId],
-                    quantity,
-                },
-            };
-        });
+    const setPrice = () => {
+        for (let product of products) {
+            price += product.price * product.quantity;
+        }
     };
 
     useEffect(() => {
@@ -76,6 +71,8 @@ const Cart = () => {
     }, []);
 
     if (!products.length) return <></>;
+
+    setPrice();
 
     return (
         <section className="m-10">
@@ -102,8 +99,8 @@ const Cart = () => {
                                 <CartProduct
                                     key={productData.id}
                                     productData={productData}
+                                    updateProduct={updateProduct}
                                     removeProduct={removeProduct}
-                                    chancePricesAndQuantities={chancePricesAndQuantities}
                                 />
                             ))}
                         </tbody>
@@ -126,9 +123,7 @@ const Cart = () => {
                             Resumo
                         </h2>
 
-                        <PricesOptions
-                            pricesAndQuantities={pricesAndQuantities}
-                        />
+                        <PricesOptions price={price} />
                     </div>
 
                     <button

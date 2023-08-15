@@ -13,15 +13,11 @@ import { formatToReal } from "@/utils/formatToReal";
 
 type Props = {
     productData: ProductCardProps;
+    updateProduct: (productId: string, quantity: number) => void;
     removeProduct: (productId: string) => void;
-    chancePricesAndQuantities: (productId: string, quantity: number) => void;
 };
 
-const CartProduct = ({
-    productData,
-    removeProduct,
-    chancePricesAndQuantities,
-}: Props) => {
+const CartProduct = ({ productData, updateProduct, removeProduct }: Props) => {
     const [amount, setAmount] = useState(1);
     const { ckeckCart } = useUserPreferences();
 
@@ -40,13 +36,13 @@ const CartProduct = ({
         removeProduct(productId);
     };
 
-    const imageUrl = generateImageUrl(productData.name, "products");
-    const price = formatToReal(productData.price * amount);
-
     useEffect(() => {
-        chancePricesAndQuantities(productData.id, amount);
+        updateProduct(productData.id, amount);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [amount]);
+
+    const imageUrl = generateImageUrl(productData.name, "products");
+    const price = formatToReal(productData.price * amount);
 
     return (
         <tr key={productData.id}>
