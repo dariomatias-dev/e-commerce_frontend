@@ -12,13 +12,22 @@ import { generateImageUrl } from "@/utils/generateImagePath";
 
 type Props = {
     product: ProductCardProps;
+    isWishlist?: boolean;
+    removeProduct?: (productId: string) => void;
 };
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, isWishlist = false, removeProduct }: Props) => {
     const formattedProductName = resetFormatting(product.name);
 
     const { cartProductIds, wishlistProductIds, ckeckProductIds } =
         useUserPreferences();
+
+    const updateWishlist = () => {
+        ckeckProductIds("wishlist", product.id);
+        if (isWishlist) {
+            removeProduct!(product.id);
+        }
+    };
 
     const imageUrl = generateImageUrl(product.name, "products");
 
@@ -49,10 +58,7 @@ const ProductCard = ({ product }: Props) => {
                 </Link>
 
                 <div className="hidden group-hover:flex gap-4 mr-1">
-                    <button
-                        type="button"
-                        onClick={() => ckeckProductIds("wishlist", product.id)}
-                    >
+                    <button type="button" onClick={updateWishlist}>
                         {wishlistProductIds.includes(product.id) ? (
                             <MdFavorite className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                         ) : (

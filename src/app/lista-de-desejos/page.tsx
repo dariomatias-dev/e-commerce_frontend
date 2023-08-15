@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 import FilterButton from "@/components/FilterButton";
-import Loading from "@/components/Loading";
 import ProductCard from "@/components/ProductCard";
 
 import ProductCardProps from "@/@types/productCard";
@@ -36,6 +35,14 @@ const Wishlist = () => {
         });
 
         setProducts(updatedProducts);
+    };
+
+    const removeProduct = (productId: string) => {
+        setProducts((prevState) => {
+            return prevState.filter((value) => {
+                return value.id !== productId;
+            });
+        });
     };
 
     useEffect(() => {
@@ -76,6 +83,8 @@ const Wishlist = () => {
                     <ProductCard
                         key={product.id}
                         product={product}
+                        isWishlist={true}
+                        removeProduct={removeProduct}
                     />
                 ))}
             </div>
