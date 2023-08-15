@@ -11,27 +11,20 @@ import resetFormatting from "@/utils/resetFormatting";
 import { generateImageUrl } from "@/utils/generateImagePath";
 
 type Props = {
-    productData: ProductCardProps;
+    product: ProductCardProps;
 };
 
-const ProductCard = ({ productData }: Props) => {
-    const formattedProductName = resetFormatting(productData.name);
+const ProductCard = ({ product }: Props) => {
+    const formattedProductName = resetFormatting(product.name);
 
-    const { cartProductIds, ckeckProductIds } = useUserPreferences();
+    const { cartProductIds, wishlistProductIds, ckeckProductIds } =
+        useUserPreferences();
 
-    // const checkFavorite = (productId: string) => {
-    //     const userId = "57e99e52-753e-4da7-8a67-a6286edd2ee4";
-
-    //     if (JSON.stringify(favoriteData) === "{}")
-    //         createFavorite(userId, productId);
-    //     else addFavorite(userId, productId);
-    // };
-
-    const imageUrl = generateImageUrl(productData.name, "products");
+    const imageUrl = generateImageUrl(product.name, "products");
 
     return (
         <div
-            key={productData.id}
+            key={product.id}
             className="w-[230px] flex flex-col justify-between gap-4 p-2 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300"
         >
             <div className="h-10 flex hover:justify-end items-center group">
@@ -58,21 +51,20 @@ const ProductCard = ({ productData }: Props) => {
                 <div className="hidden group-hover:flex gap-4 mr-1">
                     <button
                         type="button"
-                        //onClick={() => checkFavorite(productData.id)}
+                        onClick={() => ckeckProductIds("wishlist", product.id)}
                     >
-                        <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                        {/* {favoriteData.productIds?.includes(productData.id) ? (
+                        {wishlistProductIds.includes(product.id) ? (
                             <MdFavorite className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                         ) : (
                             <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                        )} */}
+                        )}
                     </button>
 
                     <button
                         type="button"
-                        onClick={() => ckeckProductIds("cart", productData.id)}
+                        onClick={() => ckeckProductIds("cart", product.id)}
                     >
-                        {cartProductIds.includes(productData.id) ? (
+                        {cartProductIds.includes(product.id) ? (
                             <HiMiniShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                         ) : (
                             <HiOutlineShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
@@ -85,7 +77,7 @@ const ProductCard = ({ productData }: Props) => {
                 href={{
                     pathname: `/produto/${formattedProductName}`,
                     query: {
-                        id: productData.id,
+                        id: product.id,
                     },
                 }}
                 legacyBehavior
@@ -96,15 +88,15 @@ const ProductCard = ({ productData }: Props) => {
                         width={500}
                         height={500}
                         priority={true}
-                        alt={`Imagem do produto: ${productData.name}.`}
+                        alt={`Imagem do produto: ${product.name}.`}
                         className="w-full max-w-[10rem] max-h-[10rem] h-auto object-contain mx-auto"
                     />
 
                     <h3 className="text-gray-700 font-bold uppercase ml-2">
-                        {productData.name}
+                        {product.name}
                     </h3>
                     <p className="text-gray-700 text-xl font-bold ml-2">
-                        {Number(productData.price).toLocaleString("pt-br", {
+                        {Number(product.price).toLocaleString("pt-br", {
                             style: "currency",
                             currency: "BRL",
                         })}

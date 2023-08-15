@@ -6,6 +6,7 @@ import { httpService } from "@/services/httpService";
 
 type UserPreferencesContexProps = {
     cartProductIds: string[];
+    wishlistProductIds: string[];
     ckeckProductIds: (listType: string, productId: string) => void;
     updateProductIds: (listType: string, newCartProductIds: string[]) => void;
 };
@@ -76,6 +77,7 @@ export const UserPreferencesProvider = ({
         <UserPreferencesContext.Provider
             value={{
                 cartProductIds,
+                wishlistProductIds,
                 ckeckProductIds,
                 updateProductIds,
             }}

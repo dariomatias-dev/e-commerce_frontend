@@ -10,12 +10,6 @@ import ProductCardProps from "@/@types/productCard";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
-type ProductsDataProps = {
-    products: ProductCardProps[];
-    skip: number;
-    take: number;
-};
-
 const orderBy = [
     "Menor preço",
     "Maior preço",
@@ -25,33 +19,31 @@ const orderBy = [
 ];
 
 const Wishlist = () => {
-    const [productsData, setProductsData] = useState({} as ProductsDataProps);
+    const [products, setProducts] = useState<ProductCardProps[]>([]);
 
-    const { favoriteData } = useUserPreferences();
+    const { wishlistProductIds } = useUserPreferences();
 
-    const fetchData = async (skip: number) => {
-        const url = new URL(
-            `${process.env.NEXT_PUBLIC_API_URL}/favorite-products?skip=${skip}`
+    const fetchData = async () => {
+        const response = await fetch(
+            `${
+                process.env.NEXT_PUBLIC_API_URL
+            }/products-by-ids?productIds=${wishlistProductIds.join(",")}`
         );
-        favoriteData.productIds?.forEach((productId) => {
-            url.searchParams.append("productIds", productId);
+        const data: ProductCardProps[] = await response.json();
+
+        const updatedProducts = data.map((value) => {
+            return { ...value, quantity: 1 };
         });
 
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            setProductsData(data);
-        } catch (err) {
-            console.log(err);
-        }
+        setProducts(updatedProducts);
     };
 
     useEffect(() => {
-        fetchData(0);
+        fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (JSON.stringify(productsData) === "{}") return <Loading />;
+    if (!products.length) return <></>;
 
     return (
         <section className="m-10">
@@ -80,10 +72,10 @@ const Wishlist = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
-                {productsData.products?.map((productData) => (
+                {products?.map((product) => (
                     <ProductCard
-                        key={productData.id}
-                        productData={productData}
+                        key={product.id}
+                        product={product}
                     />
                 ))}
             </div>
