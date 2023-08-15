@@ -6,6 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import ProductCardProps from "@/@types/productCard";
 
 import CartProduct from "@/components/CartProduct";
+import PricesOptions from "@/components/PricesOptions";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
@@ -92,41 +93,7 @@ const Cart = () => {
                             Resumo
                         </h2>
 
-                        <div className="flex flex-col gap-2 mt-5">
-                            <div className="flex justify-between mx-6">
-                                <h3 className="text-gray-600">Total</h3>
-                                <p className="text-lg font-bold">R$ 3.635,05</p>
-                            </div>
-
-                            <div className="flex flex-col gap-1 text-center font-medium">
-                                <p className="text-green-600 text-xs">
-                                    à vista
-                                </p>
-                                <p className="text-green-500 text-xl font-bold">
-                                    R$ 3.089,79
-                                </p>
-                                <p className="text-gray-500 text-xs">
-                                    no PIX com 15% de desconto
-                                </p>
-                            </div>
-
-                            <p className="text-gray-400 text-center text-sm font-medium">
-                                ou
-                            </p>
-
-                            <div className="flex flex-col gap-1 text-center text-gray-500 font-medium">
-                                <p className="text-xs">sem juros no cartão</p>
-                                <p className="text-red-600 text-xl font-bold">
-                                    R$ 3.635,05
-                                </p>
-                                <p className="text-xs">
-                                    em até 12x de{" "}
-                                    <span className="text-red-500">
-                                        R$ 302,92
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
+                        <PricesOptions price={100} />
                     </div>
 
                     <button
