@@ -17,7 +17,7 @@ interface ProductsProps extends ProductCardProps {
 const Cart = () => {
     const [products, setProducts] = useState<ProductsProps[]>([]);
 
-    const { cartProductIds, updateCartProductIds } = useUserPreferences();
+    const { cartProductIds, updateProductIds } = useUserPreferences();
     let price = 0;
 
     const fetchData = async () => {
@@ -55,7 +55,7 @@ const Cart = () => {
     };
 
     const clearProducts = () => {
-        updateCartProductIds([]);
+        updateProductIds("cart", []);
         setProducts([]);
     };
 

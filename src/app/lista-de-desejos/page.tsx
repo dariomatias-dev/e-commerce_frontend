@@ -8,7 +8,7 @@ import ProductCard from "@/components/ProductCard";
 
 import ProductCardProps from "@/@types/productCard";
 
-import { useFavorite } from "@/contexts/FavoriteContext";
+import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
 type ProductsDataProps = {
     products: ProductCardProps[];
@@ -27,7 +27,7 @@ const orderBy = [
 const Wishlist = () => {
     const [productsData, setProductsData] = useState({} as ProductsDataProps);
 
-    const { favoriteData } = useFavorite();
+    const { favoriteData } = useUserPreferences();
 
     const fetchData = async (skip: number) => {
         const url = new URL(

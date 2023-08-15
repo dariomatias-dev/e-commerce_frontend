@@ -19,7 +19,7 @@ type Props = {
 
 const CartProduct = ({ productData, updateProduct, removeProduct }: Props) => {
     const [amount, setAmount] = useState(1);
-    const { ckeckCart } = useUserPreferences();
+    const { ckeckProductIds } = useUserPreferences();
 
     const add = () => {
         if (amount < 20) setAmount(amount + 1);
@@ -32,7 +32,7 @@ const CartProduct = ({ productData, updateProduct, removeProduct }: Props) => {
     const deleteProduct = () => {
         const productId = productData.id;
 
-        ckeckCart(productId);
+        ckeckProductIds("cart", productId);
         removeProduct(productId);
     };
 

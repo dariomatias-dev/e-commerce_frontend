@@ -2,17 +2,12 @@
 
 import { useState, useEffect, useContext, createContext } from "react";
 
-import FavoriteProps from "@/@types/favorite";
-
 import { httpService } from "@/services/httpService";
 
 type UserPreferencesContexProps = {
     cartProductIds: string[];
-    ckeckCart: (productId: string) => void;
-    updateCartProductIds: (newCartProductIds: string[]) => void;
-    favoriteData: FavoriteProps;
-    createFavorite: (userId: string, productId: string) => void;
-    addFavorite: (userId: string, productId: string) => void;
+    ckeckProductIds: (listType: string, productId: string) => void;
+    updateProductIds: (listType: string, newCartProductIds: string[]) => void;
 };
 
 const UserPreferencesContext = createContext({} as UserPreferencesContexProps);
@@ -25,119 +20,64 @@ export const UserPreferencesProvider = ({
     children,
 }: UserPreferencesProviderProps) => {
     const [cartProductIds, setCartProductIds] = useState<string[]>([]);
-    const [favoriteData, setFavoriteData] = useState({} as FavoriteProps);
+    const [wishlistProductIds, setWishlistProductIds] = useState<string[]>([]);
 
-    const fetchCart = async () => {
+    const fetchData = async (listType: string) => {
         const productIds = await httpService(
-            "cart/f8a5ded4-9247-44c2-a794-15aa5ff6fda1"
+            `${listType}/f8a5ded4-9247-44c2-a794-15aa5ff6fda1`
         );
 
-        setCartProductIds(productIds);
+        listType === "cart"
+            ? setCartProductIds(productIds)
+            : setWishlistProductIds(productIds);
     };
 
-    const ckeckCart = (productId: string) => {
-        let newCartProductIds;
-        if (cartProductIds.includes(productId)) {
-            newCartProductIds = cartProductIds.filter((value) => {
-                return value !== productId;
-            });
-        } else {
-            newCartProductIds = [...cartProductIds, productId];
-        }
+    const ckeckProductIds = (listType: string, productId: string) => {
+        let productIds =
+            listType === "cart" ? cartProductIds : wishlistProductIds;
 
-        updateCartProductIds(newCartProductIds);
-    };
-
-    const updateCartProductIds = (newCartProductIds: string[]) => {
-        setCartProductIds(newCartProductIds);
-
-        const body = {
-            productIds: newCartProductIds,
-        };
-        httpService("cart/f8a5ded4-9247-44c2-a794-15aa5ff6fda1", "PUT", body);
-    };
-
-    const createFavorite = async (userId: string, productId: string) => {
-        const data = {
-            userId,
-            productIds: [productId],
-        };
-
-        try {
-            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wishlist`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-
-            setFavoriteData(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    const addFavorite = async (userId: string, productId: string) => {
-        const productAdded = favoriteData.productIds.includes(productId);
-
-        let productIds = favoriteData.productIds;
-        if (productAdded)
+        if (productIds.includes(productId)) {
             productIds = productIds.filter((value) => {
                 return value !== productId;
             });
-        else productIds.push(productId);
-
-        const data = {
-            userId,
-            productIds: productIds ? productIds : [],
-        };
-
-        try {
-            await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/wishlist/57e99e52-753e-4da7-8a67-a6286edd2ee4`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                }
-            );
-
-            setFavoriteData(data);
-        } catch (err) {
-            console.log(err);
+        } else {
+            productIds = [...productIds, productId];
         }
+
+        updateProductIds(listType, productIds);
     };
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/wishlist/57e99e52-753e-4da7-8a67-a6286edd2ee4`
-            );
-            const data = await response.json();
+    const updateProductIds = (listType: string, productIds: string[]) => {
+        listType === "cart"
+            ? setCartProductIds(productIds)
+            : setWishlistProductIds(productIds);
 
-            if (data !== null) setFavoriteData(data);
-        } catch (err) {
-            console.log(err);
-        }
+        const body = {
+            productIds,
+        };
+
+        httpService(
+            `${listType}/f8a5ded4-9247-44c2-a794-15aa5ff6fda1`,
+            "PUT",
+            body
+        );
     };
 
     useEffect(() => {
-        fetchData();
-        fetchCart();
+        fetchData("cart");
+        fetchData("wishlist");
     }, []);
+
+    useEffect(() => {
+        console.log(cartProductIds);
+    }, [cartProductIds]);
 
     return (
         <UserPreferencesContext.Provider
             value={{
                 cartProductIds,
-                ckeckCart,
-                updateCartProductIds,
-                favoriteData,
-                createFavorite,
-                addFavorite,
+                ckeckProductIds,
+                updateProductIds,
             }}
         >
             {children}

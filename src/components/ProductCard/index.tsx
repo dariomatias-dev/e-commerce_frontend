@@ -17,21 +17,15 @@ type Props = {
 const ProductCard = ({ productData }: Props) => {
     const formattedProductName = resetFormatting(productData.name);
 
-    const {
-        cartProductIds,
-        ckeckCart,
-        favoriteData,
-        createFavorite,
-        addFavorite,
-    } = useUserPreferences();
+    const { cartProductIds, ckeckProductIds } = useUserPreferences();
 
-    const checkFavorite = (productId: string) => {
-        const userId = "57e99e52-753e-4da7-8a67-a6286edd2ee4";
+    // const checkFavorite = (productId: string) => {
+    //     const userId = "57e99e52-753e-4da7-8a67-a6286edd2ee4";
 
-        if (JSON.stringify(favoriteData) === "{}")
-            createFavorite(userId, productId);
-        else addFavorite(userId, productId);
-    };
+    //     if (JSON.stringify(favoriteData) === "{}")
+    //         createFavorite(userId, productId);
+    //     else addFavorite(userId, productId);
+    // };
 
     const imageUrl = generateImageUrl(productData.name, "products");
 
@@ -64,18 +58,19 @@ const ProductCard = ({ productData }: Props) => {
                 <div className="hidden group-hover:flex gap-4 mr-1">
                     <button
                         type="button"
-                        onClick={() => checkFavorite(productData.id)}
+                        //onClick={() => checkFavorite(productData.id)}
                     >
-                        {favoriteData.productIds?.includes(productData.id) ? (
+                        <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                        {/* {favoriteData.productIds?.includes(productData.id) ? (
                             <MdFavorite className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
                         ) : (
                             <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-                        )}
+                        )} */}
                     </button>
 
                     <button
                         type="button"
-                        onClick={() => ckeckCart(productData.id)}
+                        onClick={() => ckeckProductIds("cart", productData.id)}
                     >
                         {cartProductIds.includes(productData.id) ? (
                             <HiMiniShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
