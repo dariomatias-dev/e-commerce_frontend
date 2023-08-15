@@ -7,33 +7,17 @@ import ProductCardProps from "@/@types/productCard";
 
 import CartProduct from "@/components/CartProduct";
 
+import { useUserPreferences } from "@/contexts/UserPreferencesContext";
+
 const Cart = () => {
     const [products, setProducts] = useState<ProductCardProps[]>([]);
+    const { cartProductIds } = useUserPreferences();
 
-    const fecthData = async () => {
-        const productIds = await fecthCart();
-
-        fetchProducts(productIds);
-    };
-
-    const fecthCart = async () => {
-        try {
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/cart/f8a5ded4-9247-44c2-a794-15aa5ff6fda1`
-            );
-            const data = await response.json();
-
-            return data;
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    const fetchProducts = async (productIds: string[]) => {
+    const fetchData = async () => {
         const response = await fetch(
             `${
                 process.env.NEXT_PUBLIC_API_URL
-            }/products-by-ids?productIds=${productIds.join(",")}`
+            }/products-by-ids?productIds=${cartProductIds.join(",")}`
         );
         const data = await response.json();
 
@@ -41,7 +25,7 @@ const Cart = () => {
     };
 
     useEffect(() => {
-        fecthData();
+        fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

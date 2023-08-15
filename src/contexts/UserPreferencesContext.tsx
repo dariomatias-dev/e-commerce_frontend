@@ -56,10 +56,6 @@ export const UserPreferencesProvider = ({
         httpService("cart/f8a5ded4-9247-44c2-a794-15aa5ff6fda1", "PUT", body);
     };
 
-    useEffect(() => {
-        console.log(cartProductIds);
-    }, [cartProductIds]);
-
     const createFavorite = async (userId: string, productId: string) => {
         const data = {
             userId,
