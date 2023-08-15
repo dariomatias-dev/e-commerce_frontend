@@ -9,6 +9,7 @@ import { httpService } from "@/services/httpService";
 type UserPreferencesContexProps = {
     cartProductIds: string[];
     ckeckCart: (productId: string) => void;
+    updateCartProductIds: (newCartProductIds: string[]) => void;
     favoriteData: FavoriteProps;
     createFavorite: (userId: string, productId: string) => void;
     addFavorite: (userId: string, productId: string) => void;
@@ -133,6 +134,7 @@ export const UserPreferencesProvider = ({
             value={{
                 cartProductIds,
                 ckeckCart,
+                updateCartProductIds,
                 favoriteData,
                 createFavorite,
                 addFavorite,

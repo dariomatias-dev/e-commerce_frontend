@@ -6,13 +6,16 @@ import { RiSubtractFill } from "react-icons/ri";
 
 import ProductCardProps from "@/@types/productCard";
 import { generateImageUrl } from "@/utils/generateImagePath";
+import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
 type Props = {
     productData: ProductCardProps;
+    removeProduct: (productId: string) => void;
 };
 
-const CartProduct = ({ productData }: Props) => {
+const CartProduct = ({ productData, removeProduct }: Props) => {
     const [amount, setAmount] = useState(1);
+    const { ckeckCart } = useUserPreferences();
 
     const add = () => {
         if (amount < 20) setAmount(amount + 1);
@@ -20,6 +23,13 @@ const CartProduct = ({ productData }: Props) => {
 
     const subtract = () => {
         if (amount !== 1) setAmount(amount - 1);
+    };
+
+    const deleteProduct = () => {
+        const productId = productData.id;
+
+        ckeckCart(productId);
+        removeProduct(productId);
     };
 
     const imageUrl = generateImageUrl(productData.name, "products");
@@ -61,7 +71,7 @@ const CartProduct = ({ productData }: Props) => {
             </td>
 
             <td className="whitespace-nowrap p-4">
-                <button type="button" className="">
+                <button type="button" onClick={deleteProduct}>
                     <MdDelete className="w-6 h-6 text-gray-600 hover:text-gray-500 transition duration-300" />
                 </button>
             </td>

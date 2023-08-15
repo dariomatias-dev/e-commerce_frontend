@@ -11,7 +11,7 @@ import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
 const Cart = () => {
     const [products, setProducts] = useState<ProductCardProps[]>([]);
-    const { cartProductIds } = useUserPreferences();
+    const { cartProductIds, updateCartProductIds } = useUserPreferences();
 
     const fetchData = async () => {
         const response = await fetch(
@@ -22,6 +22,19 @@ const Cart = () => {
         const data = await response.json();
 
         setProducts(data);
+    };
+
+    const removeProduct = (productId: string) => {
+        setProducts((prevState) => {
+            return prevState.filter((value) => {
+                return value.id !== productId;
+            });
+        });
+    };
+
+    const clearProducts = () => {
+        updateCartProductIds([]);
+        setProducts([]);
     };
 
     useEffect(() => {
@@ -56,6 +69,7 @@ const Cart = () => {
                                 <CartProduct
                                     key={productData.id}
                                     productData={productData}
+                                    removeProduct={removeProduct}
                                 />
                             ))}
                         </tbody>
@@ -64,6 +78,7 @@ const Cart = () => {
                     <div className="flex justify-end">
                         <button
                             type="button"
+                            onClick={clearProducts}
                             className="w-min bg-white hover:bg-black text-black hover:text-white text-xs whitespace-nowrap uppercase px-4 py-2 border border-zinc-500 hover:border-black rounded-md transition duration-300"
                         >
                             Limpar carrinho
