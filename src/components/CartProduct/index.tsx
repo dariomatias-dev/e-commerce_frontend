@@ -1,19 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { RiSubtractFill } from "react-icons/ri";
 
 import ProductCardProps from "@/@types/productCard";
-import { generateImageUrl } from "@/utils/generateImagePath";
+
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
+
+import { generateImageUrl } from "@/utils/generateImagePath";
+import { formatToReal } from "@/utils/formatToReal";
 
 type Props = {
     productData: ProductCardProps;
     removeProduct: (productId: string) => void;
+    chancePricesAndQuantities: (productId: string, quantity: number) => void;
 };
 
-const CartProduct = ({ productData, removeProduct }: Props) => {
+const CartProduct = ({
+    productData,
+    removeProduct,
+    chancePricesAndQuantities,
+}: Props) => {
     const [amount, setAmount] = useState(1);
     const { ckeckCart } = useUserPreferences();
 
@@ -33,6 +41,12 @@ const CartProduct = ({ productData, removeProduct }: Props) => {
     };
 
     const imageUrl = generateImageUrl(productData.name, "products");
+    const price = formatToReal(productData.price * amount);
+
+    useEffect(() => {
+        chancePricesAndQuantities(productData.id, amount);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [amount]);
 
     return (
         <tr key={productData.id}>
@@ -63,12 +77,7 @@ const CartProduct = ({ productData, removeProduct }: Props) => {
                 </div>
             </td>
 
-            <td className="whitespace-nowrap p-4">
-                {Number(productData.price).toLocaleString("pt-br", {
-                    style: "currency",
-                    currency: "BRL",
-                })}
-            </td>
+            <td className="whitespace-nowrap p-4">{price}</td>
 
             <td className="whitespace-nowrap p-4">
                 <button type="button" onClick={deleteProduct}>

@@ -10,8 +10,19 @@ import PricesOptions from "@/components/PricesOptions";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
+type PricesAndQuantitiesProps = {
+    [key: string]: {
+        price: number;
+        quantity: number;
+    };
+};
+
 const Cart = () => {
     const [products, setProducts] = useState<ProductCardProps[]>([]);
+    const [pricesAndQuantities, setPricesAndQuantities] = useState(
+        {} as PricesAndQuantitiesProps
+    );
+
     const { cartProductIds, updateCartProductIds } = useUserPreferences();
 
     const fetchData = async () => {
@@ -20,7 +31,16 @@ const Cart = () => {
                 process.env.NEXT_PUBLIC_API_URL
             }/products-by-ids?productIds=${cartProductIds.join(",")}`
         );
-        const data = await response.json();
+        const data: ProductCardProps[] = await response.json();
+
+        const initialPricesAndQuantities = {} as PricesAndQuantitiesProps;
+        data.forEach((product) => {
+            initialPricesAndQuantities[product.id] = {
+                price: Number(product.price),
+                quantity: 1,
+            };
+        });
+        setPricesAndQuantities(initialPricesAndQuantities);
 
         setProducts(data);
     };
@@ -36,6 +56,18 @@ const Cart = () => {
     const clearProducts = () => {
         updateCartProductIds([]);
         setProducts([]);
+    };
+
+    const chancePricesAndQuantities = (productId: string, quantity: number) => {
+        setPricesAndQuantities((prevState) => {
+            return {
+                ...prevState,
+                [productId]: {
+                    ...prevState[productId],
+                    quantity,
+                },
+            };
+        });
     };
 
     useEffect(() => {
@@ -71,6 +103,7 @@ const Cart = () => {
                                     key={productData.id}
                                     productData={productData}
                                     removeProduct={removeProduct}
+                                    chancePricesAndQuantities={chancePricesAndQuantities}
                                 />
                             ))}
                         </tbody>
@@ -93,7 +126,9 @@ const Cart = () => {
                             Resumo
                         </h2>
 
-                        <PricesOptions price={100} />
+                        <PricesOptions
+                            pricesAndQuantities={pricesAndQuantities}
+                        />
                     </div>
 
                     <button

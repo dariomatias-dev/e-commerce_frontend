@@ -1,10 +1,22 @@
 import { formatToReal } from "@/utils/formatToReal";
 
 type Props = {
-    price: number;
+    pricesAndQuantities: {
+        [key: string]: {
+            price: number;
+            quantity: number;
+        };
+    };
 };
 
-const PricesOptions = ({ price }: Props) => {
+const PricesOptions = ({ pricesAndQuantities }: Props) => {
+    let price = 0;
+    for (let priceAndQuantity in pricesAndQuantities) {
+        const productData = pricesAndQuantities[priceAndQuantity];
+        console.log(productData.price * productData.quantity)
+        price += productData.price * productData.quantity;
+    }
+
     const formattedPrice = formatToReal(price);
 
     const valueInInstallments = (price / 12).toFixed(2);
