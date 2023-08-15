@@ -1,7 +1,7 @@
 export const httpService = async (
     path: string,
     method = "GET",
-    body = null
+    body: any = null
 ) => {
     try {
         const response = await fetch(

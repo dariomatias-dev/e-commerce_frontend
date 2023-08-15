@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaShoppingCart } from "react-icons/fa";
+import { HiMiniShoppingCart, HiOutlineShoppingCart } from "react-icons/hi2";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 import ProductCardProps from "@/@types/productCard";
 
-import { useFavorite } from "@/contexts/FavoriteContext";
+import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
 import resetFormatting from "@/utils/resetFormatting";
 import { generateImageUrl } from "@/utils/generateImagePath";
@@ -17,7 +17,13 @@ type Props = {
 const ProductCard = ({ productData }: Props) => {
     const formattedProductName = resetFormatting(productData.name);
 
-    const { favoriteData, createFavorite, addFavorite } = useFavorite();
+    const {
+        cartProductIds,
+        ckeckCart,
+        favoriteData,
+        createFavorite,
+        addFavorite,
+    } = useUserPreferences();
 
     const checkFavorite = (productId: string) => {
         const userId = "57e99e52-753e-4da7-8a67-a6286edd2ee4";
@@ -69,9 +75,13 @@ const ProductCard = ({ productData }: Props) => {
 
                     <button
                         type="button"
-                        //onClick={}
+                        onClick={() => ckeckCart(productData.id)}
                     >
-                        <FaShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                        {cartProductIds.includes(productData.id) ? (
+                            <HiMiniShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                        ) : (
+                            <HiOutlineShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+                        )}
                     </button>
                 </div>
             </div>
@@ -111,7 +121,7 @@ const ProductCard = ({ productData }: Props) => {
                 type="button"
                 className="w-full flex justify-center items-center gap-4 hover:bg-green-500 py-3 border-2 border-green-300 hover:border-green-500 rounded-md transition duration-300 group"
             >
-                <FaShoppingCart className="w-5 h-5 text-green-600 group-hover:text-white" />
+                <HiMiniShoppingCart className="w-5 h-5 text-green-600 group-hover:text-white" />
                 <span className="text-green-600 group-hover:text-white font-bold uppercase">
                     Comprar
                 </span>

@@ -8,6 +8,7 @@ import { httpService } from "@/services/httpService";
 
 type UserPreferencesContexProps = {
     cartProductIds: string[];
+    ckeckCart: (productId: string) => void;
     favoriteData: FavoriteProps;
     createFavorite: (userId: string, productId: string) => void;
     addFavorite: (userId: string, productId: string) => void;
@@ -19,9 +20,11 @@ type UserPreferencesProviderProps = {
     children: React.ReactNode;
 };
 
-export const UserPreferencesProvider = ({ children }: UserPreferencesProviderProps) => {
-    const [favoriteData, setFavoriteData] = useState({} as FavoriteProps);
+export const UserPreferencesProvider = ({
+    children,
+}: UserPreferencesProviderProps) => {
     const [cartProductIds, setCartProductIds] = useState<string[]>([]);
+    const [favoriteData, setFavoriteData] = useState({} as FavoriteProps);
 
     const fetchCart = async () => {
         const productIds = await httpService(
@@ -30,6 +33,32 @@ export const UserPreferencesProvider = ({ children }: UserPreferencesProviderPro
 
         setCartProductIds(productIds);
     };
+
+    const ckeckCart = (productId: string) => {
+        let newCartProductIds;
+        if (cartProductIds.includes(productId)) {
+            newCartProductIds = cartProductIds.filter((value) => {
+                return value !== productId;
+            });
+        } else {
+            newCartProductIds = [...cartProductIds, productId];
+        }
+
+        updateCartProductIds(newCartProductIds);
+    };
+
+    const updateCartProductIds = (newCartProductIds: string[]) => {
+        setCartProductIds(newCartProductIds);
+
+        const body = {
+            productIds: newCartProductIds,
+        };
+        httpService("cart/f8a5ded4-9247-44c2-a794-15aa5ff6fda1", "PUT", body);
+    };
+
+    useEffect(() => {
+        console.log(cartProductIds);
+    }, [cartProductIds]);
 
     const createFavorite = async (userId: string, productId: string) => {
         const data = {
@@ -107,6 +136,7 @@ export const UserPreferencesProvider = ({ children }: UserPreferencesProviderPro
         <UserPreferencesContext.Provider
             value={{
                 cartProductIds,
+                ckeckCart,
                 favoriteData,
                 createFavorite,
                 addFavorite,
