@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 
+import ProductCardProps from "@/@types/productCard";
+
+import EmptyContentMessage from "@/components/EmptyContentMessage";
 import FilterButton from "@/components/FilterButton";
 import ProductCard from "@/components/ProductCard";
-
-import ProductCardProps from "@/@types/productCard";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
@@ -50,7 +51,7 @@ const Wishlist = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (!products.length) return <></>;
+    if (!products.length) return EmptyContentMessage();
 
     return (
         <section className="m-10">

@@ -6,6 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import ProductCardProps from "@/@types/productCard";
 
 import CartProduct from "@/components/CartProduct";
+import EmptyContentMessage from "@/components/EmptyContentMessage";
 import PricesOptions from "@/components/PricesOptions";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
@@ -70,7 +71,7 @@ const Cart = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (!products.length) return <></>;
+    if (!products.length) return EmptyContentMessage();
 
     setPrice();
 

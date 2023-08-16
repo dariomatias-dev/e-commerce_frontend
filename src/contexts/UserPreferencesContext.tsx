@@ -69,10 +69,6 @@ export const UserPreferencesProvider = ({
         fetchData("wishlist");
     }, []);
 
-    useEffect(() => {
-        console.log(cartProductIds);
-    }, [cartProductIds]);
-
     return (
         <UserPreferencesContext.Provider
             value={{
