@@ -8,10 +8,16 @@ import { BsCart3 } from 'react-icons/bs';
 import { IoPersonAddOutline } from 'react-icons/io5';
 import { MdFavoriteBorder, MdOutlineSearch } from 'react-icons/md';
 
+import { IconLink } from './IconLink';
+
+import { useUserPreferences } from '@/contexts/UserPreferencesContext';
+
 const Header = () => {
   const [query, setQuery] = useState('');
 
   const { push } = useRouter();
+
+  const { cartProductIds, wishlistProductIds } = useUserPreferences();
 
   const validateQueryValue = () => {
     const value = query.trim();
@@ -76,17 +82,13 @@ const Header = () => {
       </div>
 
       <div className="flex gap-6">
-        <Link href="/carrinho" legacyBehavior>
-          <a className="flex justify-center items-center">
-            <BsCart3 className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-          </a>
-        </Link>
+        <IconLink path="carrinho" Icon={BsCart3} productIds={cartProductIds} />
 
-        <Link href="/lista-de-desejos" legacyBehavior>
-          <a className="flex justify-center items-center">
-            <MdFavoriteBorder className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-          </a>
-        </Link>
+        <IconLink
+          path="lista-de-desejos"
+          Icon={MdFavoriteBorder}
+          productIds={wishlistProductIds}
+        />
 
         <Link href="/login" legacyBehavior>
           <a className="flex justify-center items-center p-2 border border-gray-500 hover:text-gray-600 rounded-full transition-all duration-300 group">
