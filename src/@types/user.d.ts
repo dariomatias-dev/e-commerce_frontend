@@ -1,4 +1,4 @@
-type UserProps = {
+export type UserProps = {
     id: string;
     firstName: string;
     lastName: string;
@@ -13,5 +13,3 @@ type UserProps = {
     createdAt: Date;
     updatedAt: Date;
 };
-
-export default UserProps;

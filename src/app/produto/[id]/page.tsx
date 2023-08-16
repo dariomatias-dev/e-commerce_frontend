@@ -6,7 +6,7 @@ import { BsShare } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 
-import ProductProps from "@/@types/product";
+import { ProductProps } from "@/@types/product";
 
 import { generateImageUrl } from "@/utils/generateImagePath";
 

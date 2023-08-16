@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
-import ProductCardProps from "@/@types/productCard";
+import { ProductCardProps } from "@/@types/productCard";
 
 import CartProduct from "@/components/CartProduct";
 import EmptyContentMessage from "@/components/EmptyContentMessage";
@@ -11,9 +11,9 @@ import PricesOptions from "@/components/PricesOptions";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 
-interface ProductsProps extends ProductCardProps {
+type ProductsProps = ProductCardProps & {
     quantity: number;
-}
+};
 
 const Cart = () => {
     const [products, setProducts] = useState<ProductsProps[]>([]);

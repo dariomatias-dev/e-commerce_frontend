@@ -1,9 +1,7 @@
-import ProductCardProps from './productCard';
+import ProductCardProps from "./productCard";
 
-interface ProductProps extends Omit<ProductCardProps, "imageUrlId"> {
+export type ProductProps = Omit<ProductCardProps, "imageUrlId"> & {
     description: string;
-	amountOfImages: number,
+    amountOfImages: number;
     categoryIds: Array<string>;
 };
-
-export default ProductProps;

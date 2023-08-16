@@ -1,5 +1,3 @@
-type FavoriteProps = {
+export type FavoriteProps = {
     productIds: string[];
 };
-
-export default FavoriteProps;

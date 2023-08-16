@@ -3,7 +3,7 @@ import Link from "next/link";
 import { HiMiniShoppingCart, HiOutlineShoppingCart } from "react-icons/hi2";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-import ProductCardProps from "@/@types/productCard";
+import { ProductCardProps } from "@/@types/productCard";
 
 import { useUserPreferences } from "@/contexts/UserPreferencesContext";
 

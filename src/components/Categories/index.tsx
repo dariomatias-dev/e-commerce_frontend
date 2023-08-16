@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import CategoryProps from "@/@types/category";
+import { CategoryProps } from "@/@types/category";
 
 import { generateImageUrl } from "@/utils/generateImagePath";
 

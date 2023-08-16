@@ -6,7 +6,7 @@ import FilterButton from "@/components/FilterButton";
 import Loading from "@/components/Loading";
 import ProductCard from "@/components/ProductCard";
 
-import ProductCardProps from "@/@types/productCard";
+import { ProductCardProps } from "@/@types/productCard";
 
 type Props = {
     params: {

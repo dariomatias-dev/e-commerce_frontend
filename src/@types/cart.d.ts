@@ -1,5 +1,3 @@
-type CartProps = {
+export type CartProps = {
     productIds: string[];
 };
-
-export default CartProps;

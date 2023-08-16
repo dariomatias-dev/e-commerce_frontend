@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import ProductCard from "../ProductCard";
 
-import ProductCardProps from "@/@types/productCard";
+import { ProductCardProps } from "@/@types/productCard";
 
 type ProductsProps = {
     products: ProductCardProps[];
@@ -39,10 +39,7 @@ const ProductsSection = () => {
 
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
                 {products.products.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                    />
+                    <ProductCard key={product.id} product={product} />
                 ))}
             </div>
         </section>

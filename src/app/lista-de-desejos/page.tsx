@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import ProductCardProps from "@/@types/productCard";
+import { ProductCardProps } from "@/@types/productCard";
 
 import EmptyContentMessage from "@/components/EmptyContentMessage";
 import FilterButton from "@/components/FilterButton";
