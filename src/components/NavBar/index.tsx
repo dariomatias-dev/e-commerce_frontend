@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import resetFormatting from '@/utils/resetFormatting';
+import { resetFormatting } from '@/utils/resetFormatting';
 
 const itemsNavBar = [
   'Departamentos',

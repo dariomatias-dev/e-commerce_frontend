@@ -4,7 +4,7 @@ import { infos, socialMedia } from './data';
 
 import Contacts from '../Contacts';
 
-import resetFormatting from '@/utils/resetFormatting';
+import { resetFormatting } from '@/utils/resetFormatting';
 
 const Footer = () => {
   return (

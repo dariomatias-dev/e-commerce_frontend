@@ -5,14 +5,14 @@ import { LegalPersonFormProps } from '../Schemas/LegalPersonFormSchema';
 import { PhysicalPersonFormProps } from '../Schemas/PhysicalPersonFormSchema';
 import { LoginFormProps } from '../Schemas/LoginFormSchema';
 
-import formatCep from '@/utils/formatCep';
-import formatCnpj from '@/utils/formatCnpj';
-import formatCpf from '@/utils/formatCpf';
-import formatPhone from '@/utils/formatPhone';
-import formatRg from '@/utils/formatRg';
-import formatStateRegistration from '@/utils/formatStateRegistration';
-import formatDateOfBirth from '@/utils/formattedDateOfBirth';
-import styles from '@/utils/styles';
+import { formatCep } from '@/utils/formatCep';
+import { formatCnpj } from '@/utils/formatCnpj';
+import { formatCpf } from '@/utils/formatCpf';
+import { formatPhone } from '@/utils/formatPhone';
+import { formatRg } from '@/utils/formatRg';
+import { formatStateRegistration } from '@/utils/formatStateRegistration';
+import { formatDateOfBirth } from '@/utils/formattedDateOfBirth';
+import { styles } from '@/utils/styles';
 
 type FormsProps =
   | LegalPersonFormProps

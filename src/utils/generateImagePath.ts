@@ -1,4 +1,4 @@
-import resetFormatting from './resetFormatting';
+import { resetFormatting } from './resetFormatting';
 
 export const generateImageUrl = (name: string, resourceType: string) => {
   const formattedName = resetFormatting(name);

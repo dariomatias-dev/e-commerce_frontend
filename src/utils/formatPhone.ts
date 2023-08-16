@@ -1,4 +1,4 @@
-const formatPhone = (value: string) => {
+export const formatPhone = (value: string) => {
   if (value.length > 17) return value.slice(0, 17);
 
   return value
@@ -7,5 +7,3 @@ const formatPhone = (value: string) => {
     .replace(/(\d{2})(\d{1,5})/, '$1 $2')
     .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
 };
-
-export default formatPhone;

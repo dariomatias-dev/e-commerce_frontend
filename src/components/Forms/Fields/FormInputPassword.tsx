@@ -7,7 +7,7 @@ import { LoginFormProps } from '../Schemas/LoginFormSchema';
 
 import ShowPasswordButton from '@/components/ShowPasswordButton';
 
-import styles from '@/utils/styles';
+import { styles } from '@/utils/styles';
 
 type FormsProps =
   | LegalPersonFormProps
