@@ -1,3 +1,3 @@
 export type CartProps = {
-    productIds: string[];
+  productIds: string[];
 };

@@ -1,3 +1,3 @@
 export type FavoriteProps = {
-    productIds: string[];
+  productIds: string[];
 };

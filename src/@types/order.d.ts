@@ -1,8 +1,8 @@
-import OrderItemProps from "./orderItem";
+import OrderItemProps from './orderItem';
 
 export type OrderProps = {
-    id: string;
-    orderDay: Date;
-    orderItems: Array<OrderItemProps>;
-    totalAmount: number;
+  id: string;
+  orderDay: Date;
+  orderItems: Array<OrderItemProps>;
+  totalAmount: number;
 };

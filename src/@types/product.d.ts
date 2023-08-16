@@ -1,7 +1,7 @@
-import ProductCardProps from "./productCard";
+import ProductCardProps from './productCard';
 
-export type ProductProps = Omit<ProductCardProps, "imageUrlId"> & {
-    description: string;
-    amountOfImages: number;
-    categoryIds: Array<string>;
+export type ProductProps = Omit<ProductCardProps, 'imageUrlId'> & {
+  description: string;
+  amountOfImages: number;
+  categoryIds: Array<string>;
 };
