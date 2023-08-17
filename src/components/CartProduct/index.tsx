@@ -41,7 +41,7 @@ const CartProduct = ({ productData, updateProduct, removeProduct }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount]);
 
-  const imageUrl = generateImageUrl(productData.name, 'products');
+  const imageUrl = generateImageUrl(productData.name, 1, 'products');
   const price = formatToReal(productData.price * amount);
 
   return (

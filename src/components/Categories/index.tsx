@@ -31,7 +31,7 @@ const Categories = () => {
   return (
     <section className="flex flex-wrap justify-center gap-x-28 gap-y-10 mx-10 my-8">
       {categoriesData.map((categoryData) => {
-        const imageUrl = generateImageUrl(categoryData.name, 'categories');
+        const imageUrl = generateImageUrl(categoryData.name, 1, 'categories');
 
         return (
           <div

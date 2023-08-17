@@ -29,7 +29,7 @@ const ProductCard = ({ product, isWishlist = false, removeProduct }: Props) => {
     }
   };
 
-  const imageUrl = generateImageUrl(product.name, 'products');
+  const imageUrl = generateImageUrl(product.name, 1, 'products');
 
   return (
     <div
