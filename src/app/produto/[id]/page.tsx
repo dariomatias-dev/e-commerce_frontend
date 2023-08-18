@@ -58,47 +58,81 @@ const Product = ({ searchParams }: Props) => {
 
   return (
     <div className="flex flex-col gap-8 m-10">
-      <div className="h-[500px] flex gap-20 bg-zinc-100 text-white p-10 rounded-md">
-        <div className="w-full">
-          <div className="flex justify-end gap-4 mb-6">
+      <div className="h-[500px] flex gap-14 bg-zinc-100 text-white p-10 rounded-md">
+        <div className="w-full h-full relative">
+          <div className="absolute top-4 right-4 flex justify-end gap-4 mb-6 z-10">
             <BsShare className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
             <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
           </div>
 
-          <Swiper
-            modules={[Autoplay, Navigation, EffectFade]}
-            effect="fade"
-            loop={true}
-            autoplay={true}
-            className="cursor-grab w-[300px]"
-          >
-            {Array.from({ length: product.amountOfImages }).map((_, index) => {
-              const imageNumber = index + 1;
-              const imageUrl = generateImageUrl(
-                product.name,
-                imageNumber,
-                'products',
-              );
+          <div className="h-full flex gap-10">
+            <div className="flex flex-col gap-2">
+              {Array.from({ length: product.amountOfImages }).map(
+                (_, index) => {
+                  const imageNumber = index + 1;
+                  const imageUrl = generateImageUrl(
+                    product.name,
+                    imageNumber,
+                    'products',
+                  );
 
-              return (
-                <SwiperSlide key={index}>
-                  <div className="w-full h-full bg-zinc-100 p-10">
-                    <Image
-                      src={imageUrl}
-                      width={1000}
-                      height={1000}
-                      priority={true}
-                      className="w-full h-auto object-contain"
-                      alt={`Produto ${product.name}`}
-                    />
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+                  return (
+                    <div
+                      key={index}
+                      className="w-24 h-24 flex items-center bg-white px-4 rounded-xl"
+                    >
+                      <Image
+                        src={imageUrl}
+                        width={1000}
+                        height={1000}
+                        priority={true}
+                        className="max-h-16 object-contain"
+                        alt={`Produto ${product.name}`}
+                      />
+                    </div>
+                  );
+                },
+              )}
+            </div>
+
+            <div className="h-full w-full flex flex-col gap-4 bg-white rounded-xl">
+              <Swiper
+                modules={[Autoplay, Navigation, EffectFade]}
+                effect="fade"
+                loop={true}
+                className="w-[300px] h-full cursor-grab"
+              >
+                {Array.from({ length: product.amountOfImages }).map(
+                  (_, index) => {
+                    const imageNumber = index + 1;
+                    const imageUrl = generateImageUrl(
+                      product.name,
+                      imageNumber,
+                      'products',
+                    );
+
+                    return (
+                      <SwiperSlide key={index}>
+                        <div className="w-full h-full flex items-center bg-white p-10">
+                          <Image
+                            src={imageUrl}
+                            width={1000}
+                            height={1000}
+                            priority={true}
+                            className="w-full h-auto object-contain"
+                            alt={`Produto ${product.name}`}
+                          />
+                        </div>
+                      </SwiperSlide>
+                    );
+                  },
+                )}
+              </Swiper>
+            </div>
+          </div>
         </div>
 
-        <div className="w-full max-w-[580px] flex flex-col justify-between gap-4 bg-zinc-800 px-4 py-8 rounded-md">
+        <div className="w-full max-w-[500px] flex flex-col justify-between gap-4 bg-zinc-800 px-4 py-8 rounded-md">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
               <h1 className="text-3xl font-bold">{product.name}</h1>
