@@ -12,6 +12,8 @@ import { BsShare } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
 import { MdFavoriteBorder } from 'react-icons/md';
 
+import { iconStyle } from './defaultStyles';
+
 import { ProductProps } from '@/@types/product';
 import { ProductCardProps } from '@/@types/productCard';
 
@@ -101,8 +103,8 @@ const Product = ({ searchParams }: Props) => {
       <div className="h-[500px] flex gap-14 bg-zinc-100 text-white p-10 rounded-md">
         <div className="w-full h-full relative">
           <div className="absolute top-4 right-4 flex justify-end gap-4 mb-6 z-10">
-            <BsShare className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
-            <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+            <BsShare className={iconStyle} />
+            <MdFavoriteBorder className={iconStyle} />
           </div>
 
           <div className="h-full flex gap-10">

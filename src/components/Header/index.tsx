@@ -11,6 +11,7 @@ import { MdFavoriteBorder, MdOutlineSearch } from 'react-icons/md';
 import { IconLink } from './IconLink';
 
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
+import { NavLinkGroup } from './NavLinkGroup';
 
 const Header = () => {
   const [query, setQuery] = useState('');
@@ -51,15 +52,8 @@ const Header = () => {
         </Link>
 
         <ul className="flex gap-5 text-gray-600 text-xs mb-[3px]">
-          <li className="flex flex-col items-center group">
-            <Link href="/">Sobre nós</Link>
-            <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
-          </li>
-
-          <li className="flex flex-col items-center group">
-            <Link href="/">Contato</Link>
-            <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
-          </li>
+          <NavLinkGroup name="Sobre nós" />
+          <NavLinkGroup name="Contato" />
         </ul>
       </div>
 
