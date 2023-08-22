@@ -68,7 +68,10 @@ const Product = ({ searchParams }: Props) => {
       );
       const data: SimilarProductsProps = await response.json();
 
-      return data;
+      return {
+        ...data,
+        products: [...data.products, ...data.products, ...data.products],
+      };
     } catch (err) {
       console.log(err);
     }
@@ -225,13 +228,43 @@ const Product = ({ searchParams }: Props) => {
         <p className="text-black text-justify">{product.description}</p>
       </div>
 
-      <div className="flex gap-4 bg-zinc-100 p-10 rounded-md">
-        {product.similarProducts.products.map((similarProduct) => {
-          console.log(similarProduct);
-          return (
-            <ProductCard key={similarProduct.id} product={similarProduct} />
-          );
-        })}
+      <div className="flex flex-col gap-4 bg-zinc-100 p-10 rounded-md">
+        <h2 className="text-2xl text-gray-700 font-bold">Produtos similares</h2>
+
+        <div>
+          <Swiper
+            slidesPerView={1}
+            centeredSlides={false}
+            grabCursor={true}
+            keyboard={{
+              enabled: true,
+            }}
+            breakpoints={{
+              1024: {
+                slidesPerView: 3,
+              },
+              1280: {
+                slidesPerView: 4,
+              },
+              1400: {
+                slidesPerView: 5,
+              },
+            }}
+            spaceBetween={30}
+            pagination={{
+              clickable: true,
+            }}
+            className="w-full"
+          >
+            {product.similarProducts.products.map((similarProduct) => {
+              return (
+                <SwiperSlide key={similarProduct.id}>
+                  <ProductCard product={similarProduct} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
       </div>
     </div>
   );
