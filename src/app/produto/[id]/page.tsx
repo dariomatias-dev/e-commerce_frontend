@@ -1,12 +1,13 @@
 'use client';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, EffectFade } from 'swiper/modules';
 import 'swiper/css/bundle';
 import 'swiper/css/effect-fade';
 
-import { useState, useEffect } from 'react';
+import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { BsShare } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
 import { MdFavoriteBorder } from 'react-icons/md';
@@ -16,8 +17,8 @@ import { ProductCardProps } from '@/@types/productCard';
 
 import ProductCard from '@/components/ProductCard';
 
-import { generateImageUrl } from '@/utils/generateImagePath';
 import { formatToReal } from '@/utils/formatToReal';
+import { generateImageUrl } from '@/utils/generateImagePath';
 
 type Props = {
   searchParams: Record<string, string>;
@@ -68,10 +69,7 @@ const Product = ({ searchParams }: Props) => {
       );
       const data: SimilarProductsProps = await response.json();
 
-      return {
-        ...data,
-        products: [...data.products, ...data.products, ...data.products],
-      };
+      return data;
     } catch (err) {
       console.log(err);
     }

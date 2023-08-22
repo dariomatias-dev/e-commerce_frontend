@@ -7,8 +7,8 @@ import { ProductCardProps } from '@/@types/productCard';
 
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
 
-import { resetFormatting } from '@/utils/resetFormatting';
 import { generateImageUrl } from '@/utils/generateImagePath';
+import { resetFormatting } from '@/utils/resetFormatting';
 
 type Props = {
   product: ProductCardProps;

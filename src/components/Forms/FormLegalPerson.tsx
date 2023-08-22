@@ -1,11 +1,12 @@
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
+import FormCheckboxes from './Fields/FormCheckboxes';
 import FormInput from './Fields/FormInput';
+import FormInputPassword from './Fields/FormInputPassword';
+
 import { schema } from './Schemas/LegalPersonFormSchema';
 
-import FormInputPassword from './Fields/FormInputPassword';
-import FormCheckboxes from './Fields/FormCheckboxes';
 import SubmitFormButton from './SubmitFormButton';
 
 import sendRegistrationDataToServer from '@/services/sendRegistrationDataToServer';

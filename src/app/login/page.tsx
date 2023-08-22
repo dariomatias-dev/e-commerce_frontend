@@ -1,13 +1,13 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
 import FormInput from '@/components/Forms/Fields/FormInput';
 import FormInputPassword from '@/components/Forms/Fields/FormInputPassword';
 import {
-  schema,
   LoginFormProps,
+  schema,
 } from '@/components/Forms/Schemas/LoginFormSchema';
 import SubmitFormButton from '@/components/Forms/SubmitFormButton';
 import RedirectionLoginRegistration from '@/components/RedirectionLoginRegistration';

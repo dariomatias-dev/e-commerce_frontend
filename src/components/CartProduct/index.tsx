@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 import { RiSubtractFill } from 'react-icons/ri';
@@ -8,8 +8,8 @@ import { ProductCardProps } from '@/@types/productCard';
 
 import { useUserPreferences } from '@/contexts/UserPreferencesContext';
 
-import { generateImageUrl } from '@/utils/generateImagePath';
 import { formatToReal } from '@/utils/formatToReal';
+import { generateImageUrl } from '@/utils/generateImagePath';
 
 type Props = {
   productData: ProductCardProps;

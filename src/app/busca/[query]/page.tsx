@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import FilterButton from '@/components/FilterButton';
 import Loading from '@/components/Loading';

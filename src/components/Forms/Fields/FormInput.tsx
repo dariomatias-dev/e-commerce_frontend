@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 
 import { LegalPersonFormProps } from '../Schemas/LegalPersonFormSchema';
-import { PhysicalPersonFormProps } from '../Schemas/PhysicalPersonFormSchema';
 import { LoginFormProps } from '../Schemas/LoginFormSchema';
+import { PhysicalPersonFormProps } from '../Schemas/PhysicalPersonFormSchema';
 
 import { formatCep } from '@/utils/formatCep';
 import { formatCnpj } from '@/utils/formatCnpj';

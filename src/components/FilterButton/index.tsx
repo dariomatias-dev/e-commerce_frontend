@@ -1,5 +1,5 @@
-import { useState, Dispatch, SetStateAction } from 'react';
 import * as Popover from '@radix-ui/react-popover';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 type Props = {

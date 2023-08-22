@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 
 import { ProductCardProps } from '@/@types/productCard';
