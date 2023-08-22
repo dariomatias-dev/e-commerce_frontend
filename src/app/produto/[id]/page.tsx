@@ -12,6 +12,9 @@ import { FaPlus } from 'react-icons/fa';
 import { MdFavoriteBorder } from 'react-icons/md';
 
 import { ProductProps } from '@/@types/product';
+import { ProductCardProps } from '@/@types/productCard';
+
+import ProductCard from '@/components/ProductCard';
 
 import { generateImageUrl } from '@/utils/generateImagePath';
 import { formatToReal } from '@/utils/formatToReal';
@@ -20,23 +23,59 @@ type Props = {
   searchParams: Record<string, string>;
 };
 
-const Product = ({ searchParams }: Props) => {
-  const [product, setProduct] = useState({} as ProductProps);
+type SimilarProductsProps = {
+  products: ProductCardProps[];
+  skip: number;
+};
 
-  const fetchData = async () => {
+type ProductWithSimilarProps = ProductProps & {
+  similarProducts: SimilarProductsProps;
+};
+
+const Product = ({ searchParams }: Props) => {
+  const [product, setProduct] = useState({} as ProductWithSimilarProps);
+
+  const fetchProduct = async () => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/product/${searchParams.id}`,
       );
-      const data = await response.json();
-      setProduct(data);
+      const data: ProductProps = await response.json();
+      const similarProducts = await fetchSimilarProducts(
+        data.id,
+        data.categoryIds,
+      );
+
+      if (similarProducts !== undefined) {
+        setProduct({ ...data, similarProducts });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchSimilarProducts = async (
+    productId: string,
+    categoryIds: string[],
+  ) => {
+    try {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }/products-by-categories?productId=${productId}&categoryIds=${categoryIds.join(
+          ',',
+        )}&skip=0`,
+      );
+      const data: SimilarProductsProps = await response.json();
+
+      return data;
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -184,6 +223,15 @@ const Product = ({ searchParams }: Props) => {
           Descrição do produto
         </h2>
         <p className="text-black text-justify">{product.description}</p>
+      </div>
+
+      <div className="flex gap-4 bg-zinc-100 p-10 rounded-md">
+        {product.similarProducts.products.map((similarProduct) => {
+          console.log(similarProduct);
+          return (
+            <ProductCard key={similarProduct.id} product={similarProduct} />
+          );
+        })}
       </div>
     </div>
   );
