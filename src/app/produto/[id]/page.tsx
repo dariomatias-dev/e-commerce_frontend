@@ -107,8 +107,15 @@ const Product = ({ searchParams }: Props) => {
             <MdFavoriteBorder className={iconStyle} />
           </div>
 
-          <div className="flex h-full gap-10">
-            <div className="flex flex-col gap-2">
+          <div className="flex h-full gap-6">
+            <Swiper
+              direction={'vertical'}
+              slidesPerView={4}
+              pagination={{
+                clickable: true,
+              }}
+              className="h-full w-24"
+            >
               {Array.from({ length: product.amountOfImages }).map(
                 (_, index) => {
                   const imageNumber = index + 1;
@@ -119,23 +126,22 @@ const Product = ({ searchParams }: Props) => {
                   );
 
                   return (
-                    <div
-                      key={index}
-                      className="flex h-24 w-24 items-center rounded-xl bg-white px-4"
-                    >
-                      <Image
-                        src={imageUrl}
-                        width={1000}
-                        height={1000}
-                        priority={true}
-                        className="max-h-16 object-contain"
-                        alt={`Produto ${product.name}`}
-                      />
-                    </div>
+                    <SwiperSlide key={index}>
+                      <div className="flex h-20 w-full items-center rounded-xl bg-white p-4">
+                        <Image
+                          src={imageUrl}
+                          width={1000}
+                          height={1000}
+                          priority={true}
+                          className="max-h-16 object-contain"
+                          alt={`Produto ${product.name}`}
+                        />
+                      </div>
+                    </SwiperSlide>
                   );
                 },
               )}
-            </div>
+            </Swiper>
 
             <div className="flex h-full w-full flex-col gap-4 rounded-xl bg-white">
               <Swiper
