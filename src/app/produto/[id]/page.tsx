@@ -15,24 +15,17 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import { iconStyle } from './defaultStyles';
 
 import { ProductProps } from '@/@types/product';
-import { ProductCardProps } from '@/@types/productCard';
+import { ProductWithSimilarProps } from '@/@types/productWithSimilar';
+import { SimilarProductsProps } from '@/@types/similarProducts';
 
 import ProductCard from '@/components/ProductCard';
 
+import { SideImagens } from '@/components/SideImages';
 import { formatToReal } from '@/utils/formatToReal';
 import { generateImageUrl } from '@/utils/generateImagePath';
 
 type Props = {
   searchParams: Record<string, string>;
-};
-
-type SimilarProductsProps = {
-  products: ProductCardProps[];
-  skip: number;
-};
-
-type ProductWithSimilarProps = ProductProps & {
-  similarProducts: SimilarProductsProps;
 };
 
 const Product = ({ searchParams }: Props) => {
@@ -108,40 +101,7 @@ const Product = ({ searchParams }: Props) => {
           </div>
 
           <div className="flex h-full gap-6">
-            <Swiper
-              direction={'vertical'}
-              slidesPerView={4}
-              pagination={{
-                clickable: true,
-              }}
-              className="h-full w-24"
-            >
-              {Array.from({ length: product.amountOfImages }).map(
-                (_, index) => {
-                  const imageNumber = index + 1;
-                  const imageUrl = generateImageUrl(
-                    product.name,
-                    imageNumber,
-                    'products',
-                  );
-
-                  return (
-                    <SwiperSlide key={index}>
-                      <div className="flex h-20 w-full items-center rounded-xl bg-white p-4">
-                        <Image
-                          src={imageUrl}
-                          width={1000}
-                          height={1000}
-                          priority={true}
-                          className="max-h-16 object-contain"
-                          alt={`Produto ${product.name}`}
-                        />
-                      </div>
-                    </SwiperSlide>
-                  );
-                },
-              )}
-            </Swiper>
+            <SideImagens product={product} />
 
             <div className="flex h-full w-full flex-col gap-4 rounded-xl bg-white">
               <Swiper
