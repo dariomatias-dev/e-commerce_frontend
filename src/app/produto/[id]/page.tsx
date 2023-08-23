@@ -3,14 +3,16 @@
 import 'swiper/css/bundle';
 import 'swiper/css/effect-fade';
 
-import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+
 import { BsShare } from 'react-icons/bs';
 import { FaPlus } from 'react-icons/fa';
 import { MdFavoriteBorder } from 'react-icons/md';
+
+import SwiperProps from 'swiper';
+import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { iconStyle } from './defaultStyles';
 
@@ -18,12 +20,10 @@ import { ProductProps } from '@/@types/product';
 import { ProductWithSimilarProps } from '@/@types/productWithSimilar';
 import { SimilarProductsProps } from '@/@types/similarProducts';
 
-import ProductCard from '@/components/ProductCard';
-
 import { SideImagens } from '@/components/SideImages';
+import { SimilarProductsSection } from '@/components/SimilarProductsSection';
 import { formatToReal } from '@/utils/formatToReal';
 import { generateImageUrl } from '@/utils/generateImagePath';
-import { SimilarProductsSection } from '@/components/SimilarProductsSection';
 
 type Props = {
   searchParams: Record<string, string>;
@@ -31,6 +31,7 @@ type Props = {
 
 const Product = ({ searchParams }: Props) => {
   const [product, setProduct] = useState({} as ProductWithSimilarProps);
+  const [swiper, setSwiper] = useState<SwiperProps | null>(null);
 
   const fetchProduct = async () => {
     try {
@@ -71,6 +72,10 @@ const Product = ({ searchParams }: Props) => {
     }
   };
 
+  const changeImage = (imageNumber: number) => {
+    swiper?.slideTo(imageNumber, 0);
+  };
+
   useEffect(() => {
     fetchProduct();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,13 +107,16 @@ const Product = ({ searchParams }: Props) => {
           </div>
 
           <div className="flex h-full gap-6">
-            <SideImagens product={product} />
+            <SideImagens product={product} changeImage={changeImage} />
 
             <div className="flex h-full w-full flex-col gap-4 rounded-xl bg-white">
               <Swiper
                 modules={[Autoplay, Navigation, EffectFade]}
                 effect="fade"
                 loop={true}
+                onSwiper={(s) => {
+                  setSwiper(s);
+                }}
                 className="h-full w-[300px] cursor-grab"
               >
                 {Array.from({ length: product.amountOfImages }).map(

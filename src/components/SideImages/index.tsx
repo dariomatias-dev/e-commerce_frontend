@@ -1,24 +1,34 @@
 import Image from 'next/image';
+import SwiperProps from 'swiper';
+
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
+
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 import { ProductWithSimilarProps } from '@/@types/productWithSimilar';
 
-import { generateImageUrl } from '@/utils/generateImagePath';
 import { ChangeProductImage } from './ChangeProductImage';
-import { useState } from 'react';
-import SwiperProps from 'swiper';
+
+import { generateImageUrl } from '@/utils/generateImagePath';
 
 type Props = {
   product: ProductWithSimilarProps;
+  changeImage: (imageNumber: number) => void;
 };
 
-export const SideImagens = ({ product }: Props) => {
+export const SideImagens = ({ product, changeImage }: Props) => {
   const [swiper, setSwiper] = useState<SwiperProps | null>(null);
 
   return (
     <div className="relative flex flex-col items-center gap-2">
-      <ChangeProductImage swiper={swiper} Icon={IoIosArrowUp} position="top" />
+      {product.amountOfImages > 4 && (
+        <ChangeProductImage
+          swiper={swiper}
+          Icon={IoIosArrowUp}
+          position="top"
+        />
+      )}
 
       <Swiper
         direction={'vertical'}
@@ -41,7 +51,10 @@ export const SideImagens = ({ product }: Props) => {
           );
           return (
             <SwiperSlide key={index}>
-              <div className="flex h-20 w-full items-center rounded-xl bg-white p-4">
+              <div
+                onClick={() => changeImage(index)}
+                className="flex h-20 w-full items-center rounded-xl bg-white p-4"
+              >
                 <Image
                   src={imageUrl}
                   width={1000}
@@ -56,11 +69,13 @@ export const SideImagens = ({ product }: Props) => {
         })}
       </Swiper>
 
-      <ChangeProductImage
-        swiper={swiper}
-        Icon={IoIosArrowDown}
-        position="bottom"
-      />
+      {product.amountOfImages > 4 && (
+        <ChangeProductImage
+          swiper={swiper}
+          Icon={IoIosArrowDown}
+          position="bottom"
+        />
+      )}
     </div>
   );
 };
