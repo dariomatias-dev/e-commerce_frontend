@@ -19,6 +19,7 @@ export const SideImagens = ({ product }: Props) => {
   return (
     <div className="relative flex flex-col items-center gap-2">
       <ChangeProductImage swiper={swiper} Icon={IoIosArrowUp} position="top" />
+
       <Swiper
         direction={'vertical'}
         slidesPerView={4}
@@ -54,6 +55,7 @@ export const SideImagens = ({ product }: Props) => {
           );
         })}
       </Swiper>
+
       <ChangeProductImage
         swiper={swiper}
         Icon={IoIosArrowDown}
