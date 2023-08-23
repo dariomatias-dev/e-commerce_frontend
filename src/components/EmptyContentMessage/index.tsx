@@ -1,6 +1,6 @@
 const EmptyContentMessage = () => {
   return (
-    <div className="h-[50vh] flex justify-center items-center">
+    <div className="flex h-[50vh] items-center justify-center">
       <h2 className="text-xl font-bold">Ainda não há produtos, adicione um!</h2>
     </div>
   );

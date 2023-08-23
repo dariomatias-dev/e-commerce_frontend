@@ -36,7 +36,7 @@ const Header = () => {
   };
 
   return (
-    <header className="py-3 flex justify-between items-center px-20">
+    <header className="flex items-center justify-between px-20 py-3">
       <div className="flex items-end gap-7">
         <Link href="/" legacyBehavior>
           <a className="flex items-center gap-2">
@@ -45,19 +45,19 @@ const Header = () => {
               width={500}
               height={500}
               alt="Logo"
-              className="w-full max-w-[25px] h-auto"
+              className="h-auto w-full max-w-[25px]"
             />
-            <h1 className="text-gray-500 text-xl font-bold">Power Tech</h1>
+            <h1 className="text-xl font-bold text-gray-500">Power Tech</h1>
           </a>
         </Link>
 
-        <ul className="flex gap-5 text-gray-600 text-xs mb-[3px]">
+        <ul className="mb-[3px] flex gap-5 text-xs text-gray-600">
           <NavLinkGroup name="Sobre nós" />
           <NavLinkGroup name="Contato" />
         </ul>
       </div>
 
-      <div className="flex w-[450px] h-10 border-[0.8px] hover:border-px border-gray-500 hover:border-black rounded-md overflow-hidden transition-all duration-300">
+      <div className="hover:border-px flex h-10 w-[450px] overflow-hidden rounded-md border-[0.8px] border-gray-500 transition-all duration-300 hover:border-black">
         <input
           type="text"
           minLength={4}
@@ -71,7 +71,7 @@ const Header = () => {
         />
 
         <button type="button" onClick={search} className="h-full bg-black px-2">
-          <MdOutlineSearch className="w-6 h-6 text-white select-none" />
+          <MdOutlineSearch className="h-6 w-6 select-none text-white" />
         </button>
       </div>
 
@@ -85,8 +85,8 @@ const Header = () => {
         />
 
         <Link href="/login" legacyBehavior>
-          <a className="flex justify-center items-center p-2 border border-gray-500 hover:text-gray-600 rounded-full transition-all duration-300 group">
-            <IoPersonAddOutline className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-all duration-300" />
+          <a className="group flex items-center justify-center rounded-full border border-gray-500 p-2 transition-all duration-300 hover:text-gray-600">
+            <IoPersonAddOutline className="h-5 w-5 text-gray-400 transition-all duration-300 group-hover:text-gray-600" />
           </a>
         </Link>
       </div>

@@ -54,7 +54,7 @@ const FormInputPassword = ({ inputName, id, control, errors }: Props) => {
         />
       </div>
 
-      <p className="text-red-600 text-xs">
+      <p className="text-xs text-red-600">
         {errors[id as keyof FormsProps]?.message}
       </p>
     </div>

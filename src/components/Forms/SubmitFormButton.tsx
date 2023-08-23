@@ -6,7 +6,7 @@ const SubmitFormButton = ({ text }: Props) => {
   return (
     <button
       type="submit"
-      className="w-full hover:bg-black hover:text-white font-semibold uppercase px-4 py-2 border border-black rounded-md transition duration-300"
+      className="w-full rounded-md border border-black px-4 py-2 font-semibold uppercase transition duration-300 hover:bg-black hover:text-white"
     >
       {text}
     </button>

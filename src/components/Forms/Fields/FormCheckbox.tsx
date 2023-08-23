@@ -21,7 +21,7 @@ const FormCheckbox = ({ message, id, register, errors }: FormCheckboxProps) => {
       </label>
 
       {id === 'termsOfUse' && (
-        <p className="text-red-600 text-xs">{errors.termsOfUse?.message}</p>
+        <p className="text-xs text-red-600">{errors.termsOfUse?.message}</p>
       )}
     </>
   );

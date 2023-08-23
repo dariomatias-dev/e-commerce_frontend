@@ -34,19 +34,19 @@ const ProductCard = ({ product, isWishlist = false, removeProduct }: Props) => {
   return (
     <div
       key={product.id}
-      className="w-[230px] flex flex-col justify-between gap-4 p-2 bg-white rounded-md shadow-md hover:shadow-lg transition duration-300"
+      className="flex w-[230px] flex-col justify-between gap-4 rounded-md bg-white p-2 shadow-md transition duration-300 hover:shadow-lg"
     >
-      <div className="h-10 flex hover:justify-end items-center group">
+      <div className="group flex h-10 items-center hover:justify-end">
         <Link href={''} legacyBehavior>
-          <a className="group-hover:hidden flex gap-2">
+          <a className="flex gap-2 group-hover:hidden">
             <div>
-              <div className="w-10 h-10 flex flex-col justify-center items-center bg-gray-400 text-xs rounded-md">
-                <span className="text-white font-bold">15%</span>
+              <div className="flex h-10 w-10 flex-col items-center justify-center rounded-md bg-gray-400 text-xs">
+                <span className="font-bold text-white">15%</span>
               </div>
             </div>
 
             <div>
-              <div className="w-10 h-10 flex flex-col justify-center items-center text-[8px] border-2 border-gray-200 rounded-md">
+              <div className="flex h-10 w-10 flex-col items-center justify-center rounded-md border-2 border-gray-200 text-[8px]">
                 <span>RESTAM</span>
                 <span className="font-bold">500</span>
                 <span>UNID.</span>
@@ -55,12 +55,12 @@ const ProductCard = ({ product, isWishlist = false, removeProduct }: Props) => {
           </a>
         </Link>
 
-        <div className="hidden group-hover:flex gap-4 mr-1">
+        <div className="mr-1 hidden gap-4 group-hover:flex">
           <button type="button" onClick={updateWishlist}>
             {wishlistProductIds.includes(product.id) ? (
-              <MdFavorite className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+              <MdFavorite className="h-6 w-6 text-gray-400 transition-all duration-300 hover:text-gray-500" />
             ) : (
-              <MdFavoriteBorder className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+              <MdFavoriteBorder className="h-6 w-6 text-gray-400 transition-all duration-300 hover:text-gray-500" />
             )}
           </button>
 
@@ -69,9 +69,9 @@ const ProductCard = ({ product, isWishlist = false, removeProduct }: Props) => {
             onClick={() => ckeckProductIds('cart', product.id)}
           >
             {cartProductIds.includes(product.id) ? (
-              <HiMiniShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+              <HiMiniShoppingCart className="h-6 w-6 text-gray-400 transition-all duration-300 hover:text-gray-500" />
             ) : (
-              <HiOutlineShoppingCart className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+              <HiOutlineShoppingCart className="h-6 w-6 text-gray-400 transition-all duration-300 hover:text-gray-500" />
             )}
           </button>
         </div>
@@ -93,13 +93,13 @@ const ProductCard = ({ product, isWishlist = false, removeProduct }: Props) => {
             height={500}
             priority={true}
             alt={`Imagem do produto: ${product.name}.`}
-            className="w-full max-w-[10rem] max-h-[10rem] h-auto object-contain mx-auto"
+            className="mx-auto h-auto max-h-[10rem] w-full max-w-[10rem] object-contain"
           />
 
-          <h3 className="text-gray-700 font-bold uppercase ml-2">
+          <h3 className="ml-2 font-bold uppercase text-gray-700">
             {product.name}
           </h3>
-          <p className="text-gray-700 text-xl font-bold ml-2">
+          <p className="ml-2 text-xl font-bold text-gray-700">
             {Number(product.price).toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
@@ -110,10 +110,10 @@ const ProductCard = ({ product, isWishlist = false, removeProduct }: Props) => {
 
       <button
         type="button"
-        className="w-full flex justify-center items-center gap-4 hover:bg-green-500 py-3 border-2 border-green-300 hover:border-green-500 rounded-md transition duration-300 group"
+        className="group flex w-full items-center justify-center gap-4 rounded-md border-2 border-green-300 py-3 transition duration-300 hover:border-green-500 hover:bg-green-500"
       >
-        <HiMiniShoppingCart className="w-5 h-5 text-green-600 group-hover:text-white" />
-        <span className="text-green-600 group-hover:text-white font-bold uppercase">
+        <HiMiniShoppingCart className="h-5 w-5 text-green-600 group-hover:text-white" />
+        <span className="font-bold uppercase text-green-600 group-hover:text-white">
           Comprar
         </span>
       </button>

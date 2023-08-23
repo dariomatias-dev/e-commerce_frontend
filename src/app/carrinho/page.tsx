@@ -79,19 +79,19 @@ const Cart = () => {
     <section className="m-10">
       <h1 className="text-2xl">Meu carrinho</h1>
 
-      <div className="flex gap-10 mt-10">
-        <div className="w-full flex flex-col gap-4">
-          <table className="divide-y divide-gray-200 border border-t-0 border-gray-200 rounded-md shadow-lg overflow-hidden">
-            <thead className="bg-black text-white text-left text-sm tracking-wider">
+      <div className="mt-10 flex gap-10">
+        <div className="flex w-full flex-col gap-4">
+          <table className="divide-y divide-gray-200 overflow-hidden rounded-md border border-t-0 border-gray-200 shadow-lg">
+            <thead className="bg-black text-left text-sm tracking-wider text-white">
               {['Produto', '', 'Quant.', 'Preço', ''].map(
                 (fieldName, index) => (
-                  <th key={index} scope="col" className="font-normal p-4">
+                  <th key={index} scope="col" className="p-4 font-normal">
                     {fieldName}
                   </th>
                 ),
               )}
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 bg-white">
               {products.map((productData) => (
                 <CartProduct
                   key={productData.id}
@@ -107,7 +107,7 @@ const Cart = () => {
             <button
               type="button"
               onClick={clearProducts}
-              className="w-min bg-white hover:bg-black text-black hover:text-white text-xs whitespace-nowrap uppercase px-4 py-2 border border-zinc-500 hover:border-black rounded-md transition duration-300"
+              className="w-min whitespace-nowrap rounded-md border border-zinc-500 bg-white px-4 py-2 text-xs uppercase text-black transition duration-300 hover:border-black hover:bg-black hover:text-white"
             >
               Limpar carrinho
             </button>
@@ -115,8 +115,8 @@ const Cart = () => {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="w-[340px] h-min p-5 border border-zinc-200 rounded-md shadow-lg">
-            <h2 className="text-gray-800 text-2xl text-center font-semibold pb-5 border-b border-zinc-200">
+          <div className="h-min w-[340px] rounded-md border border-zinc-200 p-5 shadow-lg">
+            <h2 className="border-b border-zinc-200 pb-5 text-center text-2xl font-semibold text-gray-800">
               Resumo
             </h2>
 
@@ -125,9 +125,9 @@ const Cart = () => {
 
           <button
             type="button"
-            className="w-full flex justify-center items-center gap-4 bg-green-600 hover:bg-green-500 text-white text-lg font-bold uppercase px-6 py-4 rounded-md transition duration-300"
+            className="flex w-full items-center justify-center gap-4 rounded-md bg-green-600 px-6 py-4 text-lg font-bold uppercase text-white transition duration-300 hover:bg-green-500"
           >
-            <FaShoppingCart className="w-6 h-6" />
+            <FaShoppingCart className="h-6 w-6" />
             Fazer pedido
           </button>
         </div>

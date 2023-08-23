@@ -10,9 +10,9 @@ export const NavLinkGroup = ({ name }: Props) => {
   const path = resetFormatting(name);
 
   return (
-    <li className="flex flex-col items-center group">
+    <li className="group flex flex-col items-center">
       <Link href={`/${path}`}>{name}</Link>
-      <span className="inline-block w-0 group-hover:w-full h-px bg-gray-700 transition-all duration-300" />
+      <span className="inline-block h-px w-0 bg-gray-700 transition-all duration-300 group-hover:w-full" />
     </li>
   );
 };

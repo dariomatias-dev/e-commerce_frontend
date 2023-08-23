@@ -11,9 +11,9 @@ const Cadastro = () => {
   const [form, setForm] = useState('physicalPerson');
 
   return (
-    <div className="w-full max-w-[40rem] mx-auto mt-16 mb-20">
+    <div className="mx-auto mb-20 mt-16 w-full max-w-[40rem]">
       <div className="flex flex-col gap-3">
-        <h1 className="text-gray-700 text-3xl text-center font-semibold">
+        <h1 className="text-center text-3xl font-semibold text-gray-700">
           Criar minha conta
         </h1>
 
@@ -22,8 +22,8 @@ const Cadastro = () => {
         </p>
       </div>
 
-      <div className="flex flex-col my-6">
-        <h2 className="text-gray-500 font-semibold">Tipo de conta</h2>
+      <div className="my-6 flex flex-col">
+        <h2 className="font-semibold text-gray-500">Tipo de conta</h2>
 
         <form className="flex gap-4">
           <label className="flex gap-2">

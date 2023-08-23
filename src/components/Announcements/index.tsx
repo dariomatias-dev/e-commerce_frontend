@@ -10,7 +10,7 @@ const Announcements = () => {
         width={2000}
         height={2000}
         priority={true}
-        className="w-full h-auto object-contain"
+        className="h-auto w-full object-contain"
         alt="Announcement"
       />
     </section>

@@ -57,14 +57,14 @@ const Contacts = () => {
     <div className="mx-auto">
       <h2 className="text-xl font-bold">Contato</h2>
 
-      <ul className="flex flex-col gap-3 mt-3 text-gray-200">
+      <ul className="mt-3 flex flex-col gap-3 text-gray-200">
         {contacts.map((contact, index) => (
           <li
             key={index}
             onClick={() => copyToClipboard(contact.content)}
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex cursor-pointer items-center gap-2"
           >
-            <contact.icon className="w-5 h-5 text-white" />
+            <contact.icon className="h-5 w-5 text-white" />
             {contact.content}
           </li>
         ))}
@@ -73,7 +73,7 @@ const Contacts = () => {
       <div
         className={`${
           message.showMessage ? 'opacity-100' : 'opacity-0'
-        } fixed bottom-5 left-2/4 -translate-x-2/4 bg-[#101010] px-4 py-1 rounded-full transition duration-1000`}
+        } fixed bottom-5 left-2/4 -translate-x-2/4 rounded-full bg-[#101010] px-4 py-1 transition duration-1000`}
       >
         <p>{message.contactName} copiado para a área de transferência</p>
       </div>

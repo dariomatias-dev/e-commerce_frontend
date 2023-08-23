@@ -55,12 +55,12 @@ const Wishlist = () => {
 
   return (
     <section className="m-10">
-      <div className="flex justify-between items-center gap-16 text-white bg-black my-10 px-8 py-3 rounded-md">
-        <h1 className="text-gray-100 text-2xl font-semibold">Meu carrinho</h1>
+      <div className="my-10 flex items-center justify-between gap-16 rounded-md bg-black px-8 py-3 text-white">
+        <h1 className="text-2xl font-semibold text-gray-100">Meu carrinho</h1>
 
         <div className="flex items-center gap-16">
           <div>
-            <h2 className="text-gray-300 text-end text-xs text-gray">
+            <h2 className="text-gray text-end text-xs text-gray-300">
               Produtos
             </h2>
             <p>10000</p>

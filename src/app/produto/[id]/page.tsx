@@ -99,15 +99,15 @@ const Product = ({ searchParams }: Props) => {
   const formattedDisccountPrice = formatToReal(discountPrice);
 
   return (
-    <div className="flex flex-col gap-8 m-10">
-      <div className="h-[500px] flex gap-14 bg-zinc-100 text-white p-10 rounded-md">
-        <div className="w-full h-full relative">
-          <div className="absolute top-4 right-4 flex justify-end gap-4 mb-6 z-10">
+    <div className="m-10 flex flex-col gap-8">
+      <div className="flex h-[500px] gap-14 rounded-md bg-zinc-100 p-10 text-white">
+        <div className="relative h-full w-full">
+          <div className="absolute right-4 top-4 z-10 mb-6 flex justify-end gap-4">
             <BsShare className={iconStyle} />
             <MdFavoriteBorder className={iconStyle} />
           </div>
 
-          <div className="h-full flex gap-10">
+          <div className="flex h-full gap-10">
             <div className="flex flex-col gap-2">
               {Array.from({ length: product.amountOfImages }).map(
                 (_, index) => {
@@ -121,7 +121,7 @@ const Product = ({ searchParams }: Props) => {
                   return (
                     <div
                       key={index}
-                      className="w-24 h-24 flex items-center bg-white px-4 rounded-xl"
+                      className="flex h-24 w-24 items-center rounded-xl bg-white px-4"
                     >
                       <Image
                         src={imageUrl}
@@ -137,12 +137,12 @@ const Product = ({ searchParams }: Props) => {
               )}
             </div>
 
-            <div className="h-full w-full flex flex-col gap-4 bg-white rounded-xl">
+            <div className="flex h-full w-full flex-col gap-4 rounded-xl bg-white">
               <Swiper
                 modules={[Autoplay, Navigation, EffectFade]}
                 effect="fade"
                 loop={true}
-                className="w-[300px] h-full cursor-grab"
+                className="h-full w-[300px] cursor-grab"
               >
                 {Array.from({ length: product.amountOfImages }).map(
                   (_, index) => {
@@ -155,13 +155,13 @@ const Product = ({ searchParams }: Props) => {
 
                     return (
                       <SwiperSlide key={index}>
-                        <div className="w-full h-full flex items-center bg-white p-10">
+                        <div className="flex h-full w-full items-center bg-white p-10">
                           <Image
                             src={imageUrl}
                             width={1000}
                             height={1000}
                             priority={true}
-                            className="w-full h-auto object-contain"
+                            className="h-auto w-full object-contain"
                             alt={`Produto ${product.name}`}
                           />
                         </div>
@@ -174,22 +174,22 @@ const Product = ({ searchParams }: Props) => {
           </div>
         </div>
 
-        <div className="w-full max-w-[500px] flex flex-col justify-between gap-4 bg-zinc-800 px-4 py-8 rounded-md">
+        <div className="flex w-full max-w-[500px] flex-col justify-between gap-4 rounded-md bg-zinc-800 px-4 py-8">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
               <h1 className="text-3xl font-bold">{product.name}</h1>
               <p className="text-xs text-gray-400">Código: {product.id}</p>
               <p className="text-xs text-gray-300">
                 Vendido e entregue por:{' '}
-                <span className="text-white font-semibold">Power Tech</span>
+                <span className="font-semibold text-white">Power Tech</span>
               </p>
             </div>
 
             <div className="flex flex-col gap-1">
-              <p className="text-sm text-zinc-400 font-semibold line-through">
+              <p className="text-sm font-semibold text-zinc-400 line-through">
                 {formattedPrice}
               </p>
-              <p className="text-green-500 text-2xl font-bold">
+              <p className="text-2xl font-bold text-green-500">
                 {formattedDisccountPrice}
               </p>
               <p className="text-xs">
@@ -198,7 +198,7 @@ const Product = ({ searchParams }: Props) => {
             </div>
 
             <div>
-              <p className="text-sm text-zinc-200 font-bold">
+              <p className="text-sm font-bold text-zinc-200">
                 {formattedOldPrice}
               </p>
               <p className="text-xs">
@@ -213,23 +213,23 @@ const Product = ({ searchParams }: Props) => {
 
           <button
             type="button"
-            className="w-full hover:bg-zinc-100 hover:text-black font-bold uppercase py-1 border border-zinc-200 hover:border-zinc-100 rounded-md transition duration-300"
+            className="w-full rounded-md border border-zinc-200 py-1 font-bold uppercase transition duration-300 hover:border-zinc-100 hover:bg-zinc-100 hover:text-black"
           >
             COMPRAR
           </button>
         </div>
       </div>
 
-      <div className="flex flex-col justify-between gap-4 bg-zinc-100 p-10 rounded-md">
-        <h2 className="flex items-center gap-3 text-gray-700 hover:text-gray-900 text-3xl font-bold uppercase cursor-pointer transition duration-300">
-          <FaPlus className="w-7 h-7" />
+      <div className="flex flex-col justify-between gap-4 rounded-md bg-zinc-100 p-10">
+        <h2 className="flex cursor-pointer items-center gap-3 text-3xl font-bold uppercase text-gray-700 transition duration-300 hover:text-gray-900">
+          <FaPlus className="h-7 w-7" />
           Descrição do produto
         </h2>
-        <p className="text-black text-justify">{product.description}</p>
+        <p className="text-justify text-black">{product.description}</p>
       </div>
 
-      <div className="flex flex-col gap-4 bg-zinc-100 p-10 rounded-md">
-        <h2 className="text-2xl text-gray-700 font-bold">Produtos similares</h2>
+      <div className="flex flex-col gap-4 rounded-md bg-zinc-100 p-10">
+        <h2 className="text-2xl font-bold text-gray-700">Produtos similares</h2>
 
         <div>
           <Swiper

@@ -9,14 +9,14 @@ type Props = {
 
 export const IconLink = ({ path, Icon, productIds }: Props) => {
   return (
-    <div className="relative flex justify-center items-center">
+    <div className="relative flex items-center justify-center">
       <Link href={`/${path}`} legacyBehavior>
-        <a className="flex justify-center items-center">
-          <Icon className="w-6 h-6 text-gray-400 hover:text-gray-500 transition-all duration-300" />
+        <a className="flex items-center justify-center">
+          <Icon className="h-6 w-6 text-gray-400 transition-all duration-300 hover:text-gray-500" />
         </a>
       </Link>
       {productIds.length !== 0 && (
-        <div className="absolute top-0 -right-3 flex justify-center items-center w-5 h-5 bg-gray-100 rounded-full">
+        <div className="absolute -right-3 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-gray-100">
           <span className="text-xs text-gray-500">{productIds.length}</span>
         </div>
       )}

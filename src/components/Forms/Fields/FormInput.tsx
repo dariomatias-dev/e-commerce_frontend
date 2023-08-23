@@ -110,7 +110,7 @@ const FormInput = ({
         </label>
       </div>
 
-      <p className="text-red-600 text-xs">
+      <p className="text-xs text-red-600">
         {errors[id as keyof FormsProps]?.message}
       </p>
     </div>

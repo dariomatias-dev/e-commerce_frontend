@@ -29,14 +29,14 @@ const Categories = () => {
   if (!categoriesData) return <></>;
 
   return (
-    <section className="flex flex-wrap justify-center gap-x-28 gap-y-10 mx-10 my-8">
+    <section className="mx-10 my-8 flex flex-wrap justify-center gap-x-28 gap-y-10">
       {categoriesData.map((categoryData) => {
         const imageUrl = generateImageUrl(categoryData.name, 1, 'categories');
 
         return (
           <div
             key={categoryData.id}
-            className="flex flex-col justify-center items-center gap-3"
+            className="flex flex-col items-center justify-center gap-3"
           >
             <Image
               src={imageUrl}
@@ -44,10 +44,10 @@ const Categories = () => {
               height={500}
               priority={true}
               alt={`Imagem da categoria ${categoryData.name}.`}
-              className="w-full max-w-[14rem] h-auto object-contain mx-auto mb-4"
+              className="mx-auto mb-4 h-auto w-full max-w-[14rem] object-contain"
             />
 
-            <h3 className="text-gray-700 text-center font-bold uppercase">
+            <h3 className="text-center font-bold uppercase text-gray-700">
               {categoryData.name}
             </h3>
           </div>

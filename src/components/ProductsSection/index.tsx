@@ -35,7 +35,7 @@ const ProductsSection = () => {
 
   return (
     <section className="bg-gray-100 px-10 py-8">
-      <h2 className="text-4xl font-bold ml-20 mb-10">Produtos</h2>
+      <h2 className="mb-10 ml-20 text-4xl font-bold">Produtos</h2>
 
       <div className="flex flex-wrap justify-center gap-x-20 gap-y-10">
         {products.products.map((product) => (

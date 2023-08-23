@@ -14,18 +14,18 @@ const itemsNavBar = [
 
 const NavBar = () => {
   return (
-    <nav className="bg-zinc-100 py-2 px-16">
-      <ul className="flex justify-between text-gray-500 font-bold">
+    <nav className="bg-zinc-100 px-16 py-2">
+      <ul className="flex justify-between font-bold text-gray-500">
         {itemsNavBar.map((item) => {
           const formattedItem = resetFormatting(item);
 
           return (
             <li
               key={formattedItem}
-              className="flex flex-col items-center group"
+              className="group flex flex-col items-center"
             >
               <Link href={`/${formattedItem}`}>{item}</Link>
-              <span className="inline-block w-0 group-hover:w-full h-[1.8px] bg-gray-500 -mt-1 transition-all duration-300" />
+              <span className="-mt-1 inline-block h-[1.8px] w-0 bg-gray-500 transition-all duration-300 group-hover:w-full" />
             </li>
           );
         })}

@@ -11,12 +11,12 @@ const ShowPasswordButton = ({ showPassword, setShowPassword }: Props) => {
     <button
       type="button"
       onClick={() => setShowPassword(!showPassword)}
-      className="absolute top-1/4 right-2 mt-[2px]"
+      className="absolute right-2 top-1/4 mt-[2px]"
     >
       {showPassword ? (
-        <BsEyeFill className="w-5 h-5" />
+        <BsEyeFill className="h-5 w-5" />
       ) : (
-        <BsEyeSlashFill className="w-5 h-5" />
+        <BsEyeSlashFill className="h-5 w-5" />
       )}
     </button>
   );

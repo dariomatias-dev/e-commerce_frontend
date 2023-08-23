@@ -53,7 +53,7 @@ const CartProduct = ({ productData, updateProduct, removeProduct }: Props) => {
           height={500}
           priority={true}
           alt={`Imagem do produto: ${productData.name}.`}
-          className="w-full max-w-[5rem] max-h-[5rem] h-auto object-contain mx-auto"
+          className="mx-auto h-auto max-h-[5rem] w-full max-w-[5rem] object-contain"
         />
       </td>
 
@@ -62,13 +62,13 @@ const CartProduct = ({ productData, updateProduct, removeProduct }: Props) => {
       <td className="p-4">
         <div className="flex gap-1">
           <button type="button" onClick={subtract} className="">
-            <RiSubtractFill className="w-6 h-6 text-gray-600 hover:text-gray-500 transition duration-300" />
+            <RiSubtractFill className="h-6 w-6 text-gray-600 transition duration-300 hover:text-gray-500" />
           </button>
 
           {amount}
 
           <button type="button" onClick={add} className="">
-            <AiOutlinePlus className="w-6 h-6 text-gray-600 hover:text-gray-500 transition duration-300" />
+            <AiOutlinePlus className="h-6 w-6 text-gray-600 transition duration-300 hover:text-gray-500" />
           </button>
         </div>
       </td>
@@ -77,7 +77,7 @@ const CartProduct = ({ productData, updateProduct, removeProduct }: Props) => {
 
       <td className="whitespace-nowrap p-4">
         <button type="button" onClick={deleteProduct}>
-          <MdDelete className="w-6 h-6 text-gray-600 hover:text-gray-500 transition duration-300" />
+          <MdDelete className="h-6 w-6 text-gray-600 transition duration-300 hover:text-gray-500" />
         </button>
       </td>
     </tr>

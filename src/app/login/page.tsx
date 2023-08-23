@@ -26,9 +26,9 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full max-w-[25rem] mx-auto mt-16 mb-20">
+    <div className="mx-auto mb-20 mt-16 w-full max-w-[25rem]">
       <div className="flex flex-col gap-3">
-        <h1 className="text-gray-700 text-3xl text-center font-semibold">
+        <h1 className="text-center text-3xl font-semibold text-gray-700">
           Fazer login
         </h1>
 
@@ -39,7 +39,7 @@ const Login = () => {
 
       <form
         onSubmit={handleSubmit(receiveFormData)}
-        className="flex flex-col gap-6 my-6"
+        className="my-6 flex flex-col gap-6"
       >
         <FormInput
           inputName="E-mail"

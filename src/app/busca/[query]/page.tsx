@@ -52,17 +52,15 @@ const Search = ({ params }: Props) => {
   if (JSON.stringify(products) === '{}') return <Loading />;
 
   return (
-    <section className="flex flex-col gap-10 m-10">
-      <div className="flex justify-between items-center text-white bg-black px-8 py-3 rounded-md">
-        <h1 className="text-gray-100 text-2xl font-semibold">
+    <section className="m-10 flex flex-col gap-10">
+      <div className="flex items-center justify-between rounded-md bg-black px-8 py-3 text-white">
+        <h1 className="text-2xl font-semibold text-gray-100">
           Busca por: &quot;{params.query}&quot;
         </h1>
 
         <div className="flex items-center gap-16">
           <div>
-            <h2 className="text-gray-300 text-end text-xs text-gray">
-              Produtos
-            </h2>
+            <h2 className="text-end text-xs text-gray-300">Produtos</h2>
             <p>10000</p>
           </div>
 

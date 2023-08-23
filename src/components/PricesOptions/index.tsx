@@ -19,25 +19,25 @@ const PricesOptions = ({ price }: Props) => {
   const formattedDisccountPrice = formatToReal(discountPrice);
 
   return (
-    <div className="flex flex-col gap-2 mt-5">
-      <div className="flex justify-between mx-6">
+    <div className="mt-5 flex flex-col gap-2">
+      <div className="mx-6 flex justify-between">
         <h3 className="text-gray-600">Total</h3>
         <p className="text-lg font-bold">{formattedPrice}</p>
       </div>
 
       <div className="flex flex-col gap-1 text-center font-medium">
-        <p className="text-green-600 text-xs">à vista</p>
-        <p className="text-green-500 text-xl font-bold">
+        <p className="text-xs text-green-600">à vista</p>
+        <p className="text-xl font-bold text-green-500">
           {formattedDisccountPrice}
         </p>
-        <p className="text-gray-500 text-xs">no PIX com 15% de desconto</p>
+        <p className="text-xs text-gray-500">no PIX com 15% de desconto</p>
       </div>
 
-      <p className="text-gray-400 text-center text-sm font-medium">ou</p>
+      <p className="text-center text-sm font-medium text-gray-400">ou</p>
 
-      <div className="flex flex-col gap-1 text-center text-gray-500 font-medium">
+      <div className="flex flex-col gap-1 text-center font-medium text-gray-500">
         <p className="text-xs">sem juros no cartão</p>
-        <p className="text-red-600 text-xl font-bold">{formattedOldPrice}</p>
+        <p className="text-xl font-bold text-red-600">{formattedOldPrice}</p>
         <p className="text-xs">
           em até 12x de{' '}
           <span className="text-red-500">{formattedValueInInstallments}</span>
